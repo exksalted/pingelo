@@ -12,11 +12,32 @@
             background: #343a40; /* Dark gray background */
             color: #d1d1d1; /* Light gray text color */
         }
+
+        /* Navigation bar styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #212529; /* Darker background for navbar */
+            padding: 10px 0;
+            border-bottom: 2px solid #007bff; /* Blue underline for navbar */
+        }
+        .navbar a {
+            color: #d1d1d1;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            color: #007bff; /* Blue color for hover effect */
+        }
+
         .container {
             max-width: 800px;
             margin: auto;
             padding: 20px;
         }
+
         .leaderboard {
             margin-top: 20px;
             border-collapse: collapse;
@@ -43,6 +64,15 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+    <!-- Content -->
     <div class="container">
         <h1>Leaderboard</h1>
         <table class="leaderboard">
@@ -62,7 +92,6 @@
                     <td>1933.6</td>
                     <td>68.4</td>
                     <td>74.0%</td>
-
                 </tr>
                 <tr>
                     <td>2</td>
@@ -108,6 +137,6 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> 
 </body>
 </html>
