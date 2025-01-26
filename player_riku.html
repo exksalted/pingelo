@@ -1,1 +1,152 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riku's Stats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #212529; /* Really dark gray background */
+            color: #d1d1d1; /* Light gray text color */
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #343a40; /* Slightly lighter dark gray */
+            border-radius: 8px; /* Rounded corners */
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff; /* White color for the header */
+        }
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        p strong {
+            color: #007bff; /* Blue color for labels */
+        }
+        a {
+            text-decoration: none;
+            color: #007bff; /* Blue color for the link */
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .stats {
+            margin-top: 20px;
+        }
+        .stats p {
+            margin: 10px 0;
+        }
+        .stats strong {
+            color: #ffffff; /* White color for stat labels */
+        }
+
+        /* Style for section titles like "Rank Stats", "Rating Stats" */
+        .stat-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff; /* White color for titles */
+            margin-top: 20px;
+            text-transform: uppercase; /* Makes titles in uppercase */
+            border-bottom: 2px solid #007bff; /* Blue underline */
+            padding-bottom: 5px;
+        }
+
+        /* Adding some space between sections */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        /* Flexbox styling to align stats on the same line */
+        .stat-pair {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .stat-pair p {
+            margin: 0; /* Remove default margin */
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Riku's Stats</h1>
+
+        <div class="stats">
+            <!-- Rank Stats Section -->
+            <div class="section">
+                <p class="stat-title">Rank Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Current Rank:</strong><br>7</p>
+                    <p><strong>Peak Rank:</strong><br>1</p>
+                    <p><strong>Worst Rank:</strong><br>7</p>
+                </div>
+            </div>
+
+            <!-- Rating Stats Section -->
+            <div class="section">
+                <p class="stat-title">Rating Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Current Rating:</strong><br>1159.5</p>
+                    <p><strong>Peak Rating:</strong><br>1662.2</p>
+                    <p><strong>Worst Rating:</strong><br>1148.0</p>
+                </div>
+            </div>
+
+            <!-- Game Stats Section -->
+            <div class="section">
+                <p class="stat-title">Game Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Games Played:</strong><br>26</p>
+                    <p><strong>Wins:</strong><br>3</p>
+                    <p><strong>Losses:</strong><br>23</p>
+                    <p><strong>Win Percentage:</strong><br>11.54%</p>
+                    <p><strong>Average Points:</strong><br>4.18 / 10.72</p>
+                </div>
+            </div>
+
+            <!-- Hall of Fame and Shame Section -->
+            <div class="section">
+                <p class="stat-title">Hall of Fame and Shame:</p>
+                <div class="stat-pair">
+                    <p><strong>Best Victory:</strong><br>Tuomas, Rated 1500.0<br>1st Match of P11<br>12.1.2025</p>
+                    <p><strong>Worst Defeat:</strong><br>Tuomas, Rated 1131.6<br>2nd Match of P13<br>12.1.2025</p>
+                </div>
+            </div>
+
+            <!-- Tournament Stats Section -->
+            <div class="section">
+                <p class="stat-title">Tournament Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Best Performance:</strong><br>1RR2, 1RR3<br>(3rd place)<br>1 - 2<br>12.1.2025</p>
+                    <p><strong>Tournaments Played:</strong><br>10</p>
+                    <p><strong>Tournaments Won:</strong><br>0</p>
+                </div>
+            </div>
+
+            <!-- Matchup Stats Section -->
+            <div class="section">
+                <p class="stat-title">Matchup Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Best WL Matchup:</strong><br>Tuomas<br>3 - 3</p>
+                    <p><strong>Worst WL Matchup:</strong><br>Juho<br>0 - 8</p>
+                    <p><strong>Best Point Matchup:</strong><br>Tuomas<br>8.00 - 9.77</p>
+                    <p><strong>Worst Point Matchup:</strong><br>Matias<br>1.00 - 11.00</p>
+                    <p><strong>Most Played:</strong><br>Juho<br>8 games</p>
+                </div>
+            </div>
+
+        </div>
+
+        <p><a href="index.html">Back to Leaderboard</a></p>
+    </div>
+</body>
+</html>
