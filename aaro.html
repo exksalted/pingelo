@@ -73,6 +73,14 @@
             margin: 0; /* Remove default margin */
             display: inline-block;
         }
+
+        /* Wrapping stats into a new row when necessary */
+        .new-row {
+            flex-basis: 100%; /* Forces this stat pair onto a new line */
+            display: block;
+            margin-top: 10px; /* Optional: adds space between rows */
+        }
+
     </style>
 </head>
 <body>
@@ -107,6 +115,10 @@
                     <p><strong>Games Played:</strong> 50</p>
                     <p><strong>Wins:</strong> 37</p>
                     <p><strong>Losses:</strong> 13</p>
+                </div>
+
+                <!-- Manually force some stats onto the next row -->
+                <div class="stat-pair new-row">
                     <p><strong>Win Percentage:</strong> 74.00%</p>
                     <p><strong>Average Points:</strong> 10.08 / 7.24</p>
                 </div>
@@ -127,6 +139,9 @@
                 <div class="stat-pair">
                     <p><strong>Tournaments Played:</strong> 16</p>
                     <p><strong>Tournaments Won:</strong> 11</p>
+                </div>
+                <!-- New row for Best Tournament -->
+                <div class="stat-pair new-row">
                     <p><strong>Best Tournament:</strong> Tournament UHHH IDK (1st place)</p>
                 </div>
             </div>
@@ -134,11 +149,21 @@
             <!-- Matchup Stats Section -->
             <div class="section">
                 <p class="stat-title">Matchup Stats:</p>
-                <div class="stat-pair">
+
+                <!-- Matchup stats (These should break after the semicolon) -->
+                <div class="stat-pair new-row">
                     <p><strong>Best Matchup by WL:</strong> Riku, 7 - 0</p>
+                </div>
+                <div class="stat-pair new-row">
                     <p><strong>Worst Matchup by WL:</strong> Juho, 14 - 11</p>
+                </div>
+                <div class="stat-pair new-row">
                     <p><strong>Best Matchup by Points:</strong> Jussi, 11.0 - 4.25</p>
+                </div>
+                <div class="stat-pair new-row">
                     <p><strong>Worst Matchup by Points:</strong> Juho, 9.43 - 8.33</p>
+                </div>
+                <div class="stat-pair new-row">
                     <p><strong>Most Played Opponent:</strong> Juho, Played 25 times.</p>
                 </div>
             </div>
