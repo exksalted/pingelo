@@ -20,20 +20,23 @@
         .navbar {
             background-color: #212529; /* Dark navbar */
             padding: 10px 0;
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Even spacing between links */
+            border-bottom: 2px solid #007bff; /* Optional bottom border */
         }
         .navbar a {
             text-decoration: none;
             color: #007bff;
-            margin: 0 15px;
             font-size: 18px;
+            transition: color 0.3s ease;
         }
         .navbar a:hover {
-            text-decoration: underline;
+            color: #d1d1d1; /* Light gray on hover */
         }
         h1 {
             text-align: center;
+            color: white;
         }
         .tournaments {
             margin-top: 20px;
