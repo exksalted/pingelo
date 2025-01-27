@@ -147,10 +147,9 @@
 
     <script>
         // Function to sort table rows based on a specific column index and order
-function sortTable(columnIndex) {
+function sortTable(columnIndex, ascending) {
     const table = document.querySelector('.leaderboard');
     const rows = Array.from(table.querySelectorAll('tbody tr'));
-    const headers = table.querySelectorAll('thead th');
 
     const compare = (rowA, rowB) => {
         const cellA = rowA.children[columnIndex].textContent.trim();
@@ -158,11 +157,13 @@ function sortTable(columnIndex) {
 
         // Handle percentages in the WL Ratio column (remove '%' and convert to number)
         if (columnIndex === 4) {
+            // WL Ratio (columnIndex 4) - remove '%' and convert to number
             const valA = parseFloat(cellA.replace('%', ''));
             const valB = parseFloat(cellB.replace('%', ''));
             if (valA < valB) return ascending ? -1 : 1;
             if (valA > valB) return ascending ? 1 : -1;
         } else {
+            // For other columns (Rank, Player, Rating, RD)
             let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
             let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
 
@@ -171,6 +172,10 @@ function sortTable(columnIndex) {
         }
         return 0;
     };
+
+    rows.sort(compare);
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+}
 
     // Get the current direction of sorting for the column
     let ascending = headers[columnIndex].classList.contains('asc');
