@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #343a40; /* Dark gray background */
+            color: #d1d1d1; /* Light gray text color */
+        }
 
+        /* Navigation bar styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #212529; /* Darker background for navbar */
+            padding: 10px 0;
+            border-bottom: 2px solid #007bff; /* Blue underline for navbar */
+        }
+        .navbar a {
+            color: #d1d1d1;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            color: #007bff; /* Blue hover effect */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Graph/image section styles */
+        .graph-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #212529; /* Slightly darker background for graph sections */
+            border-radius: 8px;
+        }
+        .graph-section img,
+        .graph-section video {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .graph-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff; /* White for section titles */
+        }
+        .graph-description {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Graphs and Analysis</h1>
+
+        <!-- Section 2: Example Video -->
+        <div class="graph-section">
+            <p class="graph-title">Graph Title 2 (with Video)</p>
+            <video controls>
+                <source src="path/to/your/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="graph-description">
+                This section includes a video. You can embed tutorials, animations, or other video content here.
+            </p>
+        </div>
+
+        <!-- Section 1: Example Image -->
+        <div class="graph-section">
+            <p class="graph-title">Graph Title 1</p>
+            <img src="path/to/your/image1.jpg" alt="Graph 1">
+            <p class="graph-description">
+                This is a description of the graph. Explain what the data represents and why it's important.
+            </p>
+        </div>
+
+
+        <!-- Section 3: Placeholder for Future Content -->
+        <div class="graph-section">
+            <p class="graph-title">Graph Title 3</p>
+            <img src="path/to/your/image2.jpg" alt="Graph 2">
+            <p class="graph-description">
+                Add more graphs or videos with text descriptions to expand your analysis.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
