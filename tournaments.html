@@ -12,32 +12,37 @@
             background: #343a40; /* Dark gray background */
             color: #d1d1d1; /* Light gray text color */
         }
+
+        /* Navigation bar styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #212529; /* Darker background for navbar */
+            padding: 10px 0;
+            border-bottom: 2px solid #007bff; /* Blue underline for navbar */
+            position: sticky; /* Ensures it sticks to the top */
+            top: 0;
+            width: 100%; /* Makes it span the full width of the page */
+            z-index: 100; /* Ensures it stays above other content */
+            margin: 0; /* Removes any default margin */
+        }
+        .navbar a {
+            color: #d1d1d1;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            color: #007bff; /* Blue color for hover effect */
+        }
+
         .container {
             max-width: 800px;
             margin: auto;
             padding: 20px;
         }
-        .navbar {
-            background-color: #212529; /* Dark navbar */
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px; /* Even spacing between links */
-            border-bottom: 2px solid #007bff; /* Optional bottom border */
-        }
-        .navbar a {
-            text-decoration: none;
-            color: #007bff;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-        .navbar a:hover {
-            color: #d1d1d1; /* Light gray on hover */
-        }
-        h1 {
-            text-align: center;
-            color: white;
-        }
+
         .tournaments {
             margin-top: 20px;
             border-collapse: collapse;
@@ -47,6 +52,7 @@
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            color: #d1d1d1;
         }
         .tournaments th {
             background-color: #212529;
@@ -56,19 +62,17 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html">Leaderboard</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+    <!-- Content -->
     <div class="container">
-        <!-- Navbar -->
-        <div class="navbar">
-            <a href="index.html">Leaderboard</a>
-            <a href="tournaments.html">Tournaments</a>
-            <a href="graphs.html">Graphs</a>
-            <a href="faq.html">FAQ</a>
-        </div>
-
-        <!-- Page Title -->
         <h1>Tournaments</h1>
-
-        <!-- Tournaments Table -->
         <table class="tournaments">
             <thead>
                 <tr>
