@@ -9,17 +9,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #343a40; /* Dark gray background */
-            color: #d1d1d1; /* Light gray text color */
+            background: #343a40;
+            color: #d1d1d1;
         }
 
-        /* Navigation bar styles */
         .navbar {
             display: flex;
             justify-content: center;
-            background-color: #212529; /* Darker background for navbar */
+            background-color: #212529;
             padding: 10px 0;
-            border-bottom: 2px solid #007bff; /* Blue underline for navbar */
+            border-bottom: 2px solid #007bff;
         }
         .navbar a {
             color: #d1d1d1;
@@ -29,7 +28,7 @@
             font-size: 16px;
         }
         .navbar a:hover {
-            color: #007bff; /* Blue color for hover effect */
+            color: #007bff;
         }
 
         .container {
@@ -48,11 +47,14 @@
             text-align: left;
             border-bottom: 1px solid #ddd;
             color: #d1d1d1;
-            cursor: pointer; /* Makes the table header clickable */
         }
         .leaderboard th {
             background-color: #212529;
             color: white;
+            cursor: pointer;
+        }
+        .leaderboard th:hover {
+            background-color: #007bff;
         }
         a {
             text-decoration: none;
@@ -61,21 +63,10 @@
         a:hover {
             text-decoration: underline;
         }
-        .sort-icon {
-            font-size: 12px;
-            margin-left: 5px;
-        }
-        .asc::after {
-            content: "↑"; /* Up arrow for ascending */
-        }
-        .desc::after {
-            content: "↓"; /* Down arrow for descending */
-        }
     </style>
 </head>
 
 <body>
-    <!-- Navbar -->
     <div class="navbar">
         <a href="index.html">Leaderboard</a>
         <a href="tournaments.html">Tournaments</a>
@@ -83,17 +74,16 @@
         <a href="faq.html">FAQ</a>
     </div>
 
-    <!-- Content -->
     <div class="container">
         <h1>Leaderboard</h1>
-        <table class="leaderboard" id="leaderboard">
+        <table class="leaderboard" id="leaderboardTable">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">Rank <span class="sort-icon"></span></th>
-                    <th onclick="sortTable(1)">Player <span class="sort-icon"></span></th>
-                    <th onclick="sortTable(2)">Rating <span class="sort-icon"></span></th>
-                    <th onclick="sortTable(3)">RD <span class="sort-icon"></span></th>
-                    <th onclick="sortTable(4)">WL Ratio <span class="sort-icon"></span></th>
+                    <th onclick="sortTable(0)">Rank</th>
+                    <th onclick="sortTable(1)">Player</th>
+                    <th onclick="sortTable(2)">Rating</th>
+                    <th onclick="sortTable(3)">RD</th>
+                    <th onclick="sortTable(4)">WL Ratio</th>
                 </tr>
             </thead>
             <tbody>
@@ -148,78 +138,39 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> 
 
     <script>
-        let currentSort = { column: null, direction: 'asc' };
+        function sortTable(columnIndex) {
+            const table = document.getElementById("leaderboardTable");
+            const rows = Array.from(table.rows).slice(1); // Exclude header row
+            const isNumericColumn = !isNaN(parseFloat(rows[0].cells[columnIndex].textContent));
+            let sortedRows;
 
-        // Function to sort the table by column index
-        function sortTable(n) {
-            const table = document.getElementById("leaderboard");
-            const rows = Array.from(table.rows).slice(1); // Skip the header row
-            let switching = true;
-            let shouldSwitch, i, x, y;
-
-            // Determine the default sort direction based on the column
-            if (currentSort.column === n) {
-                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc'; // Toggle direction
+            if (table.getAttribute("data-sort-direction") === "asc") {
+                sortedRows = rows.sort((a, b) => compareCells(a, b, columnIndex, isNumericColumn, false));
+                table.setAttribute("data-sort-direction", "desc");
             } else {
-                currentSort.column = n;
-                currentSort.direction = (n === 0 || n === 3) ? 'asc' : 'desc'; // Default for Rank and RD to ascending, others descending
+                sortedRows = rows.sort((a, b) => compareCells(a, b, columnIndex, isNumericColumn, true));
+                table.setAttribute("data-sort-direction", "asc");
             }
 
-            // Loop to keep switching rows until no more switching is needed
-            while (switching) {
-                switching = false;
-                for (i = 0; i < rows.length - 1; i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-
-                    // Handle numeric columns (Rating, RD, WL Ratio as percentage)
-                    if (n === 2 || n === 3) {
-                        if ((currentSort.direction === 'asc' && parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) ||
-                            (currentSort.direction === 'desc' && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
-                            shouldSwitch = true;
-                        }
-                    } else if (n === 4) { // WL Ratio
-                        if ((currentSort.direction === 'asc' && parseFloat(x.innerHTML.replace('%', '')) > parseFloat(y.innerHTML.replace('%', ''))) ||
-                            (currentSort.direction === 'desc' && parseFloat(x.innerHTML.replace('%', '')) < parseFloat(y.innerHTML.replace('%', '')))) {
-                            shouldSwitch = true;
-                        }
-                    } else { // Handle text columns (Player, Rank)
-                        if ((currentSort.direction === 'asc' && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
-                            (currentSort.direction === 'desc' && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())) {
-                            shouldSwitch = true;
-                        }
-                    }
-
-                    if (shouldSwitch) {
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-                        break;
-                    }
-                }
-            }
-
-            // Update the sort icon direction
-            updateSortIcons();
+            // Re-append rows in sorted order
+            sortedRows.forEach(row => table.tBodies[0].appendChild(row));
         }
 
-        // Function to update the sort icon next to each header
-        function updateSortIcons() {
-            const headers = document.querySelectorAll("th");
-            headers.forEach((header, index) => {
-                const icon = header.querySelector(".sort-icon");
-                icon.classList.remove("asc", "desc"); // Reset icons
-                if (index === currentSort.column) {
-                    icon.classList.add(currentSort.direction);
-                }
-            });
-        }
+        function compareCells(a, b, columnIndex, isNumeric, ascending) {
+            const valA = isNumeric 
+                ? parseFloat(a.cells[columnIndex].textContent) 
+                : a.cells[columnIndex].textContent.toLowerCase();
+            const valB = isNumeric 
+                ? parseFloat(b.cells[columnIndex].textContent) 
+                : b.cells[columnIndex].textContent.toLowerCase();
 
-        // Initialize the default sorting order
-        updateSortIcons();
+            if (valA < valB) return ascending ? -1 : 1;
+            if (valA > valB) return ascending ? 1 : -1;
+            return 0;
+        }
     </script>
 </body>
 </html>
