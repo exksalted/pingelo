@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
+    <title>Graphs</title>
     <style>
         /* Global Styles */
         body {
@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #1e1e2f, #2c2c3e, #1e1e2f);
-            background-size: 300% 300%;
+            background-size: 200% 200%;
             animation: gradientAnimation 10s ease infinite;
             color: #f0f0f0;
         }
@@ -69,57 +69,50 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #2c2c3e;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Graph Section Styles */
+        .graph-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #212529;
+            border-radius: 8px;
         }
 
-        thead th {
-            background-color: #3c3c4f;
+        .graph-section img,
+        .graph-section video {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .graph-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .graph-description {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Back-to-Top Button */
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
             color: #fff;
-            padding: 15px;
-            text-align: left;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
             transition: background-color 0.3s ease;
         }
 
-        thead th:hover {
-            background-color: #4c4c5f;
-        }
-
-        tbody tr {
-            transition: background-color 0.3s ease;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #29293f;
-        }
-
-        tbody tr:hover {
-            background-color: #3e3e55;
-        }
-
-        td, th {
-            padding: 15px;
-            text-align: left;
-            color: #f0f0f0;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #66bfff;
+        .back-to-top:hover {
+            background-color: #66bfff;
         }
 
         @keyframes fadeIn {
@@ -155,74 +148,44 @@
 
     <!-- Content -->
     <div class="container">
-        <h1>Leaderboard</h1>
-        <!-- Section: Leaderboard Table -->
-        <div class="leaderboard-section">
-            <p class="section-title">Player Rankings</p>
-            <p class="section-description">Last updated 27.1.2025</p>
-            <table class="leaderboard">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Rating</th>
-                        <th>RD</th>
-                        <th>WL Ratio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="players/player_aaro.html">Aaro</a></td>
-                        <td>1953.6</td>
-                        <td>68.60</td>
-                        <td>74.0%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="players/player_juho.html">Juho</a></td>
-                        <td>1775.5</td>
-                        <td>68.80</td>
-                        <td>64.7%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="players/player_jesper.html">Jesper</a></td>
-                        <td>1735.4</td>
-                        <td>121.60</td>
-                        <td>57.1%</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href="players/player_matias.html">Matias</a></td>
-                        <td>1480.4</td>
-                        <td>160.14</td>
-                        <td>42.9%</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><a href="players/player_jussi.html">Jussi</a></td>
-                        <td>1452.6</td>
-                        <td>182.40</td>
-                        <td>8.3%</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><a href="players/player_riku.html">Riku</a></td>
-                        <td>1227.2</td>
-                        <td>123.71</td>
-                        <td>15.4%</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td><a href="players/player_tuomas.html">Tuomas</a></td>
-                        <td>1178.6</td>
-                        <td>142.47</td>
-                        <td>12.5%</td>
-                    </tr>
-                </tbody>
-            </table>
+        <h1>Graphs and Analysis</h1>
+
+        <!-- Section 1: Player Rating Evolution by Match -->
+        <div class="graph-section">
+            <p class="graph-title">Player rating evolution by match</p>
+            <img src="media/Graph2.PNG" alt="Graph 1">
+            <p class="graph-description">
+                This graph shows every change in ratings after each match. Volatile!
+            </p>
+        </div>
+
+        <!-- Section 2: Player Rating Evolution by Tournament -->
+        <div class="graph-section">
+            <p class="graph-title">Player rating evolution by tournament</p>
+            <img src="media/Graph1.PNG" alt="Graph 2">
+            <p class="graph-description">
+                This graph only shows the change in ratings after each tournament. Smooth!
+            </p>
         </div>
     </div>
+
+    <!-- Back-to-Top Button -->
+    <button id="back-to-top" class="back-to-top">↑</button>
+
+    <script>
+        // Back-to-Top Button Script
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', () => {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
