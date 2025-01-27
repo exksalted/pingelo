@@ -6,17 +6,24 @@
     <title>Tournaments</title>
     <style>
         body {
-            background: repeating-linear-gradient(135deg, #1e1e2f, #2c2c3e 10%, #1e1e2f 20%);
-            background-size: 200% 200%; /* Make the gradient larger */
-            animation: gradientAnimation 10s ease infinite; /* Optional: Add animation for a smooth effect */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c3e, #1e1e2f);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #f0f0f0;
         }
 
         @keyframes gradientAnimation {
             0% {
-                background-position: 0% 0%;
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
             }
             100% {
-                background-position: 100% 100%;
+                background-position: 0% 50%;
             }
         }
 
