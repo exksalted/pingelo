@@ -147,7 +147,7 @@
 
     <script>
         // Function to sort table rows based on a specific column index and order
-function sortTable(columnIndex, ascending) {
+function sortTable(columnIndex) {
     const table = document.querySelector('.leaderboard');
     const rows = Array.from(table.querySelectorAll('tbody tr'));
     const headers = table.querySelectorAll('thead th');
@@ -171,6 +171,32 @@ function sortTable(columnIndex, ascending) {
         }
         return 0;
     };
+
+    // Get the current direction of sorting for the column
+    let ascending = headers[columnIndex].classList.contains('asc');
+
+    // Toggle sorting direction (ascending ↔ descending)
+    ascending = !ascending;
+
+    // Remove sorting icons and classes from all columns
+    headers.forEach(th => {
+        th.innerHTML = th.textContent.trim(); // Reset the header text
+        th.classList.remove('asc', 'desc'); // Remove the sorting classes
+    });
+
+    // Add the icon to the sorted column header
+    const sortedHeader = headers[columnIndex];
+    const icon = ascending ? '↑' : '↓';
+    sortedHeader.innerHTML = `${sortedHeader.textContent.trim()} ${icon}`;
+    sortedHeader.classList.add(ascending ? 'asc' : 'desc'); // Add sorting class
+
+    // Sort the rows based on the column
+    rows.sort(compare);
+
+    // Append the sorted rows back into the table
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+}
+
 
     rows.sort(compare);
 
