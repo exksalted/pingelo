@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #212529; /* Dark background */
+            color: #d1d1d1; /* Light text */
+        }
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #343a40; /* Slightly lighter dark gray */
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .info, .results {
+            margin: 20px 0;
+        }
+        .info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .info p strong {
+            color: #007bff; /* Blue for labels */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #495057; /* Subtle border for cells */
+            padding: 8px;
+            text-align: center;
+        }
+        table th {
+            background-color: #007bff; /* Blue for table headers */
+            color: #ffffff;
+        }
+        table td {
+            background-color: #495057; /* Darker gray for table cells */
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tournament Name</h1>
+
+        <!-- Info Section -->
+        <div class="info">
+            <p><strong>#:</strong> 1</p>
+            <p><strong>Place:</strong> Pirkkola</p>
+            <p><strong>Type:</strong> Double Elimination</p>
+            <p><strong>Participants:</strong> 5</p>
+            <p><strong>Strength:</strong> 1500</p>
+            <p><strong>Date:</strong> 12.1.2025</p>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results">
+            <h2>Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Seed</th>
+                        <th>Name</th>
+                        <th>Rating Before</th>
+                        <th>Result</th>
+                        <th>Rating Change</th>
+                        <th>Rating After</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="../site/players/player_.html">player1</a></td>
+                        <td>1933.6</td>
+                        <td>2-0</td>
+                        <td>+0</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="player_.html">player2</a></td>
+                        <td>1500</td>
+                        <td>1-1</td>
+                        <td>+0</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><a href="player_s.html">player3</a></td>
+                        <td>1500.0</td>
+                        <td>0-2</td>
+                        <td>+0</td>
+                        <td>1500</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="back-link">
+            <p><a href="../index.html">Back to Leaderboard</a></p>
+        </div>
+    </div>
+</body>
+</html>
