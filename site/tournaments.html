@@ -9,58 +9,118 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #343a40; /* Dark gray background */
-            color: #d1d1d1; /* Light gray text color */
+            background: #1e1e2f; /* Deep dark background */
+            color: #f0f0f0; /* Light text color for better contrast */
         }
 
         /* Navigation bar styles */
         .navbar {
             display: flex;
             justify-content: center;
-            background-color: #212529; /* Darker background for navbar */
-            padding: 10px 0;
-            border-bottom: 2px solid #007bff; /* Blue underline for navbar */
+            background-color: #2c2c3e; /* Darker background for navbar */
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+
         .navbar a {
-            color: #d1d1d1;
+            color: #f0f0f0;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 16px;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s ease;
         }
+
         .navbar a:hover {
-            color: #007bff; /* Blue color for hover effect */
+            color: #007bff; /* Blue hover color */
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: auto;
             padding: 20px;
         }
 
-        .tournaments {
-            margin-top: 20px;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .tournaments th, .tournaments td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            color: #d1d1d1;
-        }
-        .tournaments th {
-            background-color: #212529;
-            color: white;
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        /* Link styling */
-        a {
-            text-decoration: none;
-            color: #007bff; /* Blue color for the links */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #2c2c3e; /* Dark background for the table */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
+
+        thead th {
+            background-color: #3c3c4f; /* Slightly lighter dark */
+            color: #fff;
+            padding: 15px;
+            text-align: left;
+        }
+
+        tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #29293f; /* Alternating row colors */
+        }
+
+        tbody tr:hover {
+            background-color: #3e3e55; /* Hover color */
+        }
+
+        td, th {
+            padding: 15px;
+            text-align: left;
+            color: #f0f0f0;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
         a:hover {
-            text-decoration: underline; /* Underline effect on hover */
+            text-decoration: underline;
+            color: #66bfff;
+        }
+
+        /* Small screen adjustments */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead {
+                display: none;
+            }
+            tr {
+                margin-bottom: 10px;
+            }
+            td {
+                padding: 10px;
+                position: relative;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #aaa;
+            }
         }
     </style>
 </head>
@@ -77,7 +137,7 @@
     <!-- Content -->
     <div class="container">
         <h1>Tournaments</h1>
-        <table class="tournaments">
+        <table>
             <thead>
                 <tr>
                     <th>#</th>
@@ -91,149 +151,150 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td><a href="tournamentfolder/P1D1.html">Pirkkola 1 DE1</a></td>
-                    <td>Double Elimination</td>
-                    <td>5</td>
-                    <td>2688</td>
-                    <td><a href="players/player_juho.html">Juho</a></td>
-                    <td>12.1.2025</td>
+                    <td data-label="#">1</td>
+                    <td data-label="Name"><a href="tournamentfolder/P1D1.html">Pirkkola 1 DE1</a></td>
+                    <td data-label="Type">Double Elimination</td>
+                    <td data-label="Participants">5</td>
+                    <td data-label="Strength">2688</td>
+                    <td data-label="Winner"><a href="players/player_juho.html">Juho</a></td>
+                    <td data-label="Date">12.1.2025</td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td><a href="tournamentfolder/P1D2.html">Pirkkola 1 DE2</a></td>
-                    <td>Double Elimination *</td>
-                    <td>5</td>
-                    <td>2745</td>
-                    <td><a href="players/player_juho.html">Juho</a></td>
-                    <td>12.1.2025</td>
+                    <td data-label="#">2</td>
+                    <td data-label="Name"><a href="tournamentfolder/P1D2.html">Pirkkola 1 DE2</a></td>
+                    <td data-label="Type">Double Elimination *</td>
+                    <td data-label="Participants">5</td>
+                    <td data-label="Strength">2745</td>
+                    <td data-label="Winner"><a href="players/player_juho.html">Juho</a></td>
+                    <td data-label="Date">12.1.2025</td>
+                </tr>
+              <tr>
+                    <td data-label="#">3</td>
+                    <td data-label="Name"><a href="tournamentfolder/P1R1.html">Pirkkola 1 RR1</a></td>
+                    <td data-label="Type">Round Robin</td>
+                    <td data-label="Participants">4</td>
+                    <td data-label="Strength">2481</td>
+                    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+                    <td data-label="Date">12.1.2025</td>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td><a href="tournamentfolder/P1R1.html">Pirkkola 1 RR1</a></td>
-                    <td>Round Robin</td>
-                    <td>4</td>
-                    <td>2481</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>12.1.2025</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="tournamentfolder/P1R2.html">Pirkkola 1 RR2</a></td>
-                    <td>Round Robin</td>
-                    <td>4</td>
-                    <td>2474</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>12.1.2025</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><a href="tournamentfolder/P1D3.html">Pirkkola 1 DE3</a></td>
-                    <td>Double Elimination</td>
-                    <td>4</td>
-                    <td>2457</td>
-                    <td><a href="players/player_juho.html">Juho</a></td>
-                    <td>12.1.2025</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td><a href="tournamentfolder/P1R3.html">Pirkkola 1 RR3</a></td>
-                    <td>Round Robin</td>
-                    <td>4</td>
-                    <td>2470</td>
-                    <td><a href="players/player_juho.html">Juho</a></td>
-                    <td>12.1.2025</td>
-                 </tr>
-                <tr>
-                    <td>7</td>
-                    <td><a href="tournamentfolder/P2R1.html">Pirkkola 2 RR1</a></td>
-                    <td>Round Robin</td>
-                    <td>4</td>
-                    <td>2598</td>
-                    <td><a href="players/player_jesper.html">Jesper</a></td>
-                    <td>17.1.2025</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td><a href="tournamentfolder/P2D1.html">Pirkkola 2 DE1</a></td>
-                    <td>Double Elimination</td>
-                    <td>4</td>
-                    <td>2795</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>17.1.2025</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td><a href="tournamentfolder/P2D2.html">Pirkkola 2 DE2</a></td>
-                    <td>Double Elimination</td>
-                    <td>4</td>
-                    <td>2717</td>
-                    <td><a href="players/player_juho.html">Juho</a></td>
-                    <td>17.1.2025</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td><a href="tournamentfolder/P2D3.html">Pirkkola 2 DE3</a></td>
-                    <td>Double Elimination</td>
-                    <td>4</td>
-                    <td>2692</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>17.1.2025</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td><a href="tournamentfolder/P3R1.html">Pirkkola 3 RR1</a></td>
-                    <td>Round Robin</td>
-                    <td>3</td>
-                    <td>2413</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>21.1.2025</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td><a href="tournamentfolder/P3D1.html">Pirkkola 3 DE1</a></td>
-                    <td>Double Elimination</td>
-                    <td>3</td>
-                    <td>2374</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>21.1.2025</td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                    <td><a href="tournamentfolder/P3D2.html">Pirkkola 3 DE2</a></td>
-                    <td>Double Elimination</td>
-                    <td>3</td>
-                    <td>2355</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>21.1.2025</td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td><a href="tournamentfolder/P3D3.html">Pirkkola 3 DE3</a></td>
-                    <td>Double Elimination</td>
-                    <td>3</td>
-                    <td>2341</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>21.1.2025</td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td><a href="tournamentfolder/P3R2.html">Pirkkola 3 RR2</a></td>
-                    <td>Round Robin</td>
-                    <td>3</td>
-                    <td>2330</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>21.1.2025</td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                    <td><a href="tournamentfolder/P3R3.html">Pirkkola 3 RR3</a></td>
-                    <td>Round Robin</td>
-                    <td>3</td>
-                    <td>2324</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>21.1.2025</td>
-                </tr>
+    <td data-label="#">4</td>
+    <td data-label="Name"><a href="tournamentfolder/P1R2.html">Pirkkola 1 RR2</a></td>
+    <td data-label="Type">Round Robin</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2474</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">12.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">5</td>
+    <td data-label="Name"><a href="tournamentfolder/P1D3.html">Pirkkola 1 DE3</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2457</td>
+    <td data-label="Winner"><a href="players/player_juho.html">Juho</a></td>
+    <td data-label="Date">12.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">6</td>
+    <td data-label="Name"><a href="tournamentfolder/P1R3.html">Pirkkola 1 RR3</a></td>
+    <td data-label="Type">Round Robin</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2470</td>
+    <td data-label="Winner"><a href="players/player_juho.html">Juho</a></td>
+    <td data-label="Date">12.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">7</td>
+    <td data-label="Name"><a href="tournamentfolder/P2R1.html">Pirkkola 2 RR1</a></td>
+    <td data-label="Type">Round Robin</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2598</td>
+    <td data-label="Winner"><a href="players/player_jesper.html">Jesper</a></td>
+    <td data-label="Date">17.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">8</td>
+    <td data-label="Name"><a href="tournamentfolder/P2D1.html">Pirkkola 2 DE1</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2795</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">17.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">9</td>
+    <td data-label="Name"><a href="tournamentfolder/P2D2.html">Pirkkola 2 DE2</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2717</td>
+    <td data-label="Winner"><a href="players/player_juho.html">Juho</a></td>
+    <td data-label="Date">17.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">10</td>
+    <td data-label="Name"><a href="tournamentfolder/P2D3.html">Pirkkola 2 DE3</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">4</td>
+    <td data-label="Strength">2692</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">17.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">11</td>
+    <td data-label="Name"><a href="tournamentfolder/P3R1.html">Pirkkola 3 RR1</a></td>
+    <td data-label="Type">Round Robin</td>
+    <td data-label="Participants">3</td>
+    <td data-label="Strength">2413</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">21.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">12</td>
+    <td data-label="Name"><a href="tournamentfolder/P3D1.html">Pirkkola 3 DE1</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">3</td>
+    <td data-label="Strength">2374</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">21.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">13</td>
+    <td data-label="Name"><a href="tournamentfolder/P3D2.html">Pirkkola 3 DE2</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">3</td>
+    <td data-label="Strength">2355</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">21.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">14</td>
+    <td data-label="Name"><a href="tournamentfolder/P3D3.html">Pirkkola 3 DE3</a></td>
+    <td data-label="Type">Double Elimination</td>
+    <td data-label="Participants">3</td>
+    <td data-label="Strength">2341</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">21.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">15</td>
+    <td data-label="Name"><a href="tournamentfolder/P3R2.html">Pirkkola 3 RR2</a></td>
+    <td data-label="Type">Round Robin</td>
+    <td data-label="Participants">3</td>
+    <td data-label="Strength">2330</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">21.1.2025</td>
+</tr>
+<tr>
+    <td data-label="#">16</td>
+    <td data-label="Name"><a href="tournamentfolder/P3R3.html">Pirkkola 3 RR3</a></td>
+    <td data-label="Type">Round Robin</td>
+    <td data-label="Participants">3</td>
+    <td data-label="Strength">2324</td>
+    <td data-label="Winner"><a href="players/player_aaro.html">Aaro</a></td>
+    <td data-label="Date">21.1.2025</td>
+</tr>
+
             </tbody>
         </table>
     </div>
