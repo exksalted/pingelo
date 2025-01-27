@@ -5,65 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graphs</title>
     <style>
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #343a40; /* Dark gray background */
-            color: #d1d1d1; /* Light gray text color */
+            background: linear-gradient(135deg, #1e1e2f, #2c2c3e, #1e1e2f);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #f0f0f0;
         }
 
-        /* Navigation bar styles */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Navbar Styles */
         .navbar {
             display: flex;
             justify-content: center;
-            background-color: #212529; /* Darker background for navbar */
-            padding: 10px 0;
-            border-bottom: 2px solid #007bff; /* Blue underline for navbar */
-        }
-        .navbar a {
-            color: #d1d1d1;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .navbar a:hover {
-            color: #007bff; /* Blue hover effect */
+            background-color: #2c2c3e;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
+        .navbar a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        /* Container Styles */
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: auto;
             padding: 20px;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        /* Graph/image section styles */
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Graph Section Styles */
         .graph-section {
             margin-bottom: 30px;
             padding: 15px;
-            background: #212529; /* Slightly darker background for graph sections */
+            background: #212529;
             border-radius: 8px;
         }
+
         .graph-section img,
         .graph-section video {
             max-width: 100%;
             border-radius: 8px;
         }
+
         .graph-title {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #ffffff; /* White for section titles */
+            color: #ffffff;
         }
+
         .graph-description {
             font-size: 16px;
             margin-top: 10px;
         }
+
+        /* Back-to-Top Button */
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background-color: #66bfff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar a {
+                font-size: 16px;
+                margin: 0 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            td, th {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- Navbar -->
     <div class="navbar">
         <a href="index.html">Leaderboard</a>
         <a href="tournaments.html">Tournaments</a>
@@ -71,10 +146,11 @@
         <a href="faq.html">FAQ</a>
     </div>
 
-    <!-- Main Content -->
+    <!-- Content -->
     <div class="container">
         <h1>Graphs and Analysis</h1>
-        <!-- Section 1: Example Image -->
+
+        <!-- Section 1: Player Rating Evolution by Match -->
         <div class="graph-section">
             <p class="graph-title">Player rating evolution by match</p>
             <img src="media/Graph2.PNG" alt="Graph 1">
@@ -83,8 +159,7 @@
             </p>
         </div>
 
-
-        <!-- Section 3: Placeholder for Future Content -->
+        <!-- Section 2: Player Rating Evolution by Tournament -->
         <div class="graph-section">
             <p class="graph-title">Player rating evolution by tournament</p>
             <img src="media/Graph1.PNG" alt="Graph 2">
@@ -93,5 +168,24 @@
             </p>
         </div>
     </div>
+
+    <!-- Back-to-Top Button -->
+    <button id="back-to-top" class="back-to-top">↑</button>
+
+    <script>
+        // Back-to-Top Button Script
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', () => {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
