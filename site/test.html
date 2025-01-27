@@ -155,18 +155,28 @@
                 const cellA = rowA.children[columnIndex].textContent.trim();
                 const cellB = rowB.children[columnIndex].textContent.trim();
 
-                // Convert the values to numbers where applicable for proper sorting
-                let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
-                let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
+                // Handle percentages in the WL Ratio column (remove '%' and convert to number)
+                if (columnIndex === 4) {
+                    // WL Ratio (columnIndex 4) - remove '%' and convert to number
+                    const valA = parseFloat(cellA.replace('%', ''));
+                    const valB = parseFloat(cellB.replace('%', ''));
+                    if (valA < valB) return ascending ? -1 : 1;
+                    if (valA > valB) return ascending ? 1 : -1;
+                } else {
+                    // For other columns (Rank, Player, Rating, RD)
+                    let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
+                    let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
 
-                if (valA < valB) return ascending ? -1 : 1;
-                if (valA > valB) return ascending ? 1 : -1;
+                    if (valA < valB) return ascending ? -1 : 1;
+                    if (valA > valB) return ascending ? 1 : -1;
+                }
                 return 0;
             };
 
             rows.sort(compare);
             rows.forEach(row => table.querySelector('tbody').appendChild(row));
         }
+
 
         // Set up event listeners for sorting the table when clicking headers
         document.addEventListener('DOMContentLoaded', () => {
