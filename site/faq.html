@@ -38,20 +38,41 @@
             padding: 20px;
         }
 
-        .tournaments {
-            margin-top: 20px;
-            border-collapse: collapse;
-            width: 100%;
+        h1 {
+            color: white;
         }
-        .tournaments th, .tournaments td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+
+        .faq-section {
+            margin-top: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #555;
+            border-radius: 8px;
+            background-color: #212529; /* Dark gray background for each question */
+        }
+
+        .faq-item h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .faq-item h2:hover {
+            text-decoration: underline;
+        }
+
+        .faq-item p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
             color: #d1d1d1;
         }
-        .tournaments th {
-            background-color: #212529;
-            color: white;
+
+        .hidden {
+            display: none;
         }
 
         /* Link styling */
@@ -63,6 +84,22 @@
             text-decoration: underline; /* Underline effect on hover */
         }
     </style>
+    <script>
+        // Script to toggle FAQ answers
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item h2');
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const answer = item.nextElementSibling;
+                    if (answer.classList.contains('hidden')) {
+                        answer.classList.remove('hidden');
+                    } else {
+                        answer.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -76,10 +113,72 @@
 
     <!-- Content -->
     <div class="container">
-        <h1>FAQ, why r u here</h1>
+        <h1>FAQ</h1>
+
+        <!-- General Questions Section -->
+        <div class="faq-section">
+            <h2>General Questions</h2>
+
+            <div class="faq-item">
+                <h2>What is this site about?</h2>
+                <p class="hidden">This site provides a leaderboard, tournament results and stats, graphs for our table tennis games.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>Who updates the site?</h2>
+                <p class="hidden">The site is manually updated by Aaro after each tournament or event.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>How often is the site updated?</h2>
+                <p class="hidden">Updates are made after every tournament or when new information becomes available.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>How long did this site take to be made?</h2>
+                <p class="hidden">Tens of hours of work. At the final stretch, I noticed that I had 2 games in my data, where the winner and loser were swapped. It led to everything needing to be recalculated. YAY.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>What happened to that one very cool animated graph?</h2>
+                <p class="hidden">Refer to the situation mentioned above... I took the graph down, as it contained a lot of bad data. It was created using a software's free trial, and I do not fancy paying a subscription for it.</p>
+            </div>
+        </div>
+
+        <!-- Technical Questions Section -->
+        <div class="faq-section">
+            <h2>Technical Questions</h2>
+
+            <div class="faq-item">
+                <h2>How do ratings work?</h2>
+                <p class="hidden">Ratings are based on the Glicko-1 rating system, by Mark Glickman. In our system, a new player receives 1500 as their rating and 350 as their RD.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>What does RD mean?</h2>
+                <p class="hidden">RD stands for "rating deviation", and it is the numerical value of uncertainty around a player's rating. Higher RD, more uncertainty.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>How is RD increase calculated?</h2>
+                <p class="hidden">You can find the formula in the Wikipedia page for the Glicko rating system. In our system t = amount of days since last played/recalculated RD, and a player returns to RD = 350 after 365 days of inactivity. A 'typical players' RD' is calculated by taking the median of all player RD's, with values of 350 disregarded.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>How is peak/worst rating calculated?</h2>
+                <p class="hidden">Peak and worst ratings are calculated with a game-to-game basis.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>How is peak/worst ranking calculated?</h2>
+                <p class="hidden">Peak and worst ratings are calculated with a tournament to tournament basis. A new player's ranking with the rating of 1500 is disregarded.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>Can I contribute to the site?</h2>
+                <p class="hidden">At the moment you can contribute by using the site and informing Aaro about any possible bugs!</p>
+            </div>
+        </div>
     </div>
-    <div class="graph-section">
-            <p class="graph-title">ei oo valmis eikä tuu hetkeen olee.</p>
-    </div> 
 </body>
 </html>
