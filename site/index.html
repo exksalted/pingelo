@@ -29,7 +29,7 @@
             font-size: 16px;
         }
         .navbar a:hover {
-            color: #007bff; /* Blue color for hover effect */
+            color: #007bff; /* Blue hover effect */
         }
 
         .container {
@@ -38,8 +38,27 @@
             padding: 20px;
         }
 
+        /* Section styles */
+        .leaderboard-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #212529; /* Slightly darker background for sections */
+            border-radius: 8px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff; /* White for section titles */
+        }
+        .section-description {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Leaderboard table styles */
         .leaderboard {
-            margin-top: 20px;
+            margin-top: 10px;
             border-collapse: collapse;
             width: 100%;
         }
@@ -62,9 +81,8 @@
         }
     </style>
 </head>
-
 <body>
-    <!-- Navbar -->
+    <!-- Navigation Bar -->
     <div class="navbar">
         <a href="index.html">Leaderboard</a>
         <a href="tournaments.html">Tournaments</a>
@@ -72,71 +90,76 @@
         <a href="faq.html">FAQ</a>
     </div>
 
-    <!-- Content -->
+    <!-- Main Content -->
     <div class="container">
         <h1>Leaderboard</h1>
-        <table class="leaderboard">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Player</th>
-                    <th>Rating</th>
-                    <th>RD</th>
-                    <th>WL Ratio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="players/player_aaro.html">Aaro</a></td>
-                    <td>1953.6</td>
-                    <td>68.60</td>
-                    <td>74.0%</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="players/player_juho.html">Juho</a></td>
-                    <td>1775.5</td>
-                    <td>68.80</td>
-                    <td>64.7%</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="players/player_jesper.html">Jesper</a></td>
-                    <td>1735.4</td>
-                    <td>121.60</td>
-                    <td>57.1%</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="players/player_matias.html">Matias</a></td>
-                    <td>1480.4</td>
-                    <td>160.14</td>
-                    <td>42.9%</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><a href="players/player_jussi.html">Jussi</a></td>
-                    <td>1452.6</td>
-                    <td>182.40</td>
-                    <td>8.3%</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td><a href="players/player_riku.html">Riku</a></td>
-                    <td>1227.2</td>
-                    <td>123.71</td>
-                    <td>15.4%</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td><a href="players/player_tuomas.html">Tuomas</a></td>
-                    <td>1178.6</td>
-                    <td>142.47</td>
-                    <td>12.5%</td>
-                </tr>
-            </tbody>
-        </table>
-    </div> 
+        <!-- Section: Leaderboard Table -->
+        <div class="leaderboard-section">
+            <p class="section-title">Player Rankings</p>
+            <p class="section-description">Current rankings based on recent performance and ratings.</p>
+            <table class="leaderboard">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Rating</th>
+                        <th>RD</th>
+                        <th>WL Ratio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="players/player_aaro.html">Aaro</a></td>
+                        <td>1953.6</td>
+                        <td>68.60</td>
+                        <td>74.0%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="players/player_juho.html">Juho</a></td>
+                        <td>1775.5</td>
+                        <td>68.80</td>
+                        <td>64.7%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><a href="players/player_jesper.html">Jesper</a></td>
+                        <td>1735.4</td>
+                        <td>121.60</td>
+                        <td>57.1%</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><a href="players/player_matias.html">Matias</a></td>
+                        <td>1480.4</td>
+                        <td>160.14</td>
+                        <td>42.9%</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><a href="players/player_jussi.html">Jussi</a></td>
+                        <td>1452.6</td>
+                        <td>182.40</td>
+                        <td>8.3%</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><a href="players/player_riku.html">Riku</a></td>
+                        <td>1227.2</td>
+                        <td>123.71</td>
+                        <td>15.4%</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><a href="players/player_tuomas.html">Tuomas</a></td>
+                        <td>1178.6</td>
+                        <td>142.47</td>
+                        <td>12.5%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
