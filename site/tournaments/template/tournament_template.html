@@ -50,6 +50,19 @@
             font-size: 16px;
             color: #ffffff;
         }
+        .bracket-link {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .bracket-link a {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .bracket-link a:hover {
+            text-decoration: underline;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -77,6 +90,14 @@
         .back-link {
             text-align: center;
             margin-top: 20px;
+        }
+        .rating-change-positive {
+            color: #4fc3f7; /* Light blue for positive changes */
+            font-weight: bold;
+        }
+        .rating-change-negative {
+            color: #ffa726; /* Light orange for negative changes */
+            font-weight: bold;
         }
     </style>
 </head>
@@ -112,61 +133,53 @@
             </div>
         </div>
 
-<style>
-    /* Add styles for positive and negative rating changes */
-    .rating-change-positive {
-        color: #4fc3f7; /* Light blue for positive changes */
-        font-weight: bold;
-    }
-    .rating-change-negative {
-        color: #ffa726; /* Light orange for negative changes */
-        font-weight: bold;
-    }
-</style>
+        <!-- Link to Bracket Section -->
+        <div class="bracket-link">
+            <p><strong>Link to the Bracket:</strong> <a href="https://example.com" target="_blank">View Bracket</a></p>
+        </div>
 
-<!-- Results Section -->
-<div class="results">
-    <h2>Results</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Seed</th>
-                <th>Name</th>
-                <th>Rating Before</th>
-                <th>Result</th>
-                <th>Rating Change</th>
-                <th>Rating After</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td><a href="../site/players/player_.html">player1</a></td>
-                <td>1500.0</td>
-                <td>2-0</td>
-                <td><span class="rating-change-positive">+20</span></td>
-                <td>1500.0</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="player_.html">player2</a></td>
-                <td>1500</td>
-                <td>1-1</td>
-                <td><span class="rating-change-negative">-10</span></td>
-                <td>1500.0</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><a href="player_s.html">player3</a></td>
-                <td>1500.0</td>
-                <td>0-2</td>
-                <td><span class="rating-change-positive">+15</span></td>
-                <td>1500.0</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
+        <!-- Results Section -->
+        <div class="results">
+            <h2>Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Seed</th>
+                        <th>Name</th>
+                        <th>Rating Before</th>
+                        <th>Result</th>
+                        <th>Rating Change</th>
+                        <th>Rating After</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="../site/players/player_.html">player1</a></td>
+                        <td>1500.0</td>
+                        <td>2-0</td>
+                        <td><span class="rating-change-positive">+20</span></td>
+                        <td>1500.0</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="player_.html">player2</a></td>
+                        <td>1500.0</td>
+                        <td>1-1</td>
+                        <td><span class="rating-change-negative">-10</span></td>
+                        <td>1500.0</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><a href="player_s.html">player3</a></td>
+                        <td>1500.0</td>
+                        <td>0-2</td>
+                        <td><span class="rating-change-positive">+15</span></td>
+                        <td>1500.0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div class="back-link">
             <p><a href="../tournaments.html">Back to Tournaments</a></p>
