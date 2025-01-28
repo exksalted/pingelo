@@ -164,40 +164,42 @@ function sortTable(columnIndex, ascending) {
     const rows = Array.from(table.querySelectorAll('tbody tr'));
 
     const compare = (rowA, rowB) => {
-        const cellA = rowA.children[columnIndex];
-        const cellB = rowB.children[columnIndex];
+        const cellA = rowA.children[columnIndex].textContent.trim();
+        const cellB = rowB.children[columnIndex].textContent.trim();
 
-        // Extract the main text content, ignoring child elements like <span>
-        const getTextContent = (cell) => {
-            return cell.childNodes[0].nodeValue.trim(); // Get the text node's value
+        // Extract the first part of the cell content (before the first space)
+        const getFirstPart = (text) => {
+            return text.split(' ')[0]; // Split at the first space and take the first part
         };
+
+        const firstPartA = getFirstPart(cellA);
+        const firstPartB = getFirstPart(cellB);
 
         // Check if the column contains numeric data (e.g., Rating, Rank, RD, WL Ratio)
         const isNumericColumn = columnIndex === 0 || columnIndex === 2 || columnIndex === 3 || columnIndex === 4;
 
         if (isNumericColumn) {
-            // Extract numeric values from the main text content
-            const extractNumber = (text) => {
-                const match = text.match(/-?\d+(\.\d+)?/); // Match numbers with optional decimals
-                return match ? parseFloat(match[0]) : 0; // Return 0 if no number is found
-            };
+            // Parse the first part as a number
+            const valA = parseFloat(firstPartA);
+            const valB = parseFloat(firstPartB);
 
-            const valA = extractNumber(getTextContent(cellA));
-            const valB = extractNumber(getTextContent(cellB));
+            if (isNaN(valA)) return ascending ? -1 : 1; // Handle invalid numbers
+            if (isNaN(valB)) return ascending ? 1 : -1; // Handle invalid numbers
 
             if (valA < valB) return ascending ? -1 : 1;
             if (valA > valB) return ascending ? 1 : -1;
             return 0;
         } else {
             // For text columns (e.g., Player), sort alphabetically
-            const textA = getTextContent(cellA);
-            const textB = getTextContent(cellB);
-
-            if (textA < textB) return ascending ? -1 : 1;
-            if (textA > textB) return ascending ? 1 : -1;
+            if (firstPartA < firstPartB) return ascending ? -1 : 1;
+            if (firstPartA > firstPartB) return ascending ? 1 : -1;
             return 0;
         }
     };
+
+    rows.sort(compare);
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+}
 
     rows.sort(compare);
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
