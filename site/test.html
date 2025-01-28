@@ -216,31 +216,6 @@
     });
 </script>
 
-
-    // Set up event listeners for sorting the table when clicking headers
-    document.addEventListener('DOMContentLoaded', () => {
-        const headers = document.querySelectorAll('#tournament-table thead th');
-        const sortOrder = {
-            "#": false, // Descending for # (default)
-            "Name": true, // Ascending for Name (default)
-            "Type": true, // Ascending for Type (default)
-            "Participants": true, // Ascending for Participants (default)
-            "Strength": false, // Descending for Strength (default)
-            "Winner": true, // Ascending for Winner (default)
-            "Date": true // Ascending for Date (default)
-        };
-
-        headers.forEach((header, index) => {
-            header.addEventListener('click', () => {
-                // Toggle sort order for the clicked column
-                const columnName = header.textContent.trim();
-                sortTable(index, sortOrder[columnName]);
-                sortOrder[columnName] = !sortOrder[columnName];
-            });
-        });
-    });
-</script>
-    
     
 <body>
     <!-- Navbar -->
