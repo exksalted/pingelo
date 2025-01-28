@@ -159,75 +159,43 @@
 
     <script>
   // Function to sort table rows based on a specific column index and order
+// Function to sort table rows based on a specific column index and order
 function sortTable(columnIndex, ascending) {
     const table = document.querySelector('.leaderboard');
     const rows = Array.from(table.querySelectorAll('tbody tr'));
 
-    const compare = (rowA, rowB) => {
-        const cellA = rowA.children[columnIndex].textContent.trim();
-        const cellB = rowB.children[columnIndex].textContent.trim();
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.children[columnIndex].textContent.trim().replace(/[^\d.-]+/g, '');
+        const cellB = rowB.children[columnIndex].textContent.trim().replace(/[^\d.-]+/g, '');
 
-        // Extract the first part of the cell content (before the first space)
-        const getFirstPart = (text) => {
-            return text.split(' ')[0]; // Split at the first space and take the first part
-        };
+        // Check if the column contains numeric data
+        const valA = parseFloat(cellA);
+        const valB = parseFloat(cellB);
 
-        const firstPartA = getFirstPart(cellA);
-        const firstPartB = getFirstPart(cellB);
-
-        // Check if the column contains numeric data (e.g., Rating, Rank, RD, WL Ratio)
-        const isNumericColumn = columnIndex === 0 || columnIndex === 2 || columnIndex === 3 || columnIndex === 4;
-
-        if (isNumericColumn) {
-            // Parse the first part as a number
-            const valA = parseFloat(firstPartA);
-            const valB = parseFloat(firstPartB);
-
-            if (isNaN(valA)) return ascending ? -1 : 1; // Handle invalid numbers
-            if (isNaN(valB)) return ascending ? 1 : -1; // Handle invalid numbers
-
-            if (valA < valB) return ascending ? -1 : 1;
-            if (valA > valB) return ascending ? 1 : -1;
-            return 0;
-        } else {
-            // For text columns (e.g., Player), sort alphabetically
-            if (firstPartA < firstPartB) return ascending ? -1 : 1;
-            if (firstPartA > firstPartB) return ascending ? 1 : -1;
-            return 0;
+        if (!isNaN(valA) && !isNaN(valB)) {
+            return ascending ? valA - valB : valB - valA;
         }
-    };
 
-    rows.sort(compare);
+        // Fallback for text sorting
+        return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    });
+
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
 }
 
-    rows.sort(compare);
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-}
-
-
-
-
-        // Set up event listeners for sorting the table when clicking headers
+// Set up event listeners for sorting the table when clicking headers
 document.addEventListener('DOMContentLoaded', () => {
     const headers = document.querySelectorAll('thead th');
-    const sortOrder = {
-        "Rank": true, // Ascending for rank (default)
-        "Player": true, // Ascending for player (default)
-        "Rating": false, // Descending for rating (default)
-        "RD": true, // Ascending for RD (default)
-        "WL Ratio": false // Descending for WL Ratio (default)
-    };
+    const sortOrder = Array.from(headers).map(() => true);
 
     headers.forEach((header, index) => {
         header.addEventListener('click', () => {
-            // Toggle sort order for the clicked column
-            const columnName = header.textContent.trim();
-            sortTable(index, sortOrder[columnName]);
-            sortOrder[columnName] = !sortOrder[columnName];
+            sortTable(index, sortOrder[index]);
+            sortOrder[index] = !sortOrder[index];
         });
     });
 });
+
     </script>
 </head>
 <body>
