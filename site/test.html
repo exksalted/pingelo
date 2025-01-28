@@ -167,18 +167,28 @@ function sortTable(columnIndex, ascending) {
         const cellA = rowA.children[columnIndex].textContent.trim();
         const cellB = rowB.children[columnIndex].textContent.trim();
 
-        // Extract numeric values from the cell content
-        const extractNumber = (text) => {
-            const match = text.match(/-?\d+(\.\d+)?/); // Match numbers with optional decimals
-            return match ? parseFloat(match[0]) : 0; // Return 0 if no number is found
-        };
+        // Check if the column contains numeric data (e.g., Rating, Rank, RD, WL Ratio)
+        const isNumericColumn = columnIndex === 0 || columnIndex === 2 || columnIndex === 3 || columnIndex === 4;
 
-        const valA = extractNumber(cellA);
-        const valB = extractNumber(cellB);
+        if (isNumericColumn) {
+            // Extract numeric values from the cell content
+            const extractNumber = (text) => {
+                const match = text.match(/-?\d+(\.\d+)?/); // Match numbers with optional decimals
+                return match ? parseFloat(match[0]) : 0; // Return 0 if no number is found
+            };
 
-        if (valA < valB) return ascending ? -1 : 1;
-        if (valA > valB) return ascending ? 1 : -1;
-        return 0;
+            const valA = extractNumber(cellA);
+            const valB = extractNumber(cellB);
+
+            if (valA < valB) return ascending ? -1 : 1;
+            if (valA > valB) return ascending ? 1 : -1;
+            return 0;
+        } else {
+            // For text columns (e.g., Player), sort alphabetically
+            if (cellA < cellB) return ascending ? -1 : 1;
+            if (cellA > cellB) return ascending ? 1 : -1;
+            return 0;
+        }
     };
 
     rows.sort(compare);
