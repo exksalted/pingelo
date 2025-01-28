@@ -59,67 +59,38 @@
             margin: auto;
             padding: 20px;
             animation: fadeIn 1s ease-in-out;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #007bff;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #2c2c3e;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        thead th {
-            background-color: #3c3c4f;
-            color: #fff;
-            padding: 15px;
-            text-align: left;
-            transition: background-color 0.3s ease;
-        }
-
-        thead th:hover {
-            background-color: #4c4c5f;
-        }
-
-        tbody tr {
-            transition: background-color 0.3s ease;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #29293f;
-        }
-
-        tbody tr:hover {
-            background-color: #3e3e55;
-        }
-
-        td, th {
-            padding: 15px;
-            text-align: left;
+        /* Epic Battle Text */
+        .epic-text {
+            font-size: 1.5em;
             color: #f0f0f0;
+            margin-top: 30px;
+            font-weight: 600;
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        /* Image Styles */
+        .battle-image {
+            max-width: 45%;
+            margin: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        a:hover {
-            text-decoration: underline;
-            color: #66bfff;
+        .battle-image:hover {
+            transform: scale(1.1);
         }
 
         /* Back-to-Top Button */
@@ -161,6 +132,11 @@
             td, th {
                 padding: 10px;
             }
+
+            .battle-image {
+                max-width: 80%;
+                margin: 20px auto;
+            }
         }
     </style>
 </head>
@@ -177,7 +153,18 @@
     <!-- Content -->
     <div class="container">
         <h1>TABLE TENNIS WARFARE</h1>
-        <!-- Add your content here -->
+        <p class="epic-text">The battle has begun! Two legendary forces are locked in an epic struggle for supremacy. Choose your side, and aid your champion in this thrilling contest of skill and strategy!</p>
+        <p class="epic-text">Will you stand with the brilliant and daring Pingelo Michelangelo, the master of finesse and flair?</p>
+        <p class="epic-text">Or will you join the ruthless and fearless Pingis Khan, the conqueror of the court?</p>
+
+        <div>
+            <a href="index.html">
+                <img src="pingelo.jpg" alt="Pingelo Michelangelo" class="battle-image">
+            </a>
+            <a href="index.html">
+                <img src="pingis.jpg" alt="Pingis Khan" class="battle-image">
+            </a>
+        </div>
     </div>
 
     <!-- Back-to-Top Button -->
