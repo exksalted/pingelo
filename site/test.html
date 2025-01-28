@@ -170,12 +170,8 @@ function sortTable(columnIndex, ascending) {
         // Handle numeric columns: Rank (0), RD (3), Strength (4)
         if ([0, 3, 4].includes(columnIndex)) {
             // Extract numeric values, ignoring additional text
-            const valA = parseFloat(cellA.match(/-?\d+(\.\d+)?/));
-            const valB = parseFloat(cellB.match(/-?\d+(\.\d+)?/));
-
-            // If parsing fails, treat as 0 (e.g., empty or invalid numbers)
-            if (isNaN(valA)) return ascending ? -1 : 1;
-            if (isNaN(valB)) return ascending ? 1 : -1;
+            const valA = parseFloat(cellA.match(/-?\d+(\.\d+)?/)?.[0] || 0);
+            const valB = parseFloat(cellB.match(/-?\d+(\.\d+)?/)?.[0] || 0);
 
             if (valA < valB) return ascending ? -1 : 1;
             if (valA > valB) return ascending ? 1 : -1;
@@ -190,6 +186,7 @@ function sortTable(columnIndex, ascending) {
     rows.sort(compare);
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
 }
+
 
 
         // Set up event listeners for sorting the table when clicking headers
