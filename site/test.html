@@ -160,37 +160,38 @@
 </head>
 
 <script>
-    // Function to sort table rows based on a specific column index and order
-    function sortTable(columnIndex, ascending) {
-        const table = document.querySelector('#tournament-table');
-        const rows = Array.from(table.querySelectorAll('tbody tr'));
+// Function to sort table rows based on a specific column index and order
+function sortTable(columnIndex, ascending) {
+    const table = document.querySelector('#tournament-table');
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
 
-        const compare = (rowA, rowB) => {
-            const cellA = rowA.children[columnIndex].textContent.trim();
-            const cellB = rowB.children[columnIndex].textContent.trim();
+    const compare = (rowA, rowB) => {
+        let cellA = rowA.children[columnIndex].textContent.trim();
+        let cellB = rowB.children[columnIndex].textContent.trim();
 
-            // Handle numeric columns like Participants and Strength
-            if (columnIndex === 0 || columnIndex === 3 || columnIndex === 4) {
-                const valA = parseInt(cellA, 10);
-                const valB = parseInt(cellB, 10);
+        // Handle numeric columns: Rank (0), RD (3), Strength (4)
+        if ([0, 3, 4].includes(columnIndex)) {
+            // Extract numeric values, ignoring additional text
+            const valA = parseFloat(cellA.match(/-?\d+(\.\d+)?/));
+            const valB = parseFloat(cellB.match(/-?\d+(\.\d+)?/));
 
-                // If parsing fails, treat as 0 (e.g., empty or invalid numbers)
-                if (isNaN(valA)) return ascending ? -1 : 1;
-                if (isNaN(valB)) return ascending ? 1 : -1;
+            // If parsing fails, treat as 0 (e.g., empty or invalid numbers)
+            if (isNaN(valA)) return ascending ? -1 : 1;
+            if (isNaN(valB)) return ascending ? 1 : -1;
 
-                if (valA < valB) return ascending ? -1 : 1;
-                if (valA > valB) return ascending ? 1 : -1;
-            } else {
-                // For other columns (e.g., Name, Winner, Date)
-                if (cellA < cellB) return ascending ? -1 : 1;
-                if (cellA > cellB) return ascending ? 1 : -1;
-            }
-            return 0;
-        };
+            if (valA < valB) return ascending ? -1 : 1;
+            if (valA > valB) return ascending ? 1 : -1;
+        } else {
+            // For other columns (e.g., Name, Winner, Date)
+            if (cellA < cellB) return ascending ? -1 : 1;
+            if (cellA > cellB) return ascending ? 1 : -1;
+        }
+        return 0;
+    };
 
-        rows.sort(compare);
-        rows.forEach(row => table.querySelector('tbody').appendChild(row));
-    }
+    rows.sort(compare);
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+}
 
     // Set up event listeners for sorting the table when clicking headers
     document.addEventListener('DOMContentLoaded', () => {
