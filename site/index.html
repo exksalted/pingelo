@@ -158,7 +158,7 @@
 </style>
 
     <script>
-        // Function to sort table rows based on a specific column index and order
+  // Function to sort table rows based on a specific column index and order
 function sortTable(columnIndex, ascending) {
     const table = document.querySelector('.leaderboard');
     const rows = Array.from(table.querySelectorAll('tbody tr'));
@@ -167,49 +167,67 @@ function sortTable(columnIndex, ascending) {
         const cellA = rowA.children[columnIndex].textContent.trim();
         const cellB = rowB.children[columnIndex].textContent.trim();
 
-        // Handle percentages in the WL Ratio column (remove '%' and convert to number)
-        if (columnIndex === 4) {
-            // WL Ratio (columnIndex 4) - remove '%' and convert to number
-            const valA = parseFloat(cellA.replace('%', ''));
-            const valB = parseFloat(cellB.replace('%', ''));
-            if (valA < valB) return ascending ? -1 : 1;
-            if (valA > valB) return ascending ? 1 : -1;
-        } else {
-            // For other columns (Rank, Player, Rating, RD)
-            let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
-            let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
+        // Extract the first part of the cell content (before the first space)
+        const getFirstPart = (text) => {
+            return text.split(' ')[0]; // Split at the first space and take the first part
+        };
+
+        const firstPartA = getFirstPart(cellA);
+        const firstPartB = getFirstPart(cellB);
+
+        // Check if the column contains numeric data (e.g., Rating, Rank, RD, WL Ratio)
+        const isNumericColumn = columnIndex === 0 || columnIndex === 2 || columnIndex === 3 || columnIndex === 4;
+
+        if (isNumericColumn) {
+            // Parse the first part as a number
+            const valA = parseFloat(firstPartA);
+            const valB = parseFloat(firstPartB);
+
+            if (isNaN(valA)) return ascending ? -1 : 1; // Handle invalid numbers
+            if (isNaN(valB)) return ascending ? 1 : -1; // Handle invalid numbers
 
             if (valA < valB) return ascending ? -1 : 1;
             if (valA > valB) return ascending ? 1 : -1;
+            return 0;
+        } else {
+            // For text columns (e.g., Player), sort alphabetically
+            if (firstPartA < firstPartB) return ascending ? -1 : 1;
+            if (firstPartA > firstPartB) return ascending ? 1 : -1;
+            return 0;
         }
-        return 0;
     };
 
     rows.sort(compare);
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
 }
 
+    rows.sort(compare);
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+}
+
+
+
 
         // Set up event listeners for sorting the table when clicking headers
-        document.addEventListener('DOMContentLoaded', () => {
-            const headers = document.querySelectorAll('thead th');
-            const sortOrder = {
-                "Rank": true, // Ascending for rank (default)
-                "Player": true, // Ascending for player (default)
-                "Rating": false, // Descending for rating (default)
-                "RD": true, // Ascending for RD (default)
-                "Win %": false // Descending for WL Ratio (default)
-            };
+document.addEventListener('DOMContentLoaded', () => {
+    const headers = document.querySelectorAll('thead th');
+    const sortOrder = {
+        "Rank": true, // Ascending for rank (default)
+        "Player": true, // Ascending for player (default)
+        "Rating": false, // Descending for rating (default)
+        "RD": true, // Ascending for RD (default)
+        "WL Ratio": false // Descending for WL Ratio (default)
+    };
 
-            headers.forEach((header, index) => {
-                header.addEventListener('click', () => {
-                    // Toggle sort order for the clicked column
-                    const columnName = header.textContent.trim();
-                    sortTable(index, sortOrder[columnName]);
-                    sortOrder[columnName] = !sortOrder[columnName];
-                });
-            });
+    headers.forEach((header, index) => {
+        header.addEventListener('click', () => {
+            // Toggle sort order for the clicked column
+            const columnName = header.textContent.trim();
+            sortTable(index, sortOrder[columnName]);
+            sortOrder[columnName] = !sortOrder[columnName];
         });
+    });
+});
     </script>
 </head>
 <body>
@@ -227,65 +245,81 @@ function sortTable(columnIndex, ascending) {
         <!-- Section: Leaderboard Table -->
         <div class="leaderboard-section">
             <p class="section-title">Player Rankings</p>
-            <p class="section-description">Last updated 27.1.2025</p>
+            <p class="section-description">Last updated 29.1.2025</p>
             <table class="leaderboard">
                 <thead>
                     <tr>
                         <th>Rank</th>
                         <th>Player</th>
                         <th>Rating</th>
+                        <th>Rating Change</th>
                         <th>RD</th>
-                        <th>WL Ratio</th>
+                        <th>RD Change</th>
+                        <th>Win %</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
                         <td><a href="players/player_aaro.html">Aaro</a></td>
-                        <td>1951.6 <span class="change-neg">-2</span></td>
-                        <td>68.60</td>
-                        <td>74.0%</td>
+                        <td>1951.6</td>
+                        <td><span class="change-neg">-2.0</span></td>
+                        <td>71.5</td>
+                        <td><span class="change-neg">+2.90</span></td>
+                        <td>82.14%</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td><a href="players/player_juho.html">Juho</a></td>
                         <td>1775.5</td>
-                        <td>68.80</td>
+                        <td>0</td>
+                        <td>82.40</td>
+                        <td><span class="change-neg">+13.60</span></td>
                         <td>64.7%</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td><a href="players/player_jesper.html">Jesper</a></td>
                         <td>1735.4</td>
-                        <td>121.60</td>
+                        <td>0</td>
+                        <td>129.78</td>
+                        <td><span class="change-neg">+8.18</span></td>
                         <td>57.1%</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td><a href="players/player_matias.html">Matias</a></td>
                         <td>1480.4</td>
-                        <td>160.14</td>
+                        <td>0</td>
+                        <td>166.44</td>
+                        <td><span class="change-neg">+6.30</span></td>
                         <td>42.9%</td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td><a href="players/player_jussi.html">Jussi</a></td>
-                        <td>1473.3 <span class="change-pos">+20.7</span></td>
-                        <td>182.40</td>
-                        <td>8.3%</td>
+                        <td>1473.3</td>
+                        <td><span class="change-pos">+20.7</span></td>
+                        <td>115.70</td>
+                        <td><span class="change-pos">-66.7</span></td>
+                        <td>6.5%</td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td><a href="players/player_riku.html">Riku</a></td>
                         <td>1227.2</td>
-                        <td>123.71</td>
+                        <td>0</td>
+                        <td>131.76</td>
+                        <td><span class="change-neg">+8.05</span></td>
                         <td>15.4%</td>
                     </tr>
                     <tr>
                         <td>7</td>
                         <td><a href="players/player_tuomas.html">Tuomas</a></td>
                         <td>1178.6</td>
-                        <td>142.47</td>
+                        <td>0</td>
+                        <td>149.51</td>
+                        <td><span class="change-neg">+7.04</span></td>
                         <td>12.5%</td>
                     </tr>
                 </tbody>
