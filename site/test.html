@@ -164,10 +164,10 @@ function sortTable(columnIndex, ascending) {
     const rows = Array.from(table.querySelectorAll('tbody tr'));
 
     const compare = (rowA, rowB) => {
-        let cellA = rowA.children[columnIndex].textContent.trim().split(/\s+/)[0];
-        let cellB = rowB.children[columnIndex].textContent.trim().split(/\s+/)[0];
+        let cellA = rowA.children[columnIndex].innerText.trim().split(/\s+/)[0];
+        let cellB = rowB.children[columnIndex].innerText.trim().split(/\s+/)[0];
 
-        // Handle numeric columns like Participants and Strength
+        // Handle numeric columns with possible additional elements, like "1473.3 <span>"
         const valA = parseFloat(cellA);
         const valB = parseFloat(cellB);
 
@@ -182,6 +182,7 @@ function sortTable(columnIndex, ascending) {
     rows.sort(compare);
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
 }
+
 
 
 
