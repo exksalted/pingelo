@@ -170,7 +170,7 @@
             const cellB = rowB.children[columnIndex].textContent.trim();
 
             // Handle numeric columns like Participants and Strength
-            if (columnIndex === 3 || columnIndex === 4) {
+            if (columnIndex === 0 || columnIndex === 3 || columnIndex === 4) {
                 const valA = parseInt(cellA, 10);
                 const valB = parseInt(cellB, 10);
 
