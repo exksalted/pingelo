@@ -147,78 +147,26 @@
 
     <script>
         // Function to sort table rows based on a specific column index and order
-function sortTable(columnIndex, ascending) {
-    const table = document.querySelector('.leaderboard');
-    const rows = Array.from(table.querySelectorAll('tbody tr'));
+        function sortTable(columnIndex, ascending) {
+            const table = document.querySelector('.leaderboard');
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
 
-    const compare = (rowA, rowB) => {
-        const cellA = rowA.children[columnIndex].textContent.trim();
-        const cellB = rowB.children[columnIndex].textContent.trim();
+            const compare = (rowA, rowB) => {
+                const cellA = rowA.children[columnIndex].textContent.trim();
+                const cellB = rowB.children[columnIndex].textContent.trim();
 
-        // Handle percentages in the WL Ratio column (remove '%' and convert to number)
-        if (columnIndex === 4) {
-            // WL Ratio (columnIndex 4) - remove '%' and convert to number
-            const valA = parseFloat(cellA.replace('%', ''));
-            const valB = parseFloat(cellB.replace('%', ''));
-            if (valA < valB) return ascending ? -1 : 1;
-            if (valA > valB) return ascending ? 1 : -1;
-        } else {
-            // For other columns (Rank, Player, Rating, RD)
-            let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
-            let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
+                // Convert the values to numbers where applicable for proper sorting
+                let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
+                let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
 
-            if (valA < valB) return ascending ? -1 : 1;
-            if (valA > valB) return ascending ? 1 : -1;
+                if (valA < valB) return ascending ? -1 : 1;
+                if (valA > valB) return ascending ? 1 : -1;
+                return 0;
+            };
+
+            rows.sort(compare);
+            rows.forEach(row => table.querySelector('tbody').appendChild(row));
         }
-        return 0;
-    };
-
-    rows.sort(compare);
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-}
-
-    // Get the current direction of sorting for the column
-    let ascending = headers[columnIndex].classList.contains('asc');
-
-    // Toggle sorting direction (ascending ↔ descending)
-    ascending = !ascending;
-
-    // Remove sorting icons and classes from all columns
-    headers.forEach(th => {
-        th.innerHTML = th.textContent.trim(); // Reset the header text
-        th.classList.remove('asc', 'desc'); // Remove the sorting classes
-    });
-
-    // Add the icon to the sorted column header
-    const sortedHeader = headers[columnIndex];
-    const icon = ascending ? '↑' : '↓';
-    sortedHeader.innerHTML = `${sortedHeader.textContent.trim()} ${icon}`;
-    sortedHeader.classList.add(ascending ? 'asc' : 'desc'); // Add sorting class
-
-    // Sort the rows based on the column
-    rows.sort(compare);
-
-    // Append the sorted rows back into the table
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-}
-
-
-    rows.sort(compare);
-
-    // Remove existing icons
-    headers.forEach(th => {
-        th.innerHTML = th.textContent.trim(); // Remove the icon
-    });
-
-    // Add icons to the sorted column
-    const sortedHeader = headers[columnIndex];
-    const icon = ascending ? '↑' : '↓';
-    sortedHeader.innerHTML = `${sortedHeader.textContent.trim()} ${icon}`;
-
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-}
-
-
 
         // Set up event listeners for sorting the table when clicking headers
         document.addEventListener('DOMContentLoaded', () => {
