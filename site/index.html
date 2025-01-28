@@ -86,6 +86,7 @@
             color: #fff;
             padding: 15px;
             text-align: left;
+            cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
@@ -143,6 +144,61 @@
             }
         }
     </style>
+
+    <script>
+        // Function to sort table rows based on a specific column index and order
+function sortTable(columnIndex, ascending) {
+    const table = document.querySelector('.leaderboard');
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+    const compare = (rowA, rowB) => {
+        const cellA = rowA.children[columnIndex].textContent.trim();
+        const cellB = rowB.children[columnIndex].textContent.trim();
+
+        // Handle percentages in the WL Ratio column (remove '%' and convert to number)
+        if (columnIndex === 4) {
+            // WL Ratio (columnIndex 4) - remove '%' and convert to number
+            const valA = parseFloat(cellA.replace('%', ''));
+            const valB = parseFloat(cellB.replace('%', ''));
+            if (valA < valB) return ascending ? -1 : 1;
+            if (valA > valB) return ascending ? 1 : -1;
+        } else {
+            // For other columns (Rank, Player, Rating, RD)
+            let valA = isNaN(cellA) ? cellA : parseFloat(cellA);
+            let valB = isNaN(cellB) ? cellB : parseFloat(cellB);
+
+            if (valA < valB) return ascending ? -1 : 1;
+            if (valA > valB) return ascending ? 1 : -1;
+        }
+        return 0;
+    };
+
+    rows.sort(compare);
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+}
+
+
+        // Set up event listeners for sorting the table when clicking headers
+        document.addEventListener('DOMContentLoaded', () => {
+            const headers = document.querySelectorAll('thead th');
+            const sortOrder = {
+                "Rank": true, // Ascending for rank (default)
+                "Player": true, // Ascending for player (default)
+                "Rating": false, // Descending for rating (default)
+                "RD": true, // Ascending for RD (default)
+                "WL Ratio": false // Descending for WL Ratio (default)
+            };
+
+            headers.forEach((header, index) => {
+                header.addEventListener('click', () => {
+                    // Toggle sort order for the clicked column
+                    const columnName = header.textContent.trim();
+                    sortTable(index, sortOrder[columnName]);
+                    sortOrder[columnName] = !sortOrder[columnName];
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Navbar -->
