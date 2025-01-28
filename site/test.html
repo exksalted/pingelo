@@ -164,26 +164,19 @@ function sortTable(columnIndex, ascending) {
     const rows = Array.from(table.querySelectorAll('tbody tr'));
 
     const compare = (rowA, rowB) => {
-        let cellA = rowA.children[columnIndex].textContent.trim().split(' ')[0];
-        let cellB = rowB.children[columnIndex].textContent.trim().split(' ')[0];
+        let cellA = rowA.children[columnIndex].textContent.trim().split(/\s+/)[0];
+        let cellB = rowB.children[columnIndex].textContent.trim().split(/\s+/)[0];
 
         // Handle numeric columns like Participants and Strength
-        if (columnIndex === 0 || columnIndex === 3 || columnIndex === 4) {
-            const valA = parseInt(cellA, 10);
-            const valB = parseInt(cellB, 10);
+        const valA = parseFloat(cellA);
+        const valB = parseFloat(cellB);
 
-            // If parsing fails, treat as 0 (e.g., empty or invalid numbers)
-            if (isNaN(valA)) return ascending ? -1 : 1;
-            if (isNaN(valB)) return ascending ? 1 : -1;
-
-            if (valA < valB) return ascending ? -1 : 1;
-            if (valA > valB) return ascending ? 1 : -1;
-        } else {
-            // For other columns (e.g., Name, Winner, Date)
-            if (cellA < cellB) return ascending ? -1 : 1;
-            if (cellA > cellB) return ascending ? 1 : -1;
+        if (!isNaN(valA) && !isNaN(valB)) {
+            return ascending ? valA - valB : valB - valA;
         }
-        return 0;
+
+        // For non-numeric comparisons (e.g., Name, Winner, Date)
+        return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
     };
 
     rows.sort(compare);
