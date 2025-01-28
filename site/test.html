@@ -164,29 +164,37 @@ function sortTable(columnIndex, ascending) {
     const rows = Array.from(table.querySelectorAll('tbody tr'));
 
     const compare = (rowA, rowB) => {
-        const cellA = rowA.children[columnIndex].textContent.trim();
-        const cellB = rowB.children[columnIndex].textContent.trim();
+        const cellA = rowA.children[columnIndex];
+        const cellB = rowB.children[columnIndex];
+
+        // Extract the main text content, ignoring child elements like <span>
+        const getTextContent = (cell) => {
+            return cell.childNodes[0].nodeValue.trim(); // Get the text node's value
+        };
 
         // Check if the column contains numeric data (e.g., Rating, Rank, RD, WL Ratio)
         const isNumericColumn = columnIndex === 0 || columnIndex === 2 || columnIndex === 3 || columnIndex === 4;
 
         if (isNumericColumn) {
-            // Extract numeric values from the cell content
+            // Extract numeric values from the main text content
             const extractNumber = (text) => {
                 const match = text.match(/-?\d+(\.\d+)?/); // Match numbers with optional decimals
                 return match ? parseFloat(match[0]) : 0; // Return 0 if no number is found
             };
 
-            const valA = extractNumber(cellA);
-            const valB = extractNumber(cellB);
+            const valA = extractNumber(getTextContent(cellA));
+            const valB = extractNumber(getTextContent(cellB));
 
             if (valA < valB) return ascending ? -1 : 1;
             if (valA > valB) return ascending ? 1 : -1;
             return 0;
         } else {
             // For text columns (e.g., Player), sort alphabetically
-            if (cellA < cellB) return ascending ? -1 : 1;
-            if (cellA > cellB) return ascending ? 1 : -1;
+            const textA = getTextContent(cellA);
+            const textB = getTextContent(cellB);
+
+            if (textA < textB) return ascending ? -1 : 1;
+            if (textA > textB) return ascending ? 1 : -1;
             return 0;
         }
     };
