@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaro's Stats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #212529; /* Really dark gray background */
+            color: #d1d1d1; /* Light gray text color */
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #343a40; /* Slightly lighter dark gray */
+            border-radius: 8px; /* Rounded corners */
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff; /* White color for the header */
+        }
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        p strong {
+            color: #007bff; /* Blue color for labels */
+        }
+        a {
+            text-decoration: none;
+            color: #007bff; /* Blue color for the link */
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .stats {
+            margin-top: 20px;
+        }
+        .stats p {
+            margin: 10px 0;
+        }
+        .stats strong {
+            color: #ffffff; /* White color for stat labels */
+        }
+
+        /* Style for section titles like "Rank Stats", "Rating Stats" */
+        .stat-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff; /* White color for titles */
+            margin-top: 20px;
+            text-transform: uppercase; /* Makes titles in uppercase */
+            border-bottom: 2px solid #007bff; /* Blue underline */
+            padding-bottom: 5px;
+        }
+
+        /* Adding some space between sections */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        /* Flexbox styling to align stats on the same line */
+        .stat-pair {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .stat-pair p {
+            margin: 0; /* Remove default margin */
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aaro's Stats</h1>
+
+        <div class="stats">
+            <!-- Rank Stats Section -->
+            <div class="section">
+                <p class="stat-title">Rank Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Current Rank:</strong><br><span id="currentRank">Loading...</span></p>
+                    <p><strong>Peak Rank:</strong><br><span id="peakRank">Loading...</span></p>
+                    <p><strong>Worst Rank:</strong><br><span id="worstRank">Loading...</span></p>
+                </div>
+            </div>
+
+            <!-- Rating Stats Section -->
+            <div class="section">
+                <p class="stat-title">Rating Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Current Rating:</strong><br><span id="currentRating">Loading...</span></p>
+                    <p><strong>Peak Rating:</strong><br><span id="peakRating">Loading...</span></p>
+                    <p><strong>Worst Rating:</strong><br><span id="worstRating">Loading...</span></p>
+                </div>
+            </div>
+
+            <!-- Game Stats Section -->
+            <div class="section">
+                <p class="stat-title">Game Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Games Played:</strong><br><span id="gamesPlayed">Loading...</span></p>
+                    <p><strong>Wins:</strong><br><span id="wins">Loading...</span></p>
+                    <p><strong>Losses:</strong><br><span id="losses">Loading...</span></p>
+                    <p><strong>Win Percentage:</strong><br><span id="winPercentage">Loading...</span></p>
+                    <p><strong>Average Points:</strong><br><span id="averagePoints">Loading...</span></p>
+                </div>
+            </div>
+
+          <!-- Hall of Fame and Shame Section -->
+            <div class="section">
+                <p class="stat-title">Hall of Fame and Shame:</p>
+                <div class="stat-pair">
+                    <p><strong>Best Victory:</strong><br><a href="player_jesper.html">Jesper,</a> Rated 2055.6<br><a href="../tournamentfolder/P2D1.html">Pirkkola 2 DE1</a><br>12.1.2025</p>
+                    <p><strong>Worst Defeat:</strong><br><a href="player_jussi.html">Jussi,</a> Rated 1332.9<br>1v1 Bo5<br>28.1.2025</p>
+                </div>
+            </div>
+
+            <!-- Tournament Stats Section -->
+            <div class="section">
+                <p class="stat-title">Tournament Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Best Performance:</strong><br><a href="../tournamentfolder/P2D1.html">Pirkkola 2 DE1</a><br>(1st place)<br>Strength 2148.1</p>
+                    <p><strong>Tournaments Played:</strong><br><span id="tournamentsPlayed">Loading...</span></p>
+                    <p><strong><a href="ptpages/aarotourney.html">Tournaments Won:</a></strong><br><span id="tournamentsWon">Loading...</span></p>
+                </div>
+            </div>
+
+           <!-- Matchup Stats Section -->
+            <div class="section">
+                <p class="stat-title">Matchup Stats:</p>
+                <div class="stat-pair">
+                    <p><strong>Best WL Matchup:</strong><br><a href="player_riku.html">Riku</a><br>7 - 0</p>
+                    <p><strong>Worst WL Matchup:</strong><br><a href="player_juho.html">Juho</a><br>14 - 11</p>
+                    <p><strong>Best Point Matchup:</strong><br><a href="player_riku.html">Riku</a><br>11.0 - 5.45</p>
+                    <p><strong>Worst Point Matchup:</strong><br><a href="player_juho.html">Juho</a><br>9.43 - 8.33</p>
+                    <p><strong>Most Played:</strong><br><a href="player_jussi.html">Jussi</a><br>38 games</p>
+                </div>
+            </div>
+
+        </div>
+
+        <p><a href="../../index.html">Back to Leaderboard</a></p>
+    </div>
+
+    <script>
+        // Define the player's name (this will be dynamically set based on the page)
+        const playerName = "Jesper";  // Update this as needed for different player pages
+
+        // Fetch the CSV file and update the stats
+        fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRcU0BWSuV8JcIyK1VZgNmPGkfx1x85T4A8fTFilGaq-eMpWQDRXafFbIuDfz2tFwRdfuiM19_jMKB9/pub?gid=1895329333&single=true&output=csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                let stats = {};
+
+                // Loop through rows and find the player's stats
+                for (let i = 1; i < rows.length; i++) { // Start at 1 to skip header row
+                    const columns = rows[i].split(',');
+
+                    // Check if the first column (player name) matches the specified player
+                    if (columns[0].trim() === playerName) {
+                        stats = {
+                            currentRank: columns[1],
+                            peakRank: columns[2],
+                            worstRank: columns[3],
+                            currentRating: columns[4],
+                            peakRating: columns[5],
+                            worstRating: columns[6],
+                            gamesPlayed: columns[7],
+                            wins: columns[8],
+                            losses: columns[9],
+                            winPercentage: columns[10],
+                            averagePoints: columns[11],
+                            tournamentsPlayed: columns[12],
+                            tournamentsWon: columns[13]
+                        };
+                        break;
+                    }
+                }
+
+                // If player not found in the data
+                if (Object.keys(stats).length === 0) {
+                    alert('Player not found in the stats data.');
+                    return;
+                }
+
+                // Update the stats dynamically
+                document.getElementById('currentRank').textContent = stats.currentRank || 'N/A';
+                document.getElementById('peakRank').textContent = stats.peakRank || 'N/A';
+                document.getElementById('worstRank').textContent = stats.worstRank || 'N/A';
+                document.getElementById('currentRating').textContent = stats.currentRating || 'N/A';
+                document.getElementById('peakRating').textContent = stats.peakRating || 'N/A';
+                document.getElementById('worstRating').textContent = stats.worstRating || 'N/A';
+                document.getElementById('gamesPlayed').textContent = stats.gamesPlayed || 'N/A';
+                document.getElementById('wins').textContent = stats.wins || 'N/A';
+                document.getElementById('losses').textContent = stats.losses || 'N/A';
+                document.getElementById('winPercentage').textContent = stats.winPercentage || 'N/A';
+                document.getElementById('averagePoints').textContent = stats.averagePoints || 'N/A';
+                document.getElementById('tournamentsPlayed').textContent = stats.tournamentsPlayed || 'N/A';
+                document.getElementById('tournamentsWon').textContent = stats.tournamentsWon || 'N/A';
+            })
+            .catch(error => {
+                console.error('Error fetching the CSV file:', error);
+                alert('There was an error fetching the stats data.');
+            });
+    </script>
+</body>
+</html>
