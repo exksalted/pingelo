@@ -157,6 +157,81 @@
     }
 </style>
 
+<script>
+    // URL for the CSV
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcU0BWSuV8JcIyK1VZgNmPGkfx1x85T4A8fTFilGaq-eMpWQDRXafFbIuDfz2tFwRdfuiM19_jMKB9/pub?gid=1895329333&single=true&output=csv";
+
+    // Function to fetch and parse the CSV data
+    async function fetchAndUpdateLeaderboard() {
+        try {
+            const response = await fetch(csvUrl);
+            const csvText = await response.text();
+            const data = parseCSV(csvText);
+
+            // Select the leaderboard table body
+            const tbody = document.querySelector(".leaderboard tbody");
+
+            // Clear current table rows
+            tbody.innerHTML = "";
+
+            // Populate table with new data
+            data.forEach(row => {
+                if (row.Rank) { // Skip empty or invalid rows
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+        	            <td>${row.Rank}</td>
+                        <td><a href="players/player_${row.Player.toLowerCase()}.html">${row.Player}</a></td>
+                        <td>${row.Rating}</td>
+                        <td><span class="${parseChangeClass(row.RatingChange)}">${row.RatingChange}</span></td>
+                        <td>${row.RD}</td>
+                        <td><span class="${parseChangeClass(row.RDChange, true)}">${row.RDChange}</span></td>
+                    `;
+
+                    tbody.appendChild(tr);
+                }
+            });
+        } catch (error) {
+            console.error("Error fetching or updating the leaderboard:", error);
+        }
+    }
+
+    // Parse CSV into a list of objects
+    function parseCSV(text) {
+        const rows = text.trim().split("\n").map(row => row.split(","));
+        const headers = rows.shift();
+        
+        return rows.map(row => {
+            return {
+                Rank: row[1],
+                Player: row[0],
+                Rating: row[4],
+                RatingChange: row[14],
+                RD: row[15],
+                RDChange: row[16],
+            };
+        });
+    }
+
+// Function to apply positive/negative style classes with separate logic for RD changes
+function parseChangeClass(value, isRDChange = false) {
+    const numericValue = parseFloat(value);
+    if (isNaN(numericValue)) return "";
+
+    // Apply inverted logic for RD changes only
+    if (isRDChange) {
+        return numericValue < 0 ? "change-pos" : numericValue > 0 ? "change-neg" : "";
+    }
+
+    // Default logic for Rating changes
+    return numericValue > 0 ? "change-pos" : numericValue < 0 ? "change-neg" : "";
+}
+
+
+    // Load leaderboard data on page load
+    document.addEventListener("DOMContentLoaded", fetchAndUpdateLeaderboard);
+</script>
+
+    
    <script>
   // Function to sort table rows based on a specific column index and order
 // Function to sort table rows based on a specific column index and order
@@ -226,62 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="players/player_aaro.html">Aaro</a></td>
-                        <td>1951.6</td>
-                        <td><span class="change-neg">-2.0</span></td>
-                        <td>71.5</td>
-                        <td><span class="change-neg">+2.90</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="players/player_juho.html">Juho</a></td>
-                        <td>1775.5</td>
-                        <td>0</td>
-                        <td>82.40</td>
-                        <td><span class="change-neg">+13.60</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="players/player_jesper.html">Jesper</a></td>
-                        <td>1735.4</td>
-                        <td>0</td>
-                        <td>129.78</td>
-                        <td><span class="change-neg">+8.18</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href="players/player_matias.html">Matias</a></td>
-                        <td>1480.4</td>
-                        <td>0</td>
-                        <td>166.44</td>
-                        <td><span class="change-neg">+6.30</span></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><a href="players/player_jussi.html">Jussi</a></td>
-                        <td>1473.3</td>
-                        <td><span class="change-pos">+20.7</span></td>
-                        <td>115.70</td>
-                        <td><span class="change-pos">-66.7</span></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><a href="players/player_riku.html">Riku</a></td>
-                        <td>1227.2</td>
-                        <td>0</td>
-                        <td>131.76</td>
-                        <td><span class="change-neg">+8.05</span></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td><a href="players/player_tuomas.html">Tuomas</a></td>
-                        <td>1178.6</td>
-                        <td>0</td>
-                        <td>149.51</td>
-                        <td><span class="change-neg">+7.04</span></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
