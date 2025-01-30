@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaro's Stats</title>
+    <title>Jesper's Stats</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,16 +77,16 @@
 </head>
 <body>
     <div class="container">
-        <h1>Aaro's Stats</h1>
+        <h1>Jesper's Stats</h1>
 
         <div class="stats">
             <!-- Rank Stats Section -->
             <div class="section">
                 <p class="stat-title">Rank Stats:</p>
                 <div class="stat-pair">
-                    <p><strong>Current Rank:</strong><br><span id="currentRank">Loading...</span></p>
-                    <p><strong>Peak Rank:</strong><br><span id="peakRank">Loading...</span></p>
-                    <p><strong>Worst Rank:</strong><br><span id="worstRank">Loading...</span></p>
+                    <p><strong>Current Rank:</strong><br id="currentRank">Loading...</p>
+                    <p><strong>Peak Rank:</strong><br id="peakRank">Loading...</p>
+                    <p><strong>Worst Rank:</strong><br id="worstRank">Loading...</p>
                 </div>
             </div>
 
@@ -94,9 +94,9 @@
             <div class="section">
                 <p class="stat-title">Rating Stats:</p>
                 <div class="stat-pair">
-                    <p><strong>Current Rating:</strong><br><span id="currentRating">Loading...</span></p>
-                    <p><strong>Peak Rating:</strong><br><span id="peakRating">Loading...</span></p>
-                    <p><strong>Worst Rating:</strong><br><span id="worstRating">Loading...</span></p>
+                    <p><strong>Current Rating:</strong><br id="currentRating">Loading...</p>
+                    <p><strong>Peak Rating:</strong><br id="peakRating">Loading...</p>
+                    <p><strong>Worst Rating:</strong><br id="worstRating">Loading...</p>
                 </div>
             </div>
 
@@ -104,20 +104,11 @@
             <div class="section">
                 <p class="stat-title">Game Stats:</p>
                 <div class="stat-pair">
-                    <p><strong>Games Played:</strong><br><span id="gamesPlayed">Loading...</span></p>
-                    <p><strong>Wins:</strong><br><span id="wins">Loading...</span></p>
-                    <p><strong>Losses:</strong><br><span id="losses">Loading...</span></p>
-                    <p><strong>Win Percentage:</strong><br><span id="winPercentage">Loading...</span></p>
-                    <p><strong>Average Points:</strong><br><span id="averagePoints">Loading...</span></p>
-                </div>
-            </div>
-
-          <!-- Hall of Fame and Shame Section -->
-            <div class="section">
-                <p class="stat-title">Hall of Fame and Shame:</p>
-                <div class="stat-pair">
-                    <p><strong>Best Victory:</strong><br><a href="player_jesper.html">Jesper,</a> Rated 2055.6<br><a href="../tournamentfolder/P2D1.html">Pirkkola 2 DE1</a><br>12.1.2025</p>
-                    <p><strong>Worst Defeat:</strong><br><a href="player_jussi.html">Jussi,</a> Rated 1332.9<br>1v1 Bo5<br>28.1.2025</p>
+                    <p><strong>Games Played:</strong><br id="gamesPlayed">Loading...</p>
+                    <p><strong>Wins:</strong><br id="wins">Loading...</p>
+                    <p><strong>Losses:</strong><br id="losses">Loading...</p>
+                    <p><strong>Win Percentage:</strong><br id="winPercentage">Loading...</p>
+                    <p><strong>Average Points:</strong><br id="averagePoints">Loading...</p>
                 </div>
             </div>
 
@@ -125,90 +116,81 @@
             <div class="section">
                 <p class="stat-title">Tournament Stats:</p>
                 <div class="stat-pair">
-                    <p><strong>Best Performance:</strong><br>Pirkkola 2 DE1<br>(1st place)<br>Strength 2148.1</p>
-                    <p><strong>Tournaments Played:</strong><br><span id="tournamentsPlayed">Loading...</span></p>
-                    <p><strong>Tournaments Won:</strong><br><span id="tournamentsWon">Loading...</span></p>
+                    <p><strong>Best Performance:</strong><br id="bestPerformance">Loading...</p>
+                    <p><strong>Tournaments Played:</strong><br id="tournamentsPlayed">Loading...</p>
+                    <p><strong>Tournaments Won:</strong><br id="tournamentsWon">Loading...</p>
                 </div>
             </div>
 
-           <!-- Matchup Stats Section -->
+            <!-- Hall of Fame and Shame Section -->
+            <div class="section">
+                <p class="stat-title">Hall of Fame and Shame:</p>
+                <div class="stat-pair">
+                    <p><strong>Best Victory:</strong><br><a href="player_juho.html">Juho</a> Rated 1939.6<br><a href="../tournamentfolder/P2R1.html">Pirkkola 2 RR1</a><br>17.1.2025</p>
+                    <p><strong>Worst Defeat:</strong><br><a href="player_aaro.html">Aaro,</a> Rated 1770.7<br><a href="../tournamentfolder/P2D1.html">Pirkkola 2 DE1</a><br>17.1.2025</p>
+                </div>
+            </div>
+
+            <!-- Matchup Stats Section -->
             <div class="section">
                 <p class="stat-title">Matchup Stats:</p>
                 <div class="stat-pair">
-                    <p><strong>Best WL Matchup:</strong><br><a href="player_riku.html">Riku</a><br>7 - 0</p>
-                    <p><strong>Worst WL Matchup:</strong><br><a href="player_juho.html">Juho</a><br>14 - 11</p>
-                    <p><strong>Best Point Matchup:</strong><br><a href="player_riku.html">Riku</a><br>11.0 - 5.45</p>
-                    <p><strong>Worst Point Matchup:</strong><br><a href="player_juho.html">Juho</a><br>9.43 - 8.33</p>
-                    <p><strong>Most Played:</strong><br><a href="player_jussi.html">Jussi</a><br>38 games</p>
+                    <p><strong>Best WL Matchup:</strong><br><a href="player_riku.html">Riku</a><br>4 - 0</p>
+                    <p><strong>Worst WL Matchup:</strong><br><a href="player_aaro.html">Aaro</a><br>1 - 4</p>
+                    <p><strong>Best Point Matchup:</strong><br><a href="player_riku.html">Riku</a><br>11.00 - 6.13</p>
+                    <p><strong>Worst Point Matchup:</strong><br><a href="player_aaro.html">Aaro</a><br>7.83 - 10.66</p>
+                    <p><strong>Most Played:</strong><br><a href="player_juho.html">Juho</a> & <a href="player_aaro.html">Aaro</a><br>5 games</p>
                 </div>
             </div>
 
         </div>
 
-        <p><a href="../../index.html">Back to Leaderboard</a></p>
+        <p><a href="../index.html">Back to Leaderboard</a></p>
     </div>
 
     <script>
-        // Define the player's name (this will be dynamically set based on the page)
-        const playerName = "Aaro";  // Update this as needed for different player pages
+        const playerName = "Jesper"; // Player name to search in the CSV data
+        const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcU0BWSuV8JcIyK1VZgNmPGkfx1x85T4A8fTFilGaq-eMpWQDRXafFbIuDfz2tFwRdfuiM19_jMKB9/pub?gid=1895329333&single=true&output=csv";
 
-        // Fetch the CSV file and update the stats
-        fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRcU0BWSuV8JcIyK1VZgNmPGkfx1x85T4A8fTFilGaq-eMpWQDRXafFbIuDfz2tFwRdfuiM19_jMKB9/pub?gid=1895329333&single=true&output=csv')
+        // Function to fetch and parse the CSV data
+        fetch(url)
             .then(response => response.text())
-            .then(data => {
-                const rows = data.split('\n');
-                let stats = {};
+            .then(csv => {
+                const rows = csv.split("\n");
+                // Skipping the header
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i].split(",");
+                    const name = row[0].trim();
 
-                // Loop through rows and find the player's stats
-                for (let i = 1; i < rows.length; i++) { // Start at 1 to skip header row
-                    const columns = rows[i].split(',');
-
-                    // Check if the first column (player name) matches the specified player
-                    if (columns[0].trim() === playerName) {
-                        stats = {
-                            currentRank: columns[1],
-                            peakRank: columns[2],
-                            worstRank: columns[3],
-                            currentRating: columns[4],
-                            peakRating: columns[5],
-                            worstRating: columns[6],
-                            gamesPlayed: columns[7],
-                            wins: columns[8],
-                            losses: columns[9],
-                            winPercentage: columns[10],
-                            averagePoints: columns[11],
-                            tournamentsPlayed: columns[12],
-                            tournamentsWon: columns[13]
+                    if (name === playerName) {
+                        const stats = {
+                            currentRank: row[1] || 'N/A', // Index 1: Current Rank
+                            peakRank: row[2] || 'N/A', // Index 2: Peak Rank
+                            worstRank: row[3] || 'N/A', // Index 3: Worst Rank
+                            currentRating: row[4] || 'N/A', // Index 4: Current Rating
+                            peakRating: row[5] || 'N/A', // Index 5: Peak Rating
+                            worstRating: row[6] || 'N/A', // Index 6: Worst Rating
+                            gamesPlayed: row[7] || 'N/A', // Index 7: Games Played
+                            wins: row[8] || 'N/A', // Index 8: Wins
+                            losses: row[9] || 'N/A', // Index 9: Losses
+                            winPercentage: row[10] || 'N/A', // Index 10: Win Percentage
+                            averagePoints: row[11] || 'N/A', // Index 11: Average Points
+                            tournamentsPlayed: row[12] || 'N/A', // Index 12: Tournaments Played
+                            tournamentsWon: row[13] || 'N/A', // Index 13: Tournaments Won
+                            bestPerformance: row[14] || 'N/A' // Index 14: Best Performance
                         };
-                        break;
-                    }
-                }
 
-                // If player not found in the data
-                if (Object.keys(stats).length === 0) {
-                    alert('Player not found in the stats data.');
-                    return;
-                }
-
-                // Update the stats dynamically
-                document.getElementById('currentRank').textContent = stats.currentRank || 'N/A';
-                document.getElementById('peakRank').textContent = stats.peakRank || 'N/A';
-                document.getElementById('worstRank').textContent = stats.worstRank || 'N/A';
-                document.getElementById('currentRating').textContent = stats.currentRating || 'N/A';
-                document.getElementById('peakRating').textContent = stats.peakRating || 'N/A';
-                document.getElementById('worstRating').textContent = stats.worstRating || 'N/A';
-                document.getElementById('gamesPlayed').textContent = stats.gamesPlayed || 'N/A';
-                document.getElementById('wins').textContent = stats.wins || 'N/A';
-                document.getElementById('losses').textContent = stats.losses || 'N/A';
-                document.getElementById('winPercentage').textContent = stats.winPercentage || 'N/A';
-                document.getElementById('averagePoints').textContent = stats.averagePoints || 'N/A';
-                document.getElementById('tournamentsPlayed').textContent = stats.tournamentsPlayed || 'N/A';
-                document.getElementById('tournamentsWon').textContent = stats.tournamentsWon || 'N/A';
-            })
-            .catch(error => {
-                console.error('Error fetching the CSV file:', error);
-                alert('There was an error fetching the stats data.');
-            });
-    </script>
-</body>
-</html>
+                        // Update the stats dynamically
+                        document.getElementById('currentRank').textContent = stats.currentRank;
+                        document.getElementById('peakRank').textContent = stats.peakRank;
+                        document.getElementById('worstRank').textContent = stats.worstRank;
+                        document.getElementById('currentRating').textContent = stats.currentRating;
+                        document.getElementById('peakRating').textContent = stats.peakRating;
+                        document.getElementById('worstRating').textContent = stats.worstRating;
+                        document.getElementById('gamesPlayed').textContent = stats.gamesPlayed;
+                        document.getElementById('wins').textContent = stats.wins;
+                        document.getElementById('losses').textContent = stats.losses;
+                        document.getElementById('winPercentage').textContent = stats.winPercentage;
+                        document.getElementById('averagePoints').textContent = stats.averagePoints;
+                        document.getElementById('tournamentsPlayed').textContent = stats.tournamentsPlayed;
+                        document.getElementById('tournamentsWon').textContent = stats.t
