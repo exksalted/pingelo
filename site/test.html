@@ -179,13 +179,14 @@
                 if (row.Rank) { // Skip empty or invalid rows
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-                        <td>${row.Rank}</td>
+        	            <td>${row.Rank}</td>
                         <td><a href="players/player_${row.Player.toLowerCase()}.html">${row.Player}</a></td>
                         <td>${row.Rating}</td>
                         <td><span class="${parseChangeClass(row.RatingChange)}">${row.RatingChange}</span></td>
                         <td>${row.RD}</td>
-                        <td><span class="${parseChangeClass(row.RDChange)}">${row.RDChange}</span></td>
+                        <td><span class="${parseChangeClass(row.RDChange, true)}">${row.RDChange}</span></td>
                     `;
+
                     tbody.appendChild(tr);
                 }
             });
@@ -211,12 +212,20 @@
         });
     }
 
-    // Function to apply positive/negative style classes
-    function parseChangeClass(value) {
-        const numericValue = parseFloat(value);
-        if (isNaN(numericValue)) return "";
-        return numericValue > 0 ? "change-pos" : numericValue < 0 ? "change-neg" : "";
+// Function to apply positive/negative style classes with separate logic for RD changes
+function parseChangeClass(value, isRDChange = false) {
+    const numericValue = parseFloat(value);
+    if (isNaN(numericValue)) return "";
+
+    // Apply inverted logic for RD changes only
+    if (isRDChange) {
+        return numericValue < 0 ? "change-pos" : numericValue > 0 ? "change-neg" : "";
     }
+
+    // Default logic for Rating changes
+    return numericValue > 0 ? "change-pos" : numericValue < 0 ? "change-neg" : "";
+}
+
 
     // Load leaderboard data on page load
     document.addEventListener("DOMContentLoaded", fetchAndUpdateLeaderboard);
