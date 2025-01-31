@@ -1,0 +1,6 @@
+Juho Riku 9 1
+Jesper Aaro 8 11
+Riku Jesper 5 11
+Juho Aaro 8 11
+Juho Jesper 8 11
+Aaro Jesper 12 10
