@@ -4,7 +4,7 @@ BRACKETS MANUAL:
 
 Bracket info scraper? If not, brackets -> .txt manual.
 
-run_tournament to edit .csv file? 
+run_tournament to edit a .csv file/ update a google sheets one? 
 
 create functions to figure out best/worst matchups, best/worst victories, Best tournament performance???
 
