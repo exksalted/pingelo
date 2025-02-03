@@ -151,11 +151,13 @@ def adjust_rd(filename, days):
                 })
 
         rds = sorted(player["rd"] for player in players)
-        n = len(rds)
+        rds2 = [value for value in rds if value < 175]
+        print(rds2)
+        n = len(rds2)
         if n % 2 == 1:
-            median_rd = rds[n // 2]
+            median_rd = rds2[n // 2]
         else:
-            median_rd = (rds[n // 2 - 1] + rds[n // 2]) / 2
+            median_rd = (rds2[n // 2 - 1] + rds2[n // 2]) / 2
         print("")
         print("*" *50)
         print("Updating player RD:s")
@@ -188,7 +190,7 @@ pf = "ratingsWL.txt"
 
 #Code already ran:
 
-while False:
+while True:
     add_player(pf, "Aaro")
     add_player(pf, "Juho")
     add_player(pf, "Riku")
@@ -233,4 +235,29 @@ while False:
     run_tournament("P49.txt", pf)
     run_tournament("P410.txt", pf)
     run_tournament("P411.txt", pf)
+
+    adjust_rd(pf, 3)
+
+    run_tournament("P51.txt", pf)
+    run_tournament("P52.txt", pf)
+    run_tournament("P53.txt", pf)
+    run_tournament("P54.txt", pf)
+    run_tournament("P55.txt", pf)
+    run_tournament("P56.txt", pf)
+    run_tournament("P57.txt", pf)
+    run_tournament("P58.txt", pf)
+
+
+    adjust_rd(pf, 2)
+
+    add_player(pf, "Samuel")
+    add_player(pf, "Elias")
+
+    run_tournament("R11.txt", pf)
+    run_tournament("R12.txt", pf)
+    run_tournament("R13.txt", pf)
+    run_tournament("R14.txt", pf)
+    run_tournament("R15.txt", pf)
+    run_tournament("R16.txt", pf)
+    run_tournament("R17.txt", pf)
     break

@@ -1,4 +1,4 @@
-def process_tournament(input_file, output_file):
+def run_tournament(input_file, output_file):
     # Read the existing stats from the output file (if any)
     stats = {}
     try:
@@ -253,41 +253,58 @@ def print_player_stats(output_file, player_name):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-pf = "player_stats.txt"
+tf = "player_stats.txt"
 
 
 #Code already ran:
 while False:
-    process_tournament("P11.txt", tf)
-    process_tournament("P12.txt", tf)
-    process_tournament("P13.txt", tf)
-    process_tournament("P14.txt", tf)
-    process_tournament("P15.txt", tf)
-    process_tournament("P16.txt", tf)
+    run_tournament("P11.txt", tf)
+    run_tournament("P12.txt", tf)
+    run_tournament("P13.txt", tf)
+    run_tournament("P14.txt", tf)
+    run_tournament("P15.txt", tf)
+    run_tournament("P16.txt", tf)
 
-    process_tournament("P21.txt", tf)
-    process_tournament("P22.txt", tf)
-    process_tournament("P23.txt", tf)
-    process_tournament("P24.txt", tf)
+    run_tournament("P21.txt", tf)
+    run_tournament("P22.txt", tf)
+    run_tournament("P23.txt", tf)
+    run_tournament("P24.txt", tf)
 
-    process_tournament("P31.txt", tf)
-    process_tournament("P32.txt", tf)
-    process_tournament("P33.txt", tf)
-    process_tournament("P34.txt", tf)
-    process_tournament("P35.txt", tf)
-    process_tournament("P36.txt", tf)
+    run_tournament("P31.txt", tf)
+    run_tournament("P32.txt", tf)
+    run_tournament("P33.txt", tf)
+    run_tournament("P34.txt", tf)
+    run_tournament("P35.txt", tf)
+    run_tournament("P36.txt", tf)
 
-    process_tournament("P41.txt", pf)
-    process_tournament("P42.txt", pf)
-    process_tournament("P43.txt", pf)
-    process_tournament("P44.txt", pf)
-    process_tournament("P45.txt", pf)
-    process_tournament("P46.txt", pf)
-    process_tournament("P47.txt", pf)
-    process_tournament("P48.txt", pf)
-    process_tournament("P49.txt", pf)
-    process_tournament("P410.txt", pf)
-    process_tournament("P411.txt", pf)
+    pf = "player_stats.txt"
+
+    run_tournament("P41.txt", pf)
+    run_tournament("P42.txt", pf)
+    run_tournament("P43.txt", pf)
+    run_tournament("P44.txt", pf)
+    run_tournament("P45.txt", pf)
+    run_tournament("P46.txt", pf)
+    run_tournament("P47.txt", pf)
+    run_tournament("P48.txt", pf)
+    run_tournament("P49.txt", pf)
+    run_tournament("P410.txt", pf)
+    run_tournament("P411.txt", pf)
+
+    run_tournament("P51.txt", pf)
+    run_tournament("P52.txt", pf)
+    run_tournament("P53.txt", pf)
+    run_tournament("P54.txt", pf)
+    run_tournament("P55.txt", pf)
+    run_tournament("P56.txt", pf)
+    run_tournament("P57.txt", pf)
+    run_tournament("P58.txt", pf)
+
+    run_tournament("R11.txt", pf)
+    run_tournament("R12.txt", pf)
+    run_tournament("R13.txt", pf)
+    run_tournament("R14.txt", pf)
+    run_tournament("R15.txt", pf)
+    run_tournament("R16.txt", pf)
+    run_tournament("R17.txt", pf)
     break
-
-print_all_stats(pf)

@@ -43,7 +43,7 @@ def trating_from_p(p_win: float, avg_player_rating: float = 1500.0) -> float:
     opponent_rating = avg_player_rating + 400 * math.log10((1 - p_win) / p_win)
     return opponent_rating
 
-while True:
+while False:
     elo_ratings = [1500,1500,1500,1500,1500]
     probability = tournament_win_probability(elo_ratings, 1500.0)
     strength = trating_from_p(probability, 1500.0)
@@ -120,6 +120,42 @@ while True:
     print(f"Tournament Strength: {strength:.4f}")
 
     elo_ratings = [1279.3,1944.5,1805.7]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+    break
+
+    elo_ratings = [1967.2,1500,1500]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+
+    elo_ratings = [1972.9,1605.1,1320.1]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+
+    elo_ratings = [1977.9,1619.8,1253.8]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+
+    elo_ratings = [1982,1518,1350.1]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+
+    elo_ratings = [1985.4,1479,1381.2]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+
+    elo_ratings = [1988.4,1459.8,1393.4]
+    probability = tournament_win_probability(elo_ratings, 1500.0)
+    strength = trating_from_p(probability, 1500.0)
+    print(f"Tournament Strength: {strength:.4f}")
+
+    elo_ratings = [1990.9,1409.7,1438.4]
     probability = tournament_win_probability(elo_ratings, 1500.0)
     strength = trating_from_p(probability, 1500.0)
     print(f"Tournament Strength: {strength:.4f}")
