@@ -1,6 +1,0 @@
-Aaro Juho 9 1
-Tuomas Riku 9 11
-Aaro Tuomas 11 5
-Juho Riku 11 4
-Aaro Riku 11 6
-Juho Tuomas 11 6
