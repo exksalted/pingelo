@@ -1,5 +1,0 @@
-Jussi Juho 3 11
-Aaro Juho 6 11
-Aaro Jussi 11 4
-Juho Aaro 8 11
-Juho Aaro 3 11
