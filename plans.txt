@@ -9,3 +9,8 @@ run_tournament to edit a .csv file/ update a google sheets one?
 create functions to figure out best/worst matchups, best/worst victories, Best tournament performance???
 
 Automate tournament cards?
+
+
+
+
+need to redo... everythiung
