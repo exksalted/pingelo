@@ -148,7 +148,7 @@
         <p><a href="../../index.html">Back to Leaderboard</a></p>
     </div>
 
-    <script>
+<script>
     // Define the player's name (this will be dynamically set based on the page)
     const playerName = "Aaro";  // Update this as needed for different player pages
 
@@ -157,12 +157,12 @@
         .then(response => response.text())
         .then(data => {
             const rows = data.split('\n');
-            const headers = rows[0].split('\t'); // Use tab as the delimiter
+            const headers = rows[0].split(','); // Use comma as the delimiter
             let stats = {};
 
             // Loop through rows and find the player's stats
             for (let i = 1; i < rows.length; i++) { // Start at 1 to skip header row
-                const columns = rows[i].split('\t'); // Use tab as the delimiter
+                const columns = rows[i].split(','); // Use comma as the delimiter
 
                 // Check if the first column (player name) matches the specified player
                 if (columns[0].trim() === playerName) {
