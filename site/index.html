@@ -159,7 +159,7 @@
 
 <script>
     // URL for the CSV
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcU0BWSuV8JcIyK1VZgNmPGkfx1x85T4A8fTFilGaq-eMpWQDRXafFbIuDfz2tFwRdfuiM19_jMKB9/pub?gid=1895329333&single=true&output=csv";
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
 
     // Function to fetch and parse the CSV data
     async function fetchAndUpdateLeaderboard() {
@@ -180,7 +180,7 @@
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
         	            <td>${row.Rank}</td>
-                        <td><a href="players/player_${row.Player.toLowerCase()}.html">${row.Player}</a></td>
+                        <td><a href="players/player_${row.Name.toLowerCase()}.html">${row.Name}</a></td>
                         <td>${row.Rating}</td>
                         <td><span class="${parseChangeClass(row.RatingChange)}">${row.RatingChange}</span></td>
                         <td>${row.RD}</td>
@@ -202,12 +202,12 @@
         
         return rows.map(row => {
             return {
-                Rank: row[1],
-                Player: row[0],
-                Rating: row[4],
-                RatingChange: row[14],
-                RD: row[15],
-                RDChange: row[16],
+                Rank: row[4],
+                Name: row[0],
+                Rating: row[1],
+                RatingChange: row[31],
+                RD: row[2],
+                RDChange: row[3],
             };
         });
     }
@@ -291,19 +291,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <thead>
                     <tr>
                         <th>Rank</th>
-                        <th>Player</th>
+                        <th>Name</th>
                         <th>Rating</th>
-                        <th>Rating Change</th>
+                        <th>Change</th>
                         <th>RD</th>
-                        <th>RD Change</th>
+                        <th>Change</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
-            <p class="section-description">Most stats on site update automatically from a google sheet. Data updated manually.</p>
-            <p class="section-description">Data last updated 4.2.2025</p>
-            <p class="section-description">Added tourneys from 2.2 as well!</p>
+            <p class="section-description">Most stats on site update automatically from a Google Sheet.</p>
+            <p class="section-description">Data last updated 8.2.2025</p>
         </div>
     </div>
 </body>
