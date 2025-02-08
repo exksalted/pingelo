@@ -180,7 +180,6 @@
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
         	            <td>${row.Rank}</td>
-                        <td><span class="${parseChangeClass(row.RankChange)}">${row.RankChange}</span></td>
                         <td><a href="players/player_${row.Name.toLowerCase()}.html">${row.Name}</a></td>
                         <td>${row.Rating}</td>
                         <td><span class="${parseChangeClass(row.RatingChange)}">${row.RatingChange}</span></td>
@@ -204,7 +203,6 @@
         return rows.map(row => {
             return {
                 Rank: row[4],
-                RankChange: row[5],
                 Name: row[0],
                 Rating: row[1],
                 RatingChange: row[31],
@@ -293,7 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <thead>
                     <tr>
                         <th>Rank</th>
-                        <th>Change</th>
                         <th>Name</th>
                         <th>Rating</th>
                         <th>Change</th>
