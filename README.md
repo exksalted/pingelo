@@ -1,8 +1,8 @@
 # Pingelo
 
 This is a personal project, that stems from my attempt to gather and represent data from the table tennis games of my group.
-I gather data from games manually in .txt form. This data is processed by three different .py codes, from which the stats are gathered.
-The data is updated into a Google Sheet, which updates most stats on the site.
+I gather data from games manually in .txt form. This data is processed with Python, from which the stats are gathered.
+The data is updated into a Google Sheet, which the site pings for most stats on the site.
 
 ---
 
@@ -37,11 +37,11 @@ The data is updated into a Google Sheet, which updates most stats on the site.
 
 Steps on how I operate:
 - Gather data on games manually into .txt files.
-- Run the data through the three different .py files.
-- One for calculating ratings, RD etc. This data I copy manually into a Google Sheet.
-- Some values I need to check manually, while some the sheet automatically calculates. (Manual: Current/Peak/Wors Rank (read from a graph), Average points (Read from player_stats.txt), tournaments played/won (fully manual), RD & RD Change (read Elo.py output).
-- The Sheet updates most values on the site, but several stats I update manually: (Best Victory/Worst Defeat, Best Tournament Performance, Matchup Stats)
-- Tournament Cards and player won tournaments need to be added manually.
+- Run the data through a .py file
+- The data is exported to 4 .csv files, which I manually copy into a Google Sheet.
+- The site checks the Sheet for data, and populates tables and player cards with the data.
+- Still manual: Creating new players in the sheet, player.htmls, tournament card.htmls, setting the stat of "tournaments won" in the sheet.
+- Also updating the graphs is still manual, some I might change into automatically updating.
 
 
 That's about it.
