@@ -179,7 +179,7 @@
                 if (row.Rank) { // Skip empty or invalid rows
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-        	            <td>${row.CurrentRank}</td>
+        	            <td>${row.Rank}</td>
                         <td><span class="${parseChangeClass(row.RankChange)}">${row.RankChange}</span></td>
                         <td><a href="players/player_${row.Name.toLowerCase()}.html">${row.Name}</a></td>
                         <td>${row.Rating}</td>
