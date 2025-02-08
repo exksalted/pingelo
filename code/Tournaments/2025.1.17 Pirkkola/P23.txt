@@ -5,3 +5,4 @@ Aaro Juho 15 13
 Juho Jesper 11 9
 Aaro Juho 8 11
 Aaro Juho 6 11
+Tournament Strength: 2125.95

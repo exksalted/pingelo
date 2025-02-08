@@ -6,3 +6,5 @@ Riku Matias 1 9
 Juho Aaro 15 13
 Aaro Matias 14 12
 Juho Aaro 11 8
+
+Tournament Strength: 1999.24

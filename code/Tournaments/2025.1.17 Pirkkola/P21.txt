@@ -4,3 +4,4 @@ Juho Aaro 12 10
 Jesper Riku 11 5
 Juho Riku 11 8
 Jesper Aaro 13 11
+Tournament Strength: 1980.60

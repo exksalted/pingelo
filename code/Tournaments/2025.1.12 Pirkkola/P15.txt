@@ -4,3 +4,4 @@ Riku Tuomas 0 6
 Aaro Juho 4 11
 Aaro Tuomas 11 5
 Juho Aaro 11 7
+Tournament Strength: 1865.04
