@@ -337,9 +337,9 @@ def adjust_rd(filename, days):
         players = load_players(filename)  # Reuse existing player loading function
 
         # Compute median RD for players with RD < 175
-        rds = [player["rd"] for player in players.values() if player["rd"] < 175]
+        rds = [player["rd"] for player in players.values() if player["rd"] < 150]
         if not rds:
-            print("No players with RD under 175 found.")
+            print("No players with RD under 150 found.")
             return
 
         rds.sort()
@@ -358,6 +358,7 @@ def adjust_rd(filename, days):
             old_rd = player_data["rd"]
             new_rd = math.sqrt(old_rd ** 2 + c ** 2 * days)
             players[player_name]["rd"] = min(new_rd, 350)
+            new_rd = players[player_name]["rd"]
             print(f"Updated {player_name}'s RD from {old_rd:.2f} to {new_rd:.2f}")
 
         # Save the updated players back to the file
