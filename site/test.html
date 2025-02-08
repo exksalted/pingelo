@@ -159,7 +159,7 @@
 
 <script>
     // URL for the CSV
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcU0BWSuV8JcIyK1VZgNmPGkfx1x85T4A8fTFilGaq-eMpWQDRXafFbIuDfz2tFwRdfuiM19_jMKB9/pub?gid=1895329333&single=true&output=csv";
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
 
     // Function to fetch and parse the CSV data
     async function fetchAndUpdateLeaderboard() {
@@ -179,8 +179,9 @@
                 if (row.Rank) { // Skip empty or invalid rows
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-        	            <td>${row.Rank}</td>
-                        <td><a href="players/player_${row.Player.toLowerCase()}.html">${row.Player}</a></td>
+        	            <td>${row.CurrentRank}</td>
+                        <td><span class="${parseChangeClass(row.RankChange)}">${row.RankChange}</span></td>
+                        <td><a href="players/player_${row.Name.toLowerCase()}.html">${row.Name}</a></td>
                         <td>${row.Rating}</td>
                         <td><span class="${parseChangeClass(row.RatingChange)}">${row.RatingChange}</span></td>
                         <td>${row.RD}</td>
@@ -202,12 +203,13 @@
         
         return rows.map(row => {
             return {
-                Rank: row[1],
-                Player: row[0],
-                Rating: row[4],
-                RatingChange: row[14],
-                RD: row[15],
-                RDChange: row[16],
+                Rank: row[4],
+                RankChange: row[5],
+                Name: row[0],
+                Rating: row[1],
+                RatingChange: row[31],
+                RD: row[2],
+                RDChange: row[3],
             };
         });
     }
@@ -287,12 +289,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <h1>Leaderboard</h1>
         <!-- Section: Leaderboard Table -->
         <div class="leaderboard-section">
-            <p class="section-title">Player Rankings</p>
-            <p class="section-description">Last updated 29.1.2025</p>
             <table class="leaderboard">
                 <thead>
                     <tr>
                         <th>Rank</th>
+                        <th>Rank Change</th>
                         <th>Player</th>
                         <th>Rating</th>
                         <th>Rating Change</th>
@@ -303,6 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <tbody>
                 </tbody>
             </table>
+            <p class="section-description">Most stats on site update automatically from a Google Sheet.</p>
+            <p class="section-description">Data last updated 8.2.2025</p>
         </div>
     </div>
 </body>
