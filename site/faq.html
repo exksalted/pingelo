@@ -198,7 +198,7 @@
 
             <div class="faq-item">
                 <h2>Who updates the site?</h2>
-                <p class="hidden">The site is manually updated after matches by Aaro when they have the time.</p>
+                <p class="hidden">The site is updated after matches by Aaro when they have the time.</p>
             </div>
 
             <div class="faq-item">
@@ -208,7 +208,7 @@
 
             <div class="faq-item">
                 <h2>How long did this site take to be made?</h2>
-                <p class="hidden">20-40 hrs of work. This is the first time I have tried my hand in making a website! At the final stretch, I noticed that I had 2 games in my data, where the winner and loser were swapped. It led to everything needing to be recalculated. YAY.</p>
+                <p class="hidden">30-50 hrs of work. This is the first time I have tried my hand in making a website! At the final stretch, I noticed that I had 2 games in my data, where the winner and loser were swapped. It led to everything needing to be recalculated. YAY.</p>
             </div>
 
             <div class="faq-item">
@@ -218,7 +218,7 @@
 
             <div class="faq-item">
                 <h2>Can I contribute to the site?</h2>
-                <p class="hidden">At the moment you can contribute by using the site and informing Aaro about any possible bugs! OR check the plans.txt file in the github repo. IF you can figure out better code/more automatisations, then by all means help!</p>
+                <p class="hidden">At the moment you can contribute by using the site and informing Aaro about any possible bugs! OR check the plans.txt file in the github repo.</p>
             </div>
         </div>
 
@@ -242,6 +242,11 @@
             </div>
 
             <div class="faq-item">
+                <h2>What are tournaments?</h2>
+                <p class="hidden">A tournaments is considered as a tournament if at least 4 people have taken part in it. The value was 3 earlier, but this change was made to reduce the workload in creating tournament cards, as well as make tournaments won more significant.</p>
+            </div>
+
+            <div class="faq-item">
                 <h2>Tournament strength? What is it?</h2>
                 <p class="hidden">Tournament strength is a rating value that tries to determine how difficult any given tournament would be to win. Without going into too much detail, this is achieved by calculating the probability of a player with 1500 rating winning the whole tournament. Using this probability value, we solve an equation to equate winning the whole tournament to winning a single high rated player. This imaginary high rated player's rating is the tournament strength.</p>
             </div>
@@ -252,8 +257,18 @@
             </div>
 
             <div class="faq-item">
-                <h2>How is peak/worst ranking calculated?</h2>
-                <p class="hidden">Peak and worst ratings are calculated with a tournament to tournament basis. A new player's ranking with the rating of 1500 is disregarded.</p>
+                <h2>How is peak/lowest ranking calculated?</h2>
+                <p class="hidden">Peak and lowest ratings are calculated with a tournament to tournament basis. A new player's ranking with the rating of 1500 is disregarded.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h2>How is best/worst matchup calculated?</h2>
+                <p class="hidden">Best and worst matchup is calculated by looking at the win% against opponents, and choosing the outliers as best and worst matchups.</p>
+            </div>
+
+            <div class="faq-item">
+                <h2>How are average points calculated? How are Lumet/Loskat or 10+-10+ situations taken into account?</h2>
+                <p class="hidden">Average points are calculated by calculating the mean score of all of your matches. 6-0 is considered as 11-0, 9-1 is considered as 11-1. If a game goes into overtime, the result is normalised to fit into the 11-x format, for example: 15-13 becomes 11-9.53</p>
             </div>
         </div>
     </div>
