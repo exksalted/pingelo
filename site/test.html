@@ -86,7 +86,7 @@
                 <div class="stat-pair">
                     <p><strong>Current Rank:</strong><br><span id="currentRank">Loading...</span></p>
                     <p><strong>Peak Rank:</strong><br><span id="peakRank">Loading...</span></p>
-                    <p><strong>Worst Rank:</strong><br><span id="worstRank">Loading...</span></p>
+                    <p><strong>Lowest Rank:</strong><br><span id="worstRank">Loading...</span></p>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
                 <div class="stat-pair">
                     <p><strong>Current Rating:</strong><br><span id="currentRating">Loading...</span></p>
                     <p><strong>Peak Rating:</strong><br><span id="peakRating">Loading...</span></p>
-                    <p><strong>Worst Rating:</strong><br><span id="worstRating">Loading...</span></p>
+                    <p><strong>Lowest Rating:</strong><br><span id="worstRating">Loading...</span></p>
                 </div>
             </div>
 
@@ -177,11 +177,12 @@
                         wins: columns[28], // Won
                         losses: columns[29], // Lost
                         winPercentage: columns[30], // Win%
-                        averagePoints: columns[16], // Avg. Points
+                        averagePoints: columns[17], // Avg. Points
+                        avgPointsOpp: columns[18], // Avg. Points
                         tournamentsPlayed: columns[8], // Tourns. Played
-                        tournamentsWon: columns[31], // Tournaments Won
-                        bestVictory: `${columns[9]} (${columns[10]})`, // BV Rating and BV Against
-                        worstDefeat: `${columns[11]} (${columns[12]})`, // WD Rating and WD Against
+                        tournamentsWon: columns[32], // Tournaments Won
+                        bestVictory: `${columns[10]} (${columns[9]})`, // BV Rating and BV Against
+                        worstDefeat: `${columns[12]} (${columns[11]})`, // WD Rating and WD Against
                         bestWL: `${columns[19]} (${columns[20]})`, // Best WL Player and BWL Score
                         worstWL: `${columns[21]} (${columns[22]})`, // Worst WL Against and WWL Score
                         mostPlayed: `${columns[23]} (${columns[24]})`, // Most Played P and Most played #
