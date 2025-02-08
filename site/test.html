@@ -5,7 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aaro's Stats</title>
     <style>
-        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #212529; /* Really dark gray background */
+            color: #d1d1d1; /* Light gray text color */
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #343a40; /* Slightly lighter dark gray */
+            border-radius: 8px; /* Rounded corners */
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff; /* White color for the header */
+        }
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        p strong {
+            color: #007bff; /* Blue color for labels */
+        }
+        a {
+            text-decoration: none;
+            color: #007bff; /* Blue color for the link */
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .stats {
+            margin-top: 20px;
+        }
+        .stats p {
+            margin: 10px 0;
+        }
+        .stats strong {
+            color: #ffffff; /* White color for stat labels */
+        }
+
+        /* Style for section titles like "Rank Stats", "Rating Stats" */
+        .stat-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff; /* White color for titles */
+            margin-top: 20px;
+            text-transform: uppercase; /* Makes titles in uppercase */
+            border-bottom: 2px solid #007bff; /* Blue underline */
+            padding-bottom: 5px;
+        }
+
+        /* Adding some space between sections */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        /* Flexbox styling to align stats on the same line */
+        .stat-pair {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .stat-pair p {
+            margin: 0; /* Remove default margin */
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
