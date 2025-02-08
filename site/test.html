@@ -5,74 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aaro's Stats</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #212529; /* Really dark gray background */
-            color: #d1d1d1; /* Light gray text color */
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: #343a40; /* Slightly lighter dark gray */
-            border-radius: 8px; /* Rounded corners */
-        }
-        h1 {
-            text-align: center;
-            color: #ffffff; /* White color for the header */
-        }
-        p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        p strong {
-            color: #007bff; /* Blue color for labels */
-        }
-        a {
-            text-decoration: none;
-            color: #007bff; /* Blue color for the link */
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .stats {
-            margin-top: 20px;
-        }
-        .stats p {
-            margin: 10px 0;
-        }
-        .stats strong {
-            color: #ffffff; /* White color for stat labels */
-        }
-
-        /* Style for section titles like "Rank Stats", "Rating Stats" */
-        .stat-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffffff; /* White color for titles */
-            margin-top: 20px;
-            text-transform: uppercase; /* Makes titles in uppercase */
-            border-bottom: 2px solid #007bff; /* Blue underline */
-            padding-bottom: 5px;
-        }
-
-        /* Adding some space between sections */
-        .section {
-            margin-bottom: 30px;
-        }
-
-        /* Flexbox styling to align stats on the same line */
-        .stat-pair {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-        }
-        .stat-pair p {
-            margin: 0; /* Remove default margin */
-            display: inline-block;
-        }
+        /* Your CSS styles here */
     </style>
 </head>
 <body>
@@ -112,12 +45,12 @@
                 </div>
             </div>
 
-          <!-- Hall of Fame and Shame Section -->
+            <!-- Hall of Fame and Shame Section -->
             <div class="section">
                 <p class="stat-title">Hall of Fame and Shame:</p>
                 <div class="stat-pair">
-                    <p><strong>Best Victory:</strong><br>><span id="bvAgainst">Loading...</span> Rated ><span id="bvRating">Loading...</span></p>
-                    <p><strong>Worst Defeat:</strong><br><span id="wdAgainst">Loading...</span> Rated ><span id="wdRating">Loading...</span></p>
+                    <p><strong>Best Victory:</strong><br><span id="bvAgainst">Loading...</span> Rated <span id="bvRating">Loading...</span></p>
+                    <p><strong>Worst Defeat:</strong><br><span id="wdAgainst">Loading...</span> Rated <span id="wdRating">Loading...</span></p>
                 </div>
             </div>
 
@@ -131,124 +64,123 @@
                 </div>
             </div>
 
-           <!-- Matchup Stats Section -->
+            <!-- Matchup Stats Section -->
             <div class="section">
                 <p class="stat-title">Matchup Stats:</p>
                 <div class="stat-pair">
-                    <p><strong>Best WL Matchup:</strong><br><span id="bestWLPlayer">Loading...</span><br>><span id="bwlScore">Loading...</span></p>
-                    <p><strong>Worst WL Matchup:</strong><br><span id="worstWLPlayer">Loading...</span><br>><span id="wwlScore">Loading...</span></p>
-                    <p><strong>Most Played:</strong><br><span id="mostPlayedPlayer">Loading...</span><br>>with<span id="mostPlayedNumber">Loading...</span> games</p>
+                    <p><strong>Best WL Matchup:</strong><br><span id="bestWLPlayer">Loading...</span><br><span id="bwlScore">Loading...</span></p>
+                    <p><strong>Worst WL Matchup:</strong><br><span id="worstWLPlayer">Loading...</span><br><span id="wwlScore">Loading...</span></p>
+                    <p><strong>Most Played:</strong><br><span id="mostPlayedPlayer">Loading...</span><br>with <span id="mostPlayedNumber">Loading...</span> games</p>
                 </div>
             </div>
-
         </div>
 
         <p><a href="../../index.html">Back to Leaderboard</a></p>
     </div>
 
     <script>
-    // Define the player's name (this will be dynamically set based on the page)
-    const playerName = "Aaro";  // Update this as needed for different player pages
+        // Define the player's name (this will be dynamically set based on the page)
+        const playerName = "Aaro";  // Update this as needed for different player pages
 
-    // Fetch the CSV file and update the stats
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv')
-        .then(response => response.text())
-        .then(data => {
-            const rows = data.split('\n');
-            let stats = {};
+        // Fetch the CSV file and update the stats
+        fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                let stats = {};
 
-            // Loop through rows and find the player's stats
-            for (let i = 1; i < rows.length; i++) { // Start at 1 to skip header row
-                const columns = rows[i].split(',');
+                // Loop through rows and find the player's stats
+                for (let i = 1; i < rows.length; i++) { // Start at 1 to skip header row
+                    const columns = rows[i].split(',');
 
-                // Check if the first column (player name) matches the specified player
-                if (columns[0].trim() === playerName) {
-                    stats = {
-                        rank: columns[4],
-                        peakRank: columns[6],
-                        lowestRank: columns[7],
-                        
-                        rating: columns[1],
-                        peakRating: columns[25],
-                        worstRating: columns[26],
-                        
-                        played: columns[27],
-                        won: columns[28],
-                        lost: columns[29],
-                        winPercentage: columns[30],
-                        avgPoints: columns[17],
-                        avgpOpp: columns[18], // Fixed typo here (column -> columns)
-                        
-                        tournsPlayed: columns[8],
-                        tournamentsWon: columns[32],
+                    // Check if the first column (player name) matches the specified player
+                    if (columns[0].trim() === playerName) {
+                        stats = {
+                            rank: columns[4],
+                            peakRank: columns[6],
+                            lowestRank: columns[7],
+                            
+                            rating: columns[1],
+                            peakRating: columns[25],
+                            worstRating: columns[26],
+                            
+                            played: columns[27],
+                            won: columns[28],
+                            lost: columns[29],
+                            winPercentage: columns[30],
+                            avgPoints: columns[17],
+                            avgpOpp: columns[18], // Fixed typo here (column -> columns)
+                            
+                            tournsPlayed: columns[8],
+                            tournamentsWon: columns[32],
 
-                        bvAgainst: columns[10],
-                        bvRating: columns[9],
-                        wdAgainst: columns[12],
-                        wdRating: columns[11],
+                            bvAgainst: columns[10],
+                            bvRating: columns[9],
+                            wdAgainst: columns[12],
+                            wdRating: columns[11],
 
-                        bestWLPlayer: columns[19],
-                        bwlScore: columns[20],
-                        worstWLPlayer: columns[21],
-                        wwlScore: columns[22],
-                        mostPlayedPlayer: columns[23],
-                        mostPlayedNumber: columns[24],
+                            bestWLPlayer: columns[19],
+                            bwlScore: columns[20],
+                            worstWLPlayer: columns[21],
+                            wwlScore: columns[22],
+                            mostPlayedPlayer: columns[23],
+                            mostPlayedNumber: columns[24],
 
-                        lumiwNumber: columns[13],
-                        loskawNumber: columns[14],
-                        lumilNumber: columns[15],
-                        loskalNumber: columns[16]
-                    };
-                    break;
+                            lumiwNumber: columns[13],
+                            loskawNumber: columns[14],
+                            lumilNumber: columns[15],
+                            loskalNumber: columns[16]
+                        };
+                        break;
+                    }
                 }
-            }
 
-            // If player not found in the data
-            if (Object.keys(stats).length === 0) {
-                alert('Player not found in the stats data.');
-                return;
-            }
+                // If player not found in the data
+                if (Object.keys(stats).length === 0) {
+                    alert('Player not found in the stats data.');
+                    return;
+                }
 
-            // Update the stats dynamically
-            document.getElementById('rank').textContent = stats.rank || 'N/A';
-            document.getElementById('peakRank').textContent = stats.peakRank || 'N/A';
-            document.getElementById('lowestRank').textContent = stats.lowestRank || 'N/A';
-            
-            document.getElementById('rating').textContent = stats.rating || 'N/A';
-            document.getElementById('peakRating').textContent = stats.peakRating || 'N/A';
-            document.getElementById('lowestRating').textContent = stats.lowestRating || 'N/A';
-            
-            document.getElementById('played').textContent = stats.played || 'N/A';
-            document.getElementById('won').textContent = stats.won || 'N/A'; // Fixed typo here (wins -> won)
-            document.getElementById('lost').textContent = stats.lost || 'N/A'; // Fixed typo here (losses -> lost)
-            document.getElementById('winPercentage').textContent = stats.winPercentage || 'N/A';
-            document.getElementById('avgPoints').textContent = stats.avgPoints || 'N/A';
-            document.getElementById('avgpOpp').textContent = stats.avgpOpp || 'N/A';
-            
-            document.getElementById('tournsPlayed').textContent = stats.tournsPlayed || 'N/A';
-            document.getElementById('tournamentsWon').textContent = stats.tournamentsWon || 'N/A';
+                // Update the stats dynamically
+                document.getElementById('rank').textContent = stats.rank || 'N/A';
+                document.getElementById('peakRank').textContent = stats.peakRank || 'N/A';
+                document.getElementById('lowestRank').textContent = stats.lowestRank || 'N/A';
+                
+                document.getElementById('rating').textContent = stats.rating || 'N/A';
+                document.getElementById('peakRating').textContent = stats.peakRating || 'N/A';
+                document.getElementById('lowestRating').textContent = stats.lowestRating || 'N/A';
+                
+                document.getElementById('played').textContent = stats.played || 'N/A';
+                document.getElementById('won').textContent = stats.won || 'N/A'; // Fixed typo here (wins -> won)
+                document.getElementById('lost').textContent = stats.lost || 'N/A'; // Fixed typo here (losses -> lost)
+                document.getElementById('winPercentage').textContent = stats.winPercentage || 'N/A';
+                document.getElementById('avgPoints').textContent = stats.avgPoints || 'N/A';
+                document.getElementById('avgpOpp').textContent = stats.avgpOpp || 'N/A';
+                
+                document.getElementById('tournsPlayed').textContent = stats.tournsPlayed || 'N/A';
+                document.getElementById('tournamentsWon').textContent = stats.tournamentsWon || 'N/A';
 
-            document.getElementById('bvAgainst').textContent = stats.bvAgainst || 'N/A';
-            document.getElementById('bvRating').textContent = stats.bvRating || 'N/A';
-            document.getElementById('wdAgainst').textContent = stats.wdAgainst || 'N/A';
-            document.getElementById('wdRating').textContent = stats.wdRating || 'N/A';
-            
-            document.getElementById('bestWLPlayer').textContent = stats.bestWLPlayer || 'N/A';
-            document.getElementById('bwlScore').textContent = stats.bwlScore || 'N/A';
-            document.getElementById('worstWLPlayer').textContent = stats.worstWLPlayer || 'N/A';
-            document.getElementById('wwlScore').textContent = stats.wwlScore || 'N/A';
-            document.getElementById('mostPlayedPlayer').textContent = stats.mostPlayedPlayer || 'N/A';
-            document.getElementById('mostPlayedNumber').textContent = stats.mostPlayedNumber || 'N/A';
+                document.getElementById('bvAgainst').textContent = stats.bvAgainst || 'N/A';
+                document.getElementById('bvRating').textContent = stats.bvRating || 'N/A';
+                document.getElementById('wdAgainst').textContent = stats.wdAgainst || 'N/A';
+                document.getElementById('wdRating').textContent = stats.wdRating || 'N/A';
+                
+                document.getElementById('bestWLPlayer').textContent = stats.bestWLPlayer || 'N/A';
+                document.getElementById('bwlScore').textContent = stats.bwlScore || 'N/A';
+                document.getElementById('worstWLPlayer').textContent = stats.worstWLPlayer || 'N/A';
+                document.getElementById('wwlScore').textContent = stats.wwlScore || 'N/A';
+                document.getElementById('mostPlayedPlayer').textContent = stats.mostPlayedPlayer || 'N/A';
+                document.getElementById('mostPlayedNumber').textContent = stats.mostPlayedNumber || 'N/A';
 
-            document.getElementById('lumiwNumber').textContent = stats.lumiwNumber || 'N/A';
-            document.getElementById('loskawNumber').textContent = stats.loskawNumber || 'N/A';
-            document.getElementById('lumilNumber').textContent = stats.lumilNumber || 'N/A';
-            document.getElementById('loskalNumber').textContent = stats.loskalNumber || 'N/A';
-        })
-        .catch(error => {
-            console.error('Error fetching the CSV file:', error);
-            alert('There was an error fetching the stats data.');
-        });
-</script>
+                document.getElementById('lumiwNumber').textContent = stats.lumiwNumber || 'N/A';
+                document.getElementById('loskawNumber').textContent = stats.loskawNumber || 'N/A';
+                document.getElementById('lumilNumber').textContent = stats.lumilNumber || 'N/A';
+                document.getElementById('loskalNumber').textContent = stats.loskalNumber || 'N/A';
+            })
+            .catch(error => {
+                console.error('Error fetching the CSV file:', error);
+                alert('There was an error fetching the stats data. Check the console for details.');
+            });
+    </script>
 </body>
 </html>
