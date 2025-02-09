@@ -41,7 +41,7 @@ Steps on how I operate:
 - The data is exported to 4 .csv files, which I manually copy into a Google Sheet.
 - The site checks the Sheet for data, and populates tables and player cards with the data.
 - Still manual: Creating new players in the sheet, player.htmls, tournament card.htmls, setting the stat of "tournaments won" in the sheet.
-- Also updating the graphs is still manual, some I might change into automatically updating.
+- Also updating the node graph is still manual, but it is low priority anyway, so who cares.
 
 
 That's about it.
