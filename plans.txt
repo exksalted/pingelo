@@ -1,1 +1,16 @@
-Code has been updated. Now to edit site/index.html and site/players/player_name.html's to receive the data from the newly updating Google Sheet.
+Code has been redesigned and updated from the ground up.
+Now, nearly everything is automated.
+Even the rating graphs on the graph site are embeds and update automatically.
+
+I am not sure about what I should work on next!
+
+Only things that are still manual are:
+
+1. Copying data from the 4 .csv files onto the sheet.
+2. Updating Tournaments won stat on the Sheet.
+3. Creating player cards on the site.
+4. Adding players on the sheet.
+5. Tournament cards/tournament site.
+6. Node graph.
+
+Everything else works smooth as butter!
