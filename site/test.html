@@ -6,25 +6,44 @@
   <title>Player Matchup Calculator</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #1e1e2f, #2c2c3e, #1e1e2f);
-            background-size: 300% 300%;
-            animation: gradientAnimation 10s ease infinite;
-            color: #f0f0f0;
-        }
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .split-container { display: flex; justify-content: space-between; }
+    .player-side { width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .chart-container { width: 400px; height: 400px; margin: 20px auto; }
+    label { display: block; margin-top: 10px; }
+    select, button { margin-top: 5px; width: 100%; padding: 5px; }
+    button { background-color: #007BFF; color: white; border: none; cursor: pointer; padding: 10px; }
+    button:hover { background-color: #0056b3; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Player Matchup Calculator</h1>
-    <label for="player1">Player 1:</label>
-    <select id="player1"></select>
-    <label for="player2">Player 2:</label>
-    <select id="player2"></select>
+    <div class="split-container">
+      <div class="player-side" id="player1-side">
+        <label for="player1">Player 1:</label>
+        <select id="player1">
+          <option value="">----</option>
+        </select>
+        <div id="player1-info">
+          <p><strong>Name:</strong> <span id="player1-name"></span></p>
+          <p><strong>Rating:</strong> <span id="player1-rating"></span></p>
+          <p><strong>RD:</strong> <span id="player1-rd"></span></p>
+        </div>
+      </div>
+      <div class="player-side" id="player2-side">
+        <label for="player2">Player 2:</label>
+        <select id="player2">
+          <option value="">----</option>
+        </select>
+        <div id="player2-info">
+          <p><strong>Name:</strong> <span id="player2-name"></span></p>
+          <p><strong>Rating:</strong> <span id="player2-rating"></span></p>
+          <p><strong>RD:</strong> <span id="player2-rd"></span></p>
+        </div>
+      </div>
+    </div>
     <button onclick="calculateMatchup()">Calculate</button>
 
     <div id="results"></div>
@@ -33,6 +52,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script2.js"></script>
 </body>
 </html>
