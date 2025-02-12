@@ -124,6 +124,11 @@ function calculateMatchup() {
 
   // Display results
 const resultsDiv = document.getElementById("results");
+
+// Determine which win % is larger
+const player1WinClass = player1WinProb > player2WinProb ? "change-pos" : "change-neg";
+const player2WinClass = player2WinProb > player1WinProb ? "change-pos" : "change-neg";
+
 resultsDiv.innerHTML = `
   <div class="results-container">
     <div class="results-table">
@@ -134,8 +139,8 @@ resultsDiv.innerHTML = `
       </div>
       <div class="row">
         <div class="cell">Win %:</div>
-        <div class="cell">${(player1WinProb * 100).toFixed(2)}%</div>
-        <div class="cell">${(player2WinProb * 100).toFixed(2)}%</div>
+        <div class="cell ${player1WinClass}">${(player1WinProb * 100).toFixed(2)}%</div>
+        <div class="cell ${player2WinClass}">${(player2WinProb * 100).toFixed(2)}%</div>
       </div>
       <div class="row">
         <div class="cell">RD Change:</div>
@@ -144,17 +149,26 @@ resultsDiv.innerHTML = `
       </div>
       <div class="row">
         <div class="cell">Rating Change (P1 Wins):</div>
-        <div class="cell">${player1Wins.ratingChange >= 0 ? "+" : ""}${player1Wins.ratingChange.toFixed(1)}</div>
-        <div class="cell">${player2Loses.ratingChange >= 0 ? "+" : ""}${player2Loses.ratingChange.toFixed(1)}</div>
+        <div class="cell ${player1Wins.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player1Wins.ratingChange.toFixed(1)}
+        </div>
+        <div class="cell ${player2Loses.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player2Loses.ratingChange.toFixed(1)}
+        </div>
       </div>
       <div class="row">
         <div class="cell">Rating Change (P2 Wins):</div>
-        <div class="cell">${player1Loses.ratingChange >= 0 ? "+" : ""}${player1Loses.ratingChange.toFixed(1)}</div>
-        <div class="cell">${player2Wins.ratingChange >= 0 ? "+" : ""}${player2Wins.ratingChange.toFixed(1)}</div>
+        <div class="cell ${player1Loses.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player1Loses.ratingChange.toFixed(1)}
+        </div>
+        <div class="cell ${player2Wins.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player2Wins.ratingChange.toFixed(1)}
+        </div>
       </div>
     </div>
   </div>
 `;
+
 
 
 
