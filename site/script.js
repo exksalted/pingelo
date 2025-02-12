@@ -45,22 +45,16 @@ function populateDropdowns() {
 // Calculate winning probability using Glicko system
 function calculateWinProbability(player1, player2) {
   const ratingDiff = player2.rating - player1.rating;
-  const rdFactor1 = (3 * (player1.rd ** 2)) / (Math.PI ** 2);
-  const rdFactor2 = (3 * (player2.rd ** 2)) / (Math.PI ** 2);
-  const denominator = 400 * Math.sqrt(1 + rdFactor1 + rdFactor2);
-  const exponent = -ratingDiff / denominator;
-  const probability = 1 / (1 + Math.pow(10, exponent));
+  const probability = 1 / (1 + Math.pow(10, ratingDiff / 400));
 
-  console.log("Player 1:", player1.name, "Rating:", player1.rating, "RD:", player1.rd);
-  console.log("Player 2:", player2.name, "Rating:", player2.rating, "RD:", player2.rd);
+  console.log("Player 1:", player1.name, "Rating:", player1.rating);
+  console.log("Player 2:", player2.name, "Rating:", player2.rating);
   console.log("Rating Diff:", ratingDiff);
-  console.log("RD Factor 1:", rdFactor1, "RD Factor 2:", rdFactor2);
-  console.log("Denominator:", denominator);
-  console.log("Exponent:", exponent);
   console.log("Win Probability (Player 1):", probability);
 
   return probability;
 }
+
 
 
 
