@@ -87,6 +87,8 @@ function calculateGlickoChange(player, opponent, outcome) {
   return {
     newRating: newRating,
     newRD: newRD,
+    ratingChange: newRating - player.rating, // Calculate rating change
+    rdChange: newRD - player.rd, // Calculate RD change
   };
 }
 
@@ -119,12 +121,14 @@ function calculateMatchup() {
     <h2>Results</h2>
     <p><strong>${player1.name} Win Probability:</strong> ${(player1WinProb * 100).toFixed(2)}%</p>
     <p><strong>${player2.name} Win Probability:</strong> ${(player2WinProb * 100).toFixed(2)}%</p>
+    <p><strong>Player 1 RD Change:</strong> ${player1Wins.rdChange.toFixed(2)}</p>
+    <p><strong>Player 2 RD Change:</strong> ${player2Loses.rdChange.toFixed(2)}</p>
     <h3>If ${player1.name} Wins:</h3>
-    <p><strong>${player1.name} New Rating:</strong> ${player1Wins.newRating.toFixed(2)} (RD: ${player1Wins.newRD.toFixed(2)})</p>
-    <p><strong>${player2.name} New Rating:</strong> ${player2Loses.newRating.toFixed(2)} (RD: ${player2Loses.newRD.toFixed(2)})</p>
+    <p><strong>${player1.name} Rating Change:</strong> ${player1Wins.ratingChange >= 0 ? "+" : ""}${player1Wins.ratingChange.toFixed(2)}</p>
+    <p><strong>${player2.name} Rating Change:</strong> ${player2Loses.ratingChange >= 0 ? "+" : ""}${player2Loses.ratingChange.toFixed(2)}</p>
     <h3>If ${player2.name} Wins:</h3>
-    <p><strong>${player1.name} New Rating:</strong> ${player1Loses.newRating.toFixed(2)} (RD: ${player1Loses.newRD.toFixed(2)})</p>
-    <p><strong>${player2.name} New Rating:</strong> ${player2Wins.newRating.toFixed(2)} (RD: ${player2Wins.newRD.toFixed(2)})</p>
+    <p><strong>${player1.name} Rating Change:</strong> ${player1Loses.ratingChange >= 0 ? "+" : ""}${player1Loses.ratingChange.toFixed(2)}</p>
+    <p><strong>${player2.name} Rating Change:</strong> ${player2Wins.ratingChange >= 0 ? "+" : ""}${player2Wins.ratingChange.toFixed(2)}</p>
   `;
 
   // Draw pie chart
