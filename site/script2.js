@@ -190,7 +190,7 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
   matchupChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: [`${player1Name} Wins`, `${player2Name} Wins`],
+      labels: [`${player1Name} Wins`,`${player2Name} Wins`],
       datasets: [{
         data: [player1WinProb * 100, player2WinProb * 100], // Convert to percentages
         backgroundColor: ['#36A2EB', '#FF6384'],
@@ -203,5 +203,101 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadPlayerStats();
+    document.querySelector("button").addEventListener("click", calculatePairwiseStats);
+});
+
+async function loadPlayerStats() {
+    try {
+        const response = await fetch("../code/data_stats.txt");
+        const text = await response.text();
+        parsePlayerStats(text);
+    } catch (error) {
+        console.error("Error loading player stats:", error);
+    }
+}
+
+let playerStats = {};
+
+function parsePlayerStats(data) {
+    const lines = data.split("\n");
+    let currentPlayer = null;
+    
+    lines.forEach(line => {
+        line = line.trim();
+        if (line === "") return;
+        
+        const playerMatch = line.match(/^(.+?),\d+,\d+,([\d\.]+),([\d\.]+),([\d\.]+)/);
+        if (playerMatch) {
+            currentPlayer = playerMatch[1];
+            playerStats[currentPlayer] = {};
+        } else if (currentPlayer && line.startsWith("vs ")) {
+            const match = line.match(/^vs (.+?), Wins: (\d+), Losses: (\d+), Avg Points Scored: ([\d\.]+), Avg Points Against: ([\d\.]+)/);
+            if (match) {
+                const [_, opponent, wins, losses, avgScored, avgAgainst] = match;
+                playerStats[currentPlayer][opponent] = {
+                    wins: parseInt(wins),
+                    losses: parseInt(losses),
+                    avgScored: parseFloat(avgScored),
+                    avgAgainst: parseFloat(avgAgainst)
+                };
+            }
+        }
+    });
+}
+
+function calculatePairwiseStats() {
+    const player1 = document.getElementById("player1").value;
+    const player2 = document.getElementById("player2").value;
+    
+    if (!player1 || !player2 || !playerStats[player1] || !playerStats[player1][player2]) {
+        document.getElementById("pairwise-results").innerHTML = "<p>No data available for this matchup.</p>";
+        return;
+    }
+    
+    const stats = playerStats[player1][player2];
+    const totalGames = stats.wins + stats.losses;
+    const winPctP1 = ((stats.wins / totalGames) * 100).toFixed(2);
+    const winPctP2 = ((stats.losses / totalGames) * 100).toFixed(2);
+    
+    document.getElementById("pairwise-results").innerHTML = `
+        <div class="matchup-container">
+            <div class="results-container">
+                <div class="results-table">
+                    <div class="row header">
+                        <div class="cell">Pairwise Stats</div>
+                        <div class="cell">${player1}</div>
+                        <div class="cell">${player2}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Total Games Played</div>
+                        <div class="cell" colspan="2">${totalGames}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Wins</div>
+                        <div class="cell ${stats.wins > stats.losses ? 'change-pos' : 'change-neg'}">${stats.wins}</div>
+                        <div class="cell ${stats.losses > stats.wins ? 'change-pos' : 'change-neg'}">${stats.losses}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Win %</div>
+                        <div class="cell ${winPctP1 > winPctP2 ? 'change-pos' : 'change-neg'}">${winPctP1}%</div>
+                        <div class="cell ${winPctP2 > winPctP1 ? 'change-pos' : 'change-neg'}">${winPctP2}%</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Avg. Points</div>
+                        <div class="cell ${stats.avgScored > stats.avgAgainst ? 'change-pos' : 'change-neg'}">${stats.avgScored.toFixed(2)}</div>
+                        <div class="cell ${stats.avgAgainst > stats.avgScored ? 'change-pos' : 'change-neg'}">${stats.avgAgainst.toFixed(2)}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="matchupChart"></canvas>
+            </div>
+        </div>`;
+}
+
+
+document.querySelector("button").addEventListener("click", calculatePairwiseStats);
 // Initialize the page
 loadPlayers();
