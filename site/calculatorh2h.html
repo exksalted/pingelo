@@ -168,11 +168,13 @@
 }
 
 .chart-container {
-  flex: 1; /* Allow chart to take up remaining space */
+  display: flex; /* Enables flexbox */
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
-  max-width: 300px; /* Limit chart width if needed */
+  max-width: 300px; /* Keeps chart size controlled */
+  width: 100%; /* Ensures it fills available space */
 }
+
 
 .pairwise-results-container {
   flex: 1; /* Allow each child to grow and take equal space */
