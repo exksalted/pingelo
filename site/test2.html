@@ -6,56 +6,125 @@
   <title>Player Matchup Calculator</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-    .split-container { display: flex; justify-content: space-between; }
-    .player-side { width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-    .chart-container { width: 400px; height: 400px; margin: 20px auto; }
-    label { display: block; margin-top: 10px; }
-    select, button { margin-top: 5px; width: 100%; padding: 5px; }
-    button { background-color: #007BFF; color: white; border: none; cursor: pointer; padding: 10px; }
-    button:hover { background-color: #0056b3; }
-.results-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
+    /* Global Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #1e1e2f, #2c2c3e, #1e1e2f);
+        background-size: 300% 300%;
+        animation: gradientAnimation 10s ease infinite;
+        color: #f0f0f0;
+    }
 
-.results-table {
-  border-collapse: collapse;
-  width: auto;
-  text-align: center;
-  background: #f9f9f9;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
+    @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-.row {
-  display: flex;
-}
+    /* Container Styles */
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        animation: fadeIn 1s ease-in-out;
+    }
 
-.cell {
-  flex: 1;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  font-weight: bold;
-}
+    h1 {
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #007bff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
 
-.header {
-  background: #ddd;
-}
-    /* Add styles for positive and negative rating changes */
-.change-pos {
-  color: #4fc3f7; /* Light blue for positive changes */
-  font-weight: bold;
-}
-.change-neg {
-  color: #ffa726; /* Light orange for negative changes */
-  font-weight: bold;
-}
+    .split-container {
+        display: flex;
+        justify-content: space-between;
+    }
 
+    .player-side {
+        width: 45%;
+        padding: 15px;
+        border-radius: 10px;
+        background: #2c2c3e;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+
+    select, button {
+        margin-top: 5px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Results Table Styles */
+    .results-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .results-table {
+        border-collapse: collapse;
+        width: auto;
+        text-align: center;
+        background: #2c2c3e;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .cell {
+        flex: 1;
+        padding: 10px;
+        border-bottom: 1px solid #444;
+        font-weight: bold;
+    }
+
+    .header {
+        background: #3c3c4f;
+        color: white;
+    }
+
+    /* Styling for positive and negative rating changes */
+    .change-pos {
+        color: #4fc3f7; /* Light blue for positive changes */
+        font-weight: bold;
+    }
+    .change-neg {
+        color: #ffa726; /* Light orange for negative changes */
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -92,6 +161,8 @@
       <canvas id="matchupChart"></canvas>
     </div>
   </div>
+
+<div id="pairwise-results"></div>
 
   <script src="script.js"></script>
 </body>
