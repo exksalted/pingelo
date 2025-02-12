@@ -169,11 +169,9 @@
 
 .chart-container {
   flex: 1; /* Allow chart to take up remaining space */
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
   max-width: 300px; /* Limit chart width if needed */
-}
-    #matchupChart {
-  width: 100% !important; /* Ensure chart fills its container */
-  height: auto !important;
 }
 
 .pairwise-results-container {
@@ -182,10 +180,6 @@
   border: 1px solid #ddd; /* Optional: Add a border for visual clarity */
   border-radius: 4px; /* Optional: Add rounded corners */
   background-color: white; /* Optional: Add a white background */
-}
-
-.chart-container {
-  max-width: 300px; /* Limit the width of the chart container */
 }
 
 #matchupChart {
