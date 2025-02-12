@@ -23,6 +23,7 @@
         100% { background-position: 0% 50%; }
     }
 
+    /* Container Styles */
     .container {
         max-width: 1200px;
         margin: auto;
@@ -51,35 +52,78 @@
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
     }
 
-    .results-wrapper {
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+
+    select, button {
+        margin-top: 5px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Results Table Styles */
+    .results-container {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        justify-content: center;
+        align-items: center;
         margin-top: 20px;
-        flex-wrap: wrap;
     }
 
-    .chart-container {
+    .results-table {
+        border-collapse: collapse;
+        width: auto;
+        text-align: center;
+        background: #2c2c3e;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .cell {
         flex: 1;
-        max-width: 50%;
-        min-width: 300px;
+        padding: 10px;
+        border-bottom: 1px solid #444;
+        font-weight: bold;
     }
 
-    #pairwise-results {
-        flex: 1;
-        max-width: 50%;
-        min-width: 300px;
+    .header {
+        background: #3c3c4f;
+        color: white;
     }
 
-    @media (max-width: 768px) {
-        .results-wrapper {
-            flex-direction: column;
-            align-items: center;
-        }
+    /* Styling for positive and negative rating changes */
+    .change-pos {
+        color: #4fc3f7; /* Light blue for positive changes */
+        font-weight: bold;
+    }
+    .change-neg {
+        color: #ffa726; /* Light orange for negative changes */
+        font-weight: bold;
+    }
 
-        .chart-container, #pairwise-results {
-            max-width: 100%;
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
   </style>
 </head>
@@ -111,13 +155,15 @@
       </div>
     </div>
     <button onclick="calculateMatchup()">Calculate</button>
-    <div class="results-wrapper">
-      <div id="pairwise-results"></div>
-      <div class="chart-container">
-        <canvas id="matchupChart"></canvas>
-      </div>
+
+    <div id="results"></div>
+    <div class="chart-container">
+      <canvas id="matchupChart"></canvas>
     </div>
   </div>
+
+<div id="pairwise-results"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
