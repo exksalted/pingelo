@@ -102,29 +102,42 @@
     }
 
     /* Results Table Styles */
+/* Ensure the grid containers are equal in size */
+#results, .chart-container, #pairwise-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0; /* Prevents overflow */
+    min-height: 0; /* Prevents overflow */
+}
+
+/* Ensure the tables take up the full space of their containers */
 .results-table {
     width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    background: #2c2c3e;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    height: 100%; /* Ensures the table takes up the full height */
+    table-layout: fixed; /* Ensures columns have equal width */
+    border-collapse: collapse; /* Removes spacing between cells */
+    background: #2c2c3e; /* Matches your theme */
+    border-radius: 10px; /* Matches your theme */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Matches your theme */
 }
 
 .results-table th,
 .results-table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #444;
+    padding: 10px; /* Adds consistent padding */
+    text-align: center; /* Centers content */
+    border: 1px solid #444; /* Adds borders for better visibility */
 }
 
-#results, #pairwise-results {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 0;
+    /* Ensure the grid container stretches its items to the same height */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: stretch; /* Ensures all items have the same height */
+    gap: 10px;
 }
 
+    
     .row {
         display: flex;
     }
