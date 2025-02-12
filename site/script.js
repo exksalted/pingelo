@@ -190,7 +190,7 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
   matchupChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: [`${player2Name} Wins`, `${player1Name} Wins`],
+      labels: [`${player1Name} Wins`,`${player2Name} Wins`],
       datasets: [{
         data: [player1WinProb * 100, player2WinProb * 100], // Convert to percentages
         backgroundColor: ['#36A2EB', '#FF6384'],
