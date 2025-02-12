@@ -150,6 +150,36 @@
   width: 100% !important; /* Ensure chart fills its container */
   height: auto !important;
 }
+    .flex-container {
+  display: flex; /* Enable flexbox */
+  flex-direction: row; /* Arrange children in a row */
+  justify-content: space-between; /* Space out the children */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Add spacing between the children */
+  padding: 20px; /* Add padding for better spacing */
+  border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  background-color: #f9f9f9; /* Optional: Add a light background */
+}
+
+.results-container,
+.chart-container,
+.pairwise-results-container {
+  flex: 1; /* Allow each child to grow and take equal space */
+  padding: 10px; /* Add padding inside each container */
+  border: 1px solid #ddd; /* Optional: Add a border for visual clarity */
+  border-radius: 4px; /* Optional: Add rounded corners */
+  background-color: white; /* Optional: Add a white background */
+}
+
+.chart-container {
+  max-width: 300px; /* Limit the width of the chart container */
+}
+
+#matchupChart {
+  width: 100% !important; /* Ensure the chart fills its container */
+  height: auto !important;
+}
   </style>
 </head>
 <body>
@@ -181,11 +211,13 @@
     </div>
     <button onclick="calculateMatchup()">Calculate</button>
 
-      <div id="results" class="results-container"></div>
-      <div class="chart-container">
-        <canvas id="matchupChart"></canvas>
-    </div>
+<div class="flex-container">
+  <div id="results" class="results-container"></div>
+  <div class="chart-container">
+    <canvas id="matchupChart"></canvas>
   </div>
+  <div id="pairwise-results" class="pairwise-results-container"></div>
+</div>
 
   <script src="script.js"></script>
 </body>
