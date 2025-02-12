@@ -74,6 +74,24 @@ function calculateMatchup() {
   const player1WinProb = calculateWinProbability(player1, player2);
   const player2WinProb = 1 - player1WinProb;
 
+  // Display results including Rating and RD
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = `
+    <h2>Results</h2>
+    <p><strong>${player1.name}</strong>: Rating = ${player1.rating}, RD = ${player1.rd}</p>
+    <p><strong>${player2.name}</strong>: Rating = ${player2.rating}, RD = ${player2.rd}</p>
+    <p><strong>${player1.name}</strong> Win Probability: ${(player1WinProb * 100).toFixed(2)}%</p>
+    <p><strong>${player2.name}</strong> Win Probability: ${(player2WinProb * 100).toFixed(2)}%</p>
+  `;
+
+  // Draw pie chart
+  drawChart(player1WinProb, player2WinProb, player1.name, player2.name);
+}
+
+
+  const player1WinProb = calculateWinProbability(player1, player2);
+  const player2WinProb = 1 - player1WinProb;
+
   // Display results
   const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = `
