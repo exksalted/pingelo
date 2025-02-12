@@ -125,6 +125,31 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
+    .matchup-container {
+  display: flex;
+  flex-direction: row; /* Ensure elements are in a row */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Add some spacing between elements */
+}
+
+.dropdowns-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Spacing between dropdowns and button */
+}
+
+.results-container {
+  flex: 1; /* Allow results to take up remaining space */
+}
+
+.chart-container {
+  flex: 1; /* Allow chart to take up remaining space */
+  max-width: 300px; /* Limit chart width if needed */
+}
+    #matchupChart {
+  width: 100% !important; /* Ensure chart fills its container */
+  height: auto !important;
+}
   </style>
 </head>
 <body>
@@ -156,13 +181,11 @@
     </div>
     <button onclick="calculateMatchup()">Calculate</button>
 
-    <div id="results"></div>
-    <div class="chart-container">
-      <canvas id="matchupChart"></canvas>
+      <div id="results" class="results-container"></div>
+      <div class="chart-container">
+        <canvas id="matchupChart"></canvas>
     </div>
   </div>
-
-<div id="pairwise-results"></div>
 
   <script src="script.js"></script>
 </body>
