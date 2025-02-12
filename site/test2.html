@@ -1,57 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Player Matchup Calculator</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-    .split-container { display: flex; justify-content: space-between; }
-    .player-side { width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-    .chart-container { width: 400px; height: 400px; margin: 20px auto; }
-    label { display: block; margin-top: 10px; }
-    select, button { margin-top: 5px; width: 100%; padding: 5px; }
-    button { background-color: #007BFF; color: white; border: none; cursor: pointer; padding: 10px; }
-    button:hover { background-color: #0056b3; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glicko Matchup</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="script2.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .player-section {
+            width: 45%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #results {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Player Matchup Calculator</h1>
-    <div class="split-container">
-      <div class="player-side" id="player1-side">
-        <label for="player1">Player 1:</label>
-        <select id="player1">
-          <option value="">----</option>
-        </select>
-        <div id="player1-info">
-          <p><strong>Name:</strong> <span id="player1-name"></span></p>
-          <p><strong>Rating:</strong> <span id="player1-rating"></span></p>
-          <p><strong>RD:</strong> <span id="player1-rd"></span></p>
+
+    <div class="container">
+        <!-- Player 1 Section -->
+        <div class="player-section">
+            <h2>Player 1</h2>
+            <select id="player1" onchange="updatePlayerInfo('player1', 'player1-info')"></select>
+            <div id="player1-info"><p>Select a player</p></div>
         </div>
-      </div>
-      <div class="player-side" id="player2-side">
-        <label for="player2">Player 2:</label>
-        <select id="player2">
-          <option value="">----</option>
-        </select>
-        <div id="player2-info">
-          <p><strong>Name:</strong> <span id="player2-name"></span></p>
-          <p><strong>Rating:</strong> <span id="player2-rating"></span></p>
-          <p><strong>RD:</strong> <span id="player2-rd"></span></p>
+
+        <!-- Player 2 Section -->
+        <div class="player-section">
+            <h2>Player 2</h2>
+            <select id="player2" onchange="updatePlayerInfo('player2', 'player2-info')"></select>
+            <div id="player2-info"><p>Select a player</p></div>
         </div>
-      </div>
     </div>
+
+    <!-- Matchup Results -->
+    <div id="results"></div>
+    <canvas id="matchupChart"></canvas>
+
     <button onclick="calculateMatchup()">Calculate</button>
 
-    <div id="results"></div>
-    <div class="chart-container">
-      <canvas id="matchupChart"></canvas>
-    </div>
-  </div>
-
-  <script src="script2.js"></script>
 </body>
 </html>
