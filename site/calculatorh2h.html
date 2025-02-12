@@ -102,42 +102,23 @@
     }
 
     /* Results Table Styles */
-/* Ensure the grid containers are equal in size */
-#results, .chart-container, #pairwise-results {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 0; /* Prevents overflow */
-    min-height: 0; /* Prevents overflow */
-}
+    .results-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
 
-/* Ensure the tables take up the full space of their containers */
-.results-table {
-    width: 100%;
-    height: 100%; /* Ensures the table takes up the full height */
-    table-layout: fixed; /* Ensures columns have equal width */
-    border-collapse: collapse; /* Removes spacing between cells */
-    background: #2c2c3e; /* Matches your theme */
-    border-radius: 10px; /* Matches your theme */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Matches your theme */
-}
+    .results-table {
+        border-collapse: collapse;
+        width: auto;
+        text-align: center;
+        background: #2c2c3e;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    }
 
-.results-table th,
-.results-table td {
-    padding: 10px; /* Adds consistent padding */
-    text-align: center; /* Centers content */
-    border: 1px solid #444; /* Adds borders for better visibility */
-}
-
-    /* Ensure the grid container stretches its items to the same height */
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: stretch; /* Ensures all items have the same height */
-    gap: 10px;
-}
-
-    
     .row {
         display: flex;
     }
@@ -168,6 +149,50 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
+    .matchup-container {
+  display: flex;
+  flex-direction: row; /* Ensure elements are in a row */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Add some spacing between elements */
+}
+
+.dropdowns-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Spacing between dropdowns and button */
+}
+
+.results-container {
+  flex: 1; /* Allow results to take up remaining space */
+}
+
+.chart-container {
+  flex: 1; /* Allow chart to take up remaining space */
+  max-width: 300px; /* Limit chart width if needed */
+}
+    #matchupChart {
+  width: 100% !important; /* Ensure chart fills its container */
+  height: auto !important;
+}
+
+.results-container,
+.chart-container,
+.pairwise-results-container {
+  flex: 1; /* Allow each child to grow and take equal space */
+  padding: 10px; /* Add padding inside each container */
+  border: 1px solid #ddd; /* Optional: Add a border for visual clarity */
+  border-radius: 4px; /* Optional: Add rounded corners */
+  background-color: white; /* Optional: Add a white background */
+}
+
+.chart-container {
+  max-width: 300px; /* Limit the width of the chart container */
+}
+
+#matchupChart {
+  width: 100% !important; /* Ensure the chart fills its container */
+  height: auto !important;
+}
   </style>
 </head>
 <body>
