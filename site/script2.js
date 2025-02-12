@@ -21,9 +21,9 @@ function parseCsvData(csvData) {
   return rows.map(row => {
     const columns = row.split(",");
     return {
-      name: columns[0].trim(), // Player name
-      rating: parseFloat(columns[1].trim()), // Rating
-      rd: parseFloat(columns[2].trim()), // RD
+      name: columns[0].trim(),
+      rating: parseFloat(columns[1].trim()),
+      rd: parseFloat(columns[2].trim()),
     };
   });
 }
@@ -33,6 +33,10 @@ function populateDropdowns() {
   const player1Select = document.getElementById("player1");
   const player2Select = document.getElementById("player2");
 
+  // Clear previous options
+  player1Select.innerHTML = "";
+  player2Select.innerHTML = "";
+
   // Add default empty option
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
@@ -40,6 +44,7 @@ function populateDropdowns() {
   player1Select.appendChild(defaultOption.cloneNode(true));
   player2Select.appendChild(defaultOption);
 
+  // Add players to dropdowns
   players.forEach(player => {
     const option = document.createElement("option");
     option.value = player.name;
@@ -47,33 +52,33 @@ function populateDropdowns() {
     player1Select.appendChild(option.cloneNode(true));
     player2Select.appendChild(option);
   });
+
+  // Add event listeners to update player info when selection changes
+  player1Select.addEventListener("change", updatePlayerInfo);
+  player2Select.addEventListener("change", updatePlayerInfo);
 }
 
-// Update player info when selected
-function updatePlayerInfo(playerSelectId, infoDivId) {
-  const playerName = document.getElementById(playerSelectId).value;
-  const player = players.find(p => p.name === playerName);
+// Update player info display when a selection is made
+function updatePlayerInfo() {
+  const player1Name = document.getElementById("player1").value;
+  const player2Name = document.getElementById("player2").value;
 
-  const infoDiv = document.getElementById(infoDivId);
-  if (player) {
-    infoDiv.innerHTML = `<p>Rating: ${player.rating}</p><p>RD: ${player.rd}</p>`;
-  } else {
-    infoDiv.innerHTML = `<p>Select a player</p>`;
-  }
+  const player1 = players.find(p => p.name === player1Name);
+  const player2 = players.find(p => p.name === player2Name);
+
+  document.getElementById("player1-name").textContent = player1 ? player1.name : "";
+  document.getElementById("player1-rating").textContent = player1 ? player1.rating : "";
+  document.getElementById("player1-rd").textContent = player1 ? player1.rd : "";
+
+  document.getElementById("player2-name").textContent = player2 ? player2.name : "";
+  document.getElementById("player2-rating").textContent = player2 ? player2.rating : "";
+  document.getElementById("player2-rd").textContent = player2 ? player2.rd : "";
 }
 
-// Calculate the g(Δ) function for Glicko
-function glickoG(rd) {
-  const q = Math.log(10) / 400;
-  return 1 / Math.sqrt(1 + (3 * q * q * rd * rd) / (Math.PI * Math.PI));
-}
-
-// Calculate winning probability using the Glicko system
+// Calculate winning probability using only rating difference
 function calculateWinProbability(player1, player2) {
-  const q = Math.log(10) / 400;
-  const rdDiff = Math.sqrt(player1.rd * player1.rd + player2.rd * player2.rd);
-  const g = glickoG(rdDiff);
-  const exponent = -g * (player1.rating - player2.rating) / 400;
+  const ratingDiff = player2.rating - player1.rating;
+  const exponent = -ratingDiff / 400;
   return 1 / (1 + Math.pow(10, exponent));
 }
 
@@ -97,8 +102,8 @@ function calculateMatchup() {
   const resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = `
     <h2>Results</h2>
-    <p>${player1.name} Win Probability: ${(player1WinProb * 100).toFixed(2)}%</p>
-    <p>${player2.name} Win Probability: ${(player2WinProb * 100).toFixed(2)}%</p>
+    <p><strong>${player1.name} Win Probability:</strong> ${(player1WinProb * 100).toFixed(2)}%</p>
+    <p><strong>${player2.name} Win Probability:</strong> ${(player2WinProb * 100).toFixed(2)}%</p>
   `;
 
   // Draw pie chart
@@ -109,10 +114,10 @@ function calculateMatchup() {
 function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
   const ctx = document.getElementById("matchupChart").getContext("2d");
 
-  // Properly destroy previous chart instance
+  // Properly destroy previous chart instance before creating a new one
   if (matchupChart !== null) {
     matchupChart.destroy();
-    matchupChart = null; // Ensure it's fully removed before creating a new one
+    matchupChart = null;
   }
 
   // Create new chart instance
@@ -121,7 +126,7 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
     data: {
       labels: [`${player1Name} Wins`, `${player2Name} Wins`],
       datasets: [{
-        data: [player1WinProb * 100, player2WinProb * 100], // Convert to percentage for clarity
+        data: [player1WinProb * 100, player2WinProb * 100], // Convert to percentages
         backgroundColor: ['#36A2EB', '#FF6384'],
       }]
     },
@@ -131,7 +136,6 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
     }
   });
 }
-
 
 // Initialize the page
 loadPlayers();
