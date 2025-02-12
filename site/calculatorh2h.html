@@ -119,6 +119,20 @@
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
     }
 
+    #results, #pairwise-results {
+    flex: 1; /* Ensures both elements take up equal space */
+    min-width: 0; /* Prevents flex items from overflowing */
+    padding: 10px; /* Optional: Adds padding for better spacing */
+    background: #2c2c3e; /* Matches your theme */
+    border-radius: 10px; /* Matches your theme */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Matches your theme */
+}
+
+.chart-container {
+    flex: 1; /* Ensures the chart container takes up equal space */
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
     .row {
         display: flex;
     }
