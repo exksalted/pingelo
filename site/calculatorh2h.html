@@ -119,18 +119,29 @@
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
     }
 
-    #results-table {
-    flex: 1; /* Ensures both elements take up equal space */
-    min-width: 0; /* Prevents flex items from overflowing */
-    padding: 10px; /* Optional: Adds padding for better spacing */
+   .results-table {
+    width: 100%; /* Ensures the table takes up the full width of its container */
+    table-layout: fixed; /* Ensures columns have equal width */
+    border-collapse: collapse; /* Removes spacing between cells */
     background: #2c2c3e; /* Matches your theme */
     border-radius: 10px; /* Matches your theme */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Matches your theme */
 }
 
-.chart-container {
-    flex: 1; /* Ensures the chart container takes up equal space */
-    min-width: 0; /* Prevents flex items from overflowing */
+.results-table th,
+.results-table td {
+    padding: 10px; /* Adds consistent padding */
+    text-align: center; /* Centers content */
+    border: 1px solid #444; /* Adds borders for better visibility */
+}
+
+/* Ensure the tables inside #results and #pairwise-results are the same size */
+#results, #pairwise-results {
+    flex: 1; /* Ensures both containers take up equal space */
+    min-width: 0; /* Prevents overflow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
     .row {
