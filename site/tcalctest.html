@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .player-select {
+      margin-bottom: 20px;
+    }
+    .selected-players {
+      margin-top: 20px;
+    }
+    .player-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tournament Simulator</h1>
+    <div class="player-select">
+      <label for="playerDropdown">Select Players:</label>
+      <select id="playerDropdown" multiple>
+        <!-- Player options will be populated here -->
+      </select>
+      <button id="addPlayerBtn">Add Player</button>
+    </div>
+    <div class="selected-players">
+      <h2>Selected Players</h2>
+      <div id="selectedPlayersList"></div>
+    </div>
+  </div>
+
+  <script>
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
+
+    let players = [];
+    let selectedPlayers = [];
+
+    // Load player data from Google Sheets
+    async function loadPlayers() {
+      try {
+        const response = await fetch(csvUrl);
+        const csvData = await response.text();
+        players = parseCsvData(csvData);
+        populateDropdown();
+      } catch (error) {
+        console.error("Error loading player data:", error);
+      }
+    }
+
+    // Parse CSV data into an array of player objects
+    function parseCsvData(csvData) {
+      const rows = csvData.split("\n").slice(1); // Skip header row
+      return rows.map(row => {
+        const columns = row.split(",");
+        return {
+          name: columns[0].trim(),
+          rating: parseFloat(columns[1].trim()),
+          rd: parseFloat(columns[2].trim()),
+        };
+      });
+    }
+
+    // Populate the dropdown with player names
+    function populateDropdown() {
+      const dropdown = document.getElementById("playerDropdown");
+      dropdown.innerHTML = ""; // Clear existing options
+      players.forEach(player => {
+        const option = document.createElement("option");
+        option.value = player.name;
+        option.textContent = player.name;
+        dropdown.appendChild(option);
+      });
+    }
+
+    // Add selected players to the list
+    function addSelectedPlayers() {
+      const dropdown = document.getElementById("playerDropdown");
+      const selectedOptions = Array.from(dropdown.selectedOptions);
+      selectedOptions.forEach(option => {
+        const player = players.find(p => p.name === option.value);
+        if (player && !selectedPlayers.some(p => p.name === player.name)) {
+          selectedPlayers.push(player);
+        }
+      });
+      renderSelectedPlayers();
+    }
+
+    // Render the list of selected players
+    function renderSelectedPlayers() {
+      const selectedPlayersList = document.getElementById("selectedPlayersList");
+      selectedPlayersList.innerHTML = ""; // Clear existing list
+      selectedPlayers.forEach(player => {
+        const playerCard = document.createElement("div");
+        playerCard.className = "player-card";
+        playerCard.innerHTML = `
+          <strong>${player.name}</strong><br>
+          Rating: ${player.rating}<br>
+          RD: ${player.rd}
+        `;
+        selectedPlayersList.appendChild(playerCard);
+      });
+    }
+
+    // Event listener for the "Add Player" button
+    document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
+
+    // Load players when the page loads
+    window.onload = loadPlayers;
+  </script>
+</body>
+</html>
