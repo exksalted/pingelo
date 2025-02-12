@@ -109,16 +109,19 @@ function calculateMatchup() {
 function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
   const ctx = document.getElementById("matchupChart").getContext("2d");
 
-  if (matchupChart) {
+  // Properly destroy previous chart instance
+  if (matchupChart !== null) {
     matchupChart.destroy();
+    matchupChart = null; // Ensure it's fully removed before creating a new one
   }
 
+  // Create new chart instance
   matchupChart = new Chart(ctx, {
     type: 'pie',
     data: {
       labels: [`${player1Name} Wins`, `${player2Name} Wins`],
       datasets: [{
-        data: [player1WinProb, player2WinProb],
+        data: [player1WinProb * 100, player2WinProb * 100], // Convert to percentage for clarity
         backgroundColor: ['#36A2EB', '#FF6384'],
       }]
     },
@@ -128,6 +131,7 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
     }
   });
 }
+
 
 // Initialize the page
 loadPlayers();
