@@ -168,12 +168,17 @@
 }
 
 .chart-container {
-  display: flex; /* Enables flexbox */
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically */
-  max-width: 300px; /* Keeps chart size controlled */
-  width: 100%; /* Ensures it fills available space */
+  display: flex;
+  justify-content: center;  /* Centers horizontally */
+  align-items: center;  /* Centers vertically */
+  max-width: 300px;  
+  width: 100%;  /* Ensures full width usage */
 }
+.chart-container canvas {
+  display: block;  
+  margin: 0 auto;  /* Forces auto-centering */
+}
+
 
 
 .pairwise-results-container {
@@ -239,7 +244,12 @@
       <div><p>Esimated winrate graph:</p></div>
       <div><p>Pairwise stats:</p></div>
       </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 10px;">
+    <div style="
+      display: grid; 
+      grid-template-columns: 1fr 1fr 1fr; 
+      align-items: center; 
+      justify-items: center; 
+      gap: 10px;">
     <div id="results"></div>
     <div class="chart-container"><canvas id="matchupChart"></canvas></div>
     <div id="pairwise-results"></div>
