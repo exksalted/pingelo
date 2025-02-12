@@ -92,6 +92,13 @@ function calculateGlickoChange(player, opponent, outcome) {
   };
 }
 
+// Calculate win probability using the Glicko-1 system
+function calculateWinProbability(player1, player2) {
+  const q = Math.log(10) / 400;
+  const gRD = 1 / Math.sqrt(1 + (3 * q * q * player2.rd * player2.rd) / (Math.PI * Math.PI));
+  return 1 / (1 + Math.pow(10, -gRD * (player1.rating - player2.rating) / 400));
+}
+
 // Calculate and display matchup results
 function calculateMatchup() {
   const player1Name = document.getElementById("player1").value;
@@ -104,12 +111,6 @@ function calculateMatchup() {
     alert("Please select valid players.");
     return;
   }
-  // Calculate win probability using the Glicko-1 system
-function calculateWinProbability(player1, player2) {
-  const q = Math.log(10) / 400;
-  const gRD = 1 / Math.sqrt(1 + (3 * q * q * player2.rd * player2.rd) / (Math.PI * Math.PI));
-  return 1 / (1 + Math.pow(10, -gRD * (player1.rating - player2.rating) / 400));
-}
 
   // Calculate win probabilities
   const player1WinProb = calculateWinProbability(player1, player2);
