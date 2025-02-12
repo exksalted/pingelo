@@ -10,10 +10,14 @@
       margin: 20px;
       background-color: #f9f9f9;
     }
-    .player-select-container {
+    .player-list-container {
   display: flex;
-  gap: 20px; /* Space between the two sections */
-  margin-bottom: 20px;
+  gap: 20px; /* Space between Player List and Selected Players */
+}
+.player-select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between sections */
 }
 
 .player-select, .selected-players {
@@ -21,7 +25,7 @@
 }
 .player-select-buttons {
   display: flex;
-  gap: 10px; /* Space between buttons */
+  gap: 20px; /* Space between buttons */
 }
 
 .player-select-buttons button {
@@ -38,6 +42,7 @@
 .player-select-buttons button:hover {
   background-color: #0056b3;
 }
+
 
 .selected-players {
   max-height: 300px; /* Limit height to prevent it from being too bulky */
@@ -69,14 +74,16 @@
   border-radius: 4px;
 }
 
-.player-list {
-  max-height: 200px;
-  overflow-y: auto;
+.player-list, .selected-players {
+  flex: 1; /* Both sections take equal width */
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
   background-color: #fff;
+  max-height: 300px; /* Limit height */
+  overflow-y: auto; /* Add scroll if content overflows */
 }
+
     .player-item {
       display: flex;
       align-items: center;
@@ -88,9 +95,6 @@
     }
     .player-item input {
       margin-right: 10px;
-    }
-    .selected-players {
-      margin-top: 20px;
     }
     .selected-players h2 {
       margin-bottom: 10px;
@@ -143,6 +147,9 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+    .search-bar {
+  width: 100%; /* Full width */
+}
 
 #pieChart {
   flex: 1; /* Chart takes up half the space */
@@ -169,21 +176,27 @@
 <body>
   <div class="container">
     <h1>Tournament Simulator</h1>
-    <div class="player-select">
-  <input type="text" id="searchPlayer" placeholder="Search players..." />
-  <div class="player-list" id="playerList">
-    <!-- Player checkboxes will be populated here -->
+   <div class="player-select-container">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchPlayer" placeholder="Search players..." />
   </div>
+
+  <!-- Player List and Selected Players -->
+  <div class="player-list-container">
+    <div class="player-list" id="playerList">
+      <!-- Player checkboxes will be populated here -->
+    </div>
+    <div class="selected-players">
+      <h2>Selected Players</h2>
+      <div id="selectedPlayersList"></div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
   <div class="player-select-buttons">
     <button id="addPlayerBtn">Add Selected Players</button>
     <button id="calculateChancesBtn">Calculate Winning Chances</button>
-  </div>
-</div>
-  </div>
-  
-  <div class="selected-players">
-    <h2>Selected Players</h2>
-    <div id="selectedPlayersList"></div>
   </div>
 </div>
   
