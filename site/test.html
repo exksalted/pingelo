@@ -15,6 +15,33 @@
     select, button { margin-top: 5px; width: 100%; padding: 5px; }
     button { background-color: #007BFF; color: white; border: none; cursor: pointer; padding: 10px; }
     button:hover { background-color: #0056b3; }
+    .results-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  max-width: 400px;
+}
+
+.row {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.cell {
+  flex: 1;
+  padding: 6px;
+  text-align: center;
+}
+
+.header {
+  font-weight: bold;
+  background-color: #f4f4f4;
+}
   </style>
 </head>
 <body>
