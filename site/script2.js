@@ -21,9 +21,9 @@ function parseCsvData(csvData) {
   return rows.map(row => {
     const columns = row.split(",");
     return {
-      name: columns[0].trim(), // Player name is in column index 0
-      rating: parseFloat(columns[1].trim()), // Rating is in column index 1
-      rd: parseFloat(columns[2].trim()), // RD is in column index 2
+      name: columns[0].trim(), // Player name
+      rating: parseFloat(columns[1].trim()), // Rating
+      rd: parseFloat(columns[2].trim()), // RD
     };
   });
 }
@@ -40,7 +40,6 @@ function populateDropdowns() {
   player1Select.appendChild(defaultOption.cloneNode(true));
   player2Select.appendChild(defaultOption);
 
-  // Add player options
   players.forEach(player => {
     const option = document.createElement("option");
     option.value = player.name;
@@ -48,6 +47,19 @@ function populateDropdowns() {
     player1Select.appendChild(option.cloneNode(true));
     player2Select.appendChild(option);
   });
+}
+
+// Update player info when selected
+function updatePlayerInfo(playerSelectId, infoDivId) {
+  const playerName = document.getElementById(playerSelectId).value;
+  const player = players.find(p => p.name === playerName);
+
+  const infoDiv = document.getElementById(infoDivId);
+  if (player) {
+    infoDiv.innerHTML = `<p>Rating: ${player.rating}</p><p>RD: ${player.rd}</p>`;
+  } else {
+    infoDiv.innerHTML = `<p>Select a player</p>`;
+  }
 }
 
 // Calculate the g(Δ) function for Glicko
@@ -65,13 +77,6 @@ function calculateWinProbability(player1, player2) {
   return 1 / (1 + Math.pow(10, exponent));
 }
 
-// Update player info on the corresponding side
-function updatePlayerInfo(player, side) {
-  document.getElementById(`${side}-name`).textContent = player.name;
-  document.getElementById(`${side}-rating`).textContent = player.rating;
-  document.getElementById(`${side}-rd`).textContent = player.rd;
-}
-
 // Calculate and display matchup results
 function calculateMatchup() {
   const player1Name = document.getElementById("player1").value;
@@ -84,10 +89,6 @@ function calculateMatchup() {
     alert("Please select valid players.");
     return;
   }
-
-  // Update player info
-  updatePlayerInfo(player1, "player1");
-  updatePlayerInfo(player2, "player2");
 
   const player1WinProb = calculateWinProbability(player1, player2);
   const player2WinProb = 1 - player1WinProb;
