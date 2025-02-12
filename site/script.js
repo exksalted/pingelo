@@ -125,35 +125,37 @@ function calculateMatchup() {
   // Display results
 const resultsDiv = document.getElementById("results");
 resultsDiv.innerHTML = `
-  <h2>Results</h2>
-  <div class="results-table">
-    <div class="row header">
-      <div class="cell"></div>
-      <div class="cell">${player1.name}</div>
-      <div class="cell">${player2.name}</div>
-    </div>
-    <div class="row">
-      <div class="cell">Win %</div>
-      <div class="cell">${(player1WinProb * 100).toFixed(2)}%</div>
-      <div class="cell">${(player2WinProb * 100).toFixed(2)}%</div>
-    </div>
-    <div class="row">
-      <div class="cell">RD Change</div>
-      <div class="cell">${player1Wins.rdChange.toFixed(2)}</div>
-      <div class="cell">${player2Loses.rdChange.toFixed(2)}</div>
-    </div>
-    <div class="row">
-      <div class="cell">Rating Change (P1 Wins)</div>
-      <div class="cell">${player1Wins.ratingChange >= 0 ? "+" : ""}${player1Wins.ratingChange.toFixed(1)}</div>
-      <div class="cell">${player2Loses.ratingChange >= 0 ? "+" : ""}${player2Loses.ratingChange.toFixed(1)}</div>
-    </div>
-    <div class="row">
-      <div class="cell">Rating Change (P2 Wins)</div>
-      <div class="cell">${player1Loses.ratingChange >= 0 ? "+" : ""}${player1Loses.ratingChange.toFixed(1)}</div>
-      <div class="cell">${player2Wins.ratingChange >= 0 ? "+" : ""}${player2Wins.ratingChange.toFixed(1)}</div>
+  <div class="results-container">
+    <div class="results-table">
+      <div class="row header">
+        <div class="cell"></div>
+        <div class="cell">${player1.name}</div>
+        <div class="cell">${player2.name}</div>
+      </div>
+      <div class="row">
+        <div class="cell">Win %</div>
+        <div class="cell">${(player1WinProb * 100).toFixed(2)}%</div>
+        <div class="cell">${(player2WinProb * 100).toFixed(2)}%</div>
+      </div>
+      <div class="row">
+        <div class="cell">RD Change</div>
+        <div class="cell">${player1Wins.rdChange.toFixed(2)}</div>
+        <div class="cell">${player2Loses.rdChange.toFixed(2)}</div>
+      </div>
+      <div class="row">
+        <div class="cell">Rating Change (P1 Wins)</div>
+        <div class="cell">${player1Wins.ratingChange >= 0 ? "+" : ""}${player1Wins.ratingChange.toFixed(1)}</div>
+        <div class="cell">${player2Loses.ratingChange >= 0 ? "+" : ""}${player2Loses.ratingChange.toFixed(1)}</div>
+      </div>
+      <div class="row">
+        <div class="cell">Rating Change (P2 Wins)</div>
+        <div class="cell">${player1Loses.ratingChange >= 0 ? "+" : ""}${player1Loses.ratingChange.toFixed(1)}</div>
+        <div class="cell">${player2Wins.ratingChange >= 0 ? "+" : ""}${player2Wins.ratingChange.toFixed(1)}</div>
+      </div>
     </div>
   </div>
 `;
+
 
 
   // Draw pie chart
