@@ -15,6 +15,47 @@
     select, button { margin-top: 5px; width: 100%; padding: 5px; }
     button { background-color: #007BFF; color: white; border: none; cursor: pointer; padding: 10px; }
     button:hover { background-color: #0056b3; }
+.results-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.results-table {
+  border-collapse: collapse;
+  width: auto;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  flex: 1;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.header {
+  background: #ddd;
+}
+    /* Add styles for positive and negative rating changes */
+.change-pos {
+  color: #4fc3f7; /* Light blue for positive changes */
+  font-weight: bold;
+}
+.change-neg {
+  color: #ffa726; /* Light orange for negative changes */
+  font-weight: bold;
+}
+
   </style>
 </head>
 <body>
@@ -52,6 +93,6 @@
     </div>
   </div>
 
-  <script src="script2.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
