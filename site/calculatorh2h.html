@@ -22,6 +22,30 @@
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
+    /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #2c2c3e;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
 
     /* Container Styles */
     .container {
