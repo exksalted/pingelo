@@ -252,9 +252,22 @@ function calculatePairwiseStats() {
     const player2 = document.getElementById("player2").value;
     
     if (!player1 || !player2 || !playerStats[player1] || !playerStats[player1][player2]) {
-        document.getElementById("pairwise-results").innerHTML = "<p>No data available for this matchup.</p>";
-        return;
-    }
+        document.getElementById("pairwise-results").innerHTML = `
+        <div class="matchup-container">
+            <div class="results-container">
+                <div class="results-table">
+                    <div class="row header">
+                        <div class="cell">No data available!</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">These players have yet to play against each other.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="matchupChart"></canvas>
+            </div>
+        </div>`;
     
     const stats = playerStats[player1][player2];
     const totalGames = stats.wins + stats.losses;
