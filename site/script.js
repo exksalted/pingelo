@@ -138,7 +138,7 @@ resultsDiv.innerHTML = `
         <div class="cell">${player2.name}</div>
       </div>
       <div class="row">
-        <div class="cell">Win %:</div>
+        <div class="cell">Win %</div>
         <div class="cell ${player1WinClass}">${(player1WinProb * 100).toFixed(2)}%</div>
         <div class="cell ${player2WinClass}">${(player2WinProb * 100).toFixed(2)}%</div>
       </div>
