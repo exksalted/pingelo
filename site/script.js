@@ -45,10 +45,14 @@ function populateDropdowns() {
 // Calculate winning probability using Glicko system
 function calculateWinProbability(player1, player2) {
   const ratingDiff = player2.rating - player1.rating;
-  const rdSum = Math.sqrt(player1.rd ** 2 + player2.rd ** 2);
-  const exponent = -ratingDiff / (400 * Math.sqrt(1 + (3 * (rdSum ** 2)) / (Math.PI ** 2)));
+  const rdFactor1 = (3 * (player1.rd ** 2)) / (Math.PI ** 2);
+  const rdFactor2 = (3 * (player2.rd ** 2)) / (Math.PI ** 2);
+  
+  const exponent = -ratingDiff / (400 * Math.sqrt(1 + rdFactor1 + rdFactor2));
+  
   return 1 / (1 + Math.pow(10, exponent));
 }
+
 
 // Calculate and display matchup results
 function calculateMatchup() {
