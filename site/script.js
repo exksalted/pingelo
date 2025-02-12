@@ -123,20 +123,38 @@ function calculateMatchup() {
   const player2Loses = calculateGlickoChange(player2, player1, 0);
 
   // Display results
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = `
-    <h2>Results</h2>
-    <p><strong>${player1.name} Win Probability:</strong> ${(player1WinProb * 100).toFixed(2)}%</p>
-    <p><strong>${player2.name} Win Probability:</strong> ${(player2WinProb * 100).toFixed(2)}%</p>
-    <p><strong>Player 1 RD Change:</strong> ${player1Wins.rdChange.toFixed(2)}</p>
-    <p><strong>Player 2 RD Change:</strong> ${player2Loses.rdChange.toFixed(2)}</p>
-    <h3>If ${player1.name} Wins:</h3>
-    <p><strong>${player1.name} Rating Change:</strong> ${player1Wins.ratingChange >= 0 ? "+" : ""}${player1Wins.ratingChange.toFixed(2)}</p>
-    <p><strong>${player2.name} Rating Change:</strong> ${player2Loses.ratingChange >= 0 ? "+" : ""}${player2Loses.ratingChange.toFixed(2)}</p>
-    <h3>If ${player2.name} Wins:</h3>
-    <p><strong>${player1.name} Rating Change:</strong> ${player1Loses.ratingChange >= 0 ? "+" : ""}${player1Loses.ratingChange.toFixed(2)}</p>
-    <p><strong>${player2.name} Rating Change:</strong> ${player2Wins.ratingChange >= 0 ? "+" : ""}${player2Wins.ratingChange.toFixed(2)}</p>
-  `;
+const resultsDiv = document.getElementById("results");
+resultsDiv.innerHTML = `
+  <h2>Results</h2>
+  <div class="results-table">
+    <div class="row header">
+      <div class="cell"></div>
+      <div class="cell">${player1.name}</div>
+      <div class="cell">${player2.name}</div>
+    </div>
+    <div class="row">
+      <div class="cell">Win %</div>
+      <div class="cell">${(player1WinProb * 100).toFixed(2)}%</div>
+      <div class="cell">${(player2WinProb * 100).toFixed(2)}%</div>
+    </div>
+    <div class="row">
+      <div class="cell">RD Change</div>
+      <div class="cell">${player1Wins.rdChange.toFixed(2)}</div>
+      <div class="cell">${player2Loses.rdChange.toFixed(2)}</div>
+    </div>
+    <div class="row">
+      <div class="cell">Rating Change (P1 Wins)</div>
+      <div class="cell">${player1Wins.ratingChange >= 0 ? "+" : ""}${player1Wins.ratingChange.toFixed(1)}</div>
+      <div class="cell">${player2Loses.ratingChange >= 0 ? "+" : ""}${player2Loses.ratingChange.toFixed(1)}</div>
+    </div>
+    <div class="row">
+      <div class="cell">Rating Change (P2 Wins)</div>
+      <div class="cell">${player1Loses.ratingChange >= 0 ? "+" : ""}${player1Loses.ratingChange.toFixed(1)}</div>
+      <div class="cell">${player2Wins.ratingChange >= 0 ? "+" : ""}${player2Wins.ratingChange.toFixed(1)}</div>
+    </div>
+  </div>
+`;
+
 
   // Draw pie chart
   drawChart(player1WinProb, player2WinProb, player1.name, player2.name);
