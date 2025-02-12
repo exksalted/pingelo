@@ -19,6 +19,25 @@
 .player-select, .selected-players {
   flex: 1; /* Make both sections equal in width */
 }
+.player-select-buttons {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+.player-select-buttons button {
+  flex: 1; /* Each button takes up half the space */
+  padding: 15px; /* Bigger padding */
+  font-size: 16px; /* Larger text */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.player-select-buttons button:hover {
+  background-color: #0056b3;
+}
 
 .selected-players {
   max-height: 300px; /* Limit height to prevent it from being too bulky */
@@ -36,24 +55,28 @@
       text-align: center;
       color: #333;
     }
-    .player-select {
-      margin-bottom: 20px;
-    }
-    .player-select input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
-    .player-list {
-      max-height: 200px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 10px;
-      background-color: #fff;
-    }
+   .player-select {
+  flex: 1; /* Take up full width */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between elements */
+}
+
+.player-select input[type="text"] {
+  width: 100%; /* Full width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.player-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #fff;
+}
     .player-item {
       display: flex;
       align-items: center;
@@ -146,15 +169,18 @@
 <body>
   <div class="container">
     <h1>Tournament Simulator</h1>
-<div class="player-select-container">
-  <div class="player-select">
-    <input type="text" id="searchPlayer" placeholder="Search players..." />
-    <div class="player-list" id="playerList">
-      <!-- Player checkboxes will be populated here -->
-    </div>
+    <div class="player-select">
+  <input type="text" id="searchPlayer" placeholder="Search players..." />
+  <div class="player-list" id="playerList">
+    <!-- Player checkboxes will be populated here -->
+  </div>
+  <div class="player-select-buttons">
     <button id="addPlayerBtn">Add Selected Players</button>
     <button id="calculateChancesBtn">Calculate Winning Chances</button>
   </div>
+</div>
+  </div>
+  
   <div class="selected-players">
     <h2>Selected Players</h2>
     <div id="selectedPlayersList"></div>
