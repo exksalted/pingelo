@@ -239,11 +239,11 @@
       </div>
     </div>
     <button onclick="calculateMatchup()">Calculate</button>
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 10px;">
-      <div><p>Calculator results:</p></div>
-      <div><p>Esimated winrate graph:</p></div>
-      <div><p>Pairwise stats:</p></div>
-      </div>
+    <div id="resultsGrid" style="display: none; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 10px;">
+    <div><p>Calculator results:</p></div>
+    <div><p>Estimated winrate graph:</p></div>
+    <div><p>Pairwise stats:</p></div>
+</div>
     <div style="
       display: grid; 
       grid-template-columns: 1fr 1fr 1fr; 
@@ -255,7 +255,11 @@
     <div id="pairwise-results"></div>
 </div>
   </div>
-
+<script>
+function calculateMatchup() {
+    document.getElementById("resultsGrid").style.display = "grid";
+}
+</script>
 
 
   <script src="hthcalc.js"></script>
