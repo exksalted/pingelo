@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glicko Matchup</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .player-section {
+            width: 45%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #results {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Player 1 Section -->
+        <div class="player-section">
+            <h2>Player 1</h2>
+            <select id="player1" onchange="updatePlayerInfo('player1', 'player1-info')"></select>
+            <div id="player1-info"><p>Select a player</p></div>
+        </div>
+
+        <!-- Player 2 Section -->
+        <div class="player-section">
+            <h2>Player 2</h2>
+            <select id="player2" onchange="updatePlayerInfo('player2', 'player2-info')"></select>
+            <div id="player2-info"><p>Select a player</p></div>
+        </div>
+    </div>
+
+    <!-- Matchup Results -->
+    <div id="results"></div>
+    <canvas id="matchupChart"></canvas>
+
+    <button onclick="calculateMatchup()">Calculate</button>
+
+</body>
+</html>
