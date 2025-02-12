@@ -238,7 +238,7 @@
         </div>
       </div>
     </div>
-    <button onclick="calculateMatchup()">Calculate</button>
+    <button onclick="calculateMatchup(); showResults();">Calculate</button>
     <div id="resultsGrid" style="display: none; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 10px;">
     <div><p>Calculator results:</p></div>
     <div><p>Estimated winrate graph:</p></div>
@@ -256,7 +256,7 @@
 </div>
   </div>
 <script>
-function calculateMatchup() {
+function showResults() {
     document.getElementById("resultsGrid").style.display = "grid";
 }
 </script>
