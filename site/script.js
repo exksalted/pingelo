@@ -19,11 +19,11 @@ async function loadPlayers() {
 function parseCsvData(csvData) {
   const rows = csvData.split("\n").slice(1); // Skip header row
   return rows.map(row => {
-    const [name, rating, rd] = row.split(",");
+    const columns = row.split(",");
     return {
-      name: name.trim(),
-      rating: parseFloat(rating.trim()),
-      rd: parseFloat(rd.trim()),
+      name: columns[0].trim(), // Player name is in column index 0
+      rating: parseFloat(columns[1].trim()), // Rating is in column index 1
+      rd: parseFloat(columns[2].trim()), // RD is in column index 2
     };
   });
 }
