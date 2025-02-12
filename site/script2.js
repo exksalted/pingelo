@@ -246,7 +246,7 @@ function parsePlayerStats(data) {
         }
     });
 }
-
+// Calculate pairwise stats including rating change average
 function calculatePairwiseStats() {
     const player1 = document.getElementById("player1").value;
     const player2 = document.getElementById("player2").value;
@@ -258,8 +258,16 @@ function calculatePairwiseStats() {
     
     const stats = playerStats[player1][player2];
     const totalGames = stats.wins + stats.losses;
-    const winPctP1 = ((stats.wins / totalGames) * 100).toFixed(2);
-    const winPctP2 = ((stats.losses / totalGames) * 100).toFixed(2);
+    const winPctP1 = stats.wins / totalGames;
+    const winPctP2 = stats.losses / totalGames;
+    
+    const player1Wins = calculateGlickoChange(players.find(p => p.name === player1), players.find(p => p.name === player2), 1);
+    const player1Loses = calculateGlickoChange(players.find(p => p.name === player1), players.find(p => p.name === player2), 0);
+    const player2Wins = calculateGlickoChange(players.find(p => p.name === player2), players.find(p => p.name === player1), 1);
+    const player2Loses = calculateGlickoChange(players.find(p => p.name === player2), players.find(p => p.name === player1), 0);
+    
+    const ratingChangeAvgP1 = (winPctP1 * player1Wins.ratingChange) + (winPctP2 * player1Loses.ratingChange);
+    const ratingChangeAvgP2 = (winPctP2 * player2Wins.ratingChange) + (winPctP1 * player2Loses.ratingChange);
     
     document.getElementById("pairwise-results").innerHTML = `
         <div class="matchup-container">
@@ -281,13 +289,18 @@ function calculatePairwiseStats() {
                     </div>
                     <div class="row">
                         <div class="cell">Win %</div>
-                        <div class="cell ${winPctP1 > winPctP2 ? 'change-pos' : 'change-neg'}">${winPctP1}%</div>
-                        <div class="cell ${winPctP2 > winPctP1 ? 'change-pos' : 'change-neg'}">${winPctP2}%</div>
+                        <div class="cell ${winPctP1 > winPctP2 ? 'change-pos' : 'change-neg'}">${(winPctP1 * 100).toFixed(2)}%</div>
+                        <div class="cell ${winPctP2 > winPctP1 ? 'change-pos' : 'change-neg'}">${(winPctP2 * 100).toFixed(2)}%</div>
                     </div>
                     <div class="row">
                         <div class="cell">Avg. Points</div>
                         <div class="cell ${stats.avgScored > stats.avgAgainst ? 'change-pos' : 'change-neg'}">${stats.avgScored.toFixed(2)}</div>
                         <div class="cell ${stats.avgAgainst > stats.avgScored ? 'change-pos' : 'change-neg'}">${stats.avgAgainst.toFixed(2)}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Rating Change Avg</div>
+                        <div class="cell ${ratingChangeAvgP1 >= 0 ? 'change-pos' : 'change-neg'}">${ratingChangeAvgP1.toFixed(2)}</div>
+                        <div class="cell ${ratingChangeAvgP2 >= 0 ? 'change-pos' : 'change-neg'}">${ratingChangeAvgP2.toFixed(2)}</div>
                     </div>
                 </div>
             </div>
@@ -296,6 +309,7 @@ function calculatePairwiseStats() {
             </div>
         </div>`;
 }
+
 
 
 document.querySelector("button").addEventListener("click", calculatePairwiseStats);
