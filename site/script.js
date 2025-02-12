@@ -205,6 +205,7 @@ function drawChart(player1WinProb, player2WinProb, player1Name, player2Name) {
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPlayerStats();
+    document.querySelector("button").addEventListener("click", calculatePairwiseStats);
 });
 
 async function loadPlayerStats() {
@@ -261,35 +262,41 @@ function calculatePairwiseStats() {
     const winPctP2 = ((stats.losses / totalGames) * 100).toFixed(2);
     
     document.getElementById("pairwise-results").innerHTML = `
-        <div class="results-container">
-            <div class="results-table">
-                <div class="row header">
-                    <div class="cell">Pairwise Stats</div>
-                    <div class="cell">${player1}</div>
-                    <div class="cell">${player2}</div>
+        <div class="matchup-container">
+            <div class="results-container">
+                <div class="results-table">
+                    <div class="row header">
+                        <div class="cell">Pairwise Stats</div>
+                        <div class="cell">${player1}</div>
+                        <div class="cell">${player2}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Total Games Played</div>
+                        <div class="cell" colspan="2">${totalGames}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Wins</div>
+                        <div class="cell ${stats.wins > stats.losses ? 'change-pos' : 'change-neg'}">${stats.wins}</div>
+                        <div class="cell ${stats.losses > stats.wins ? 'change-pos' : 'change-neg'}">${stats.losses}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Win %</div>
+                        <div class="cell ${winPctP1 > winPctP2 ? 'change-pos' : 'change-neg'}">${winPctP1}%</div>
+                        <div class="cell ${winPctP2 > winPctP1 ? 'change-pos' : 'change-neg'}">${winPctP2}%</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell">Avg. Points</div>
+                        <div class="cell ${stats.avgScored > stats.avgAgainst ? 'change-pos' : 'change-neg'}">${stats.avgScored.toFixed(2)}</div>
+                        <div class="cell ${stats.avgAgainst > stats.avgScored ? 'change-pos' : 'change-neg'}">${stats.avgAgainst.toFixed(2)}</div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="cell">Total Games Played</div>
-                    <div class="cell" colspan="2">${totalGames}</div>
-                </div>
-                <div class="row">
-                    <div class="cell">Wins</div>
-                    <div class="cell" class="${stats.wins > stats.losses ? 'change-pos' : 'change-neg'}">${stats.wins}</div>
-                    <div class="cell" class="${stats.losses > stats.wins ? 'change-pos' : 'change-neg'}">${stats.losses}</div>
-                </div>
-                <div class="row">
-                    <div class="cell">Win %</div>
-                    <div class="cell" class="${winPctP1 > winPctP2 ? 'change-pos' : 'change-neg'}">${winPctP1}%</div>
-                    <div class="cell" class="${winPctP2 > winPctP1 ? 'change-pos' : 'change-neg'}">${winPctP2}%</div>
-                </div>
-                <div class="row">
-                    <div class="cell">Avg. Points</div>
-                    <div class="cell" class="${stats.avgScored > stats.avgAgainst ? 'change-pos' : 'change-neg'}">${stats.avgScored.toFixed(2)}</div>
-                    <div class="cell" class="${stats.avgAgainst > stats.avgScored ? 'change-pos' : 'change-neg'}">${stats.avgAgainst.toFixed(2)}</div>
-                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="matchupChart"></canvas>
             </div>
         </div>`;
 }
+
 
 document.querySelector("button").addEventListener("click", calculatePairwiseStats);
 // Initialize the page
