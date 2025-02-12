@@ -252,7 +252,7 @@ function calculatePairwiseStats() {
     const player2 = document.getElementById("player2").value;
     
     if (!player1 || !player2 || !playerStats[player1] || !playerStats[player1][player2]) {
-        document.getElementById("pairwise-results").innerHTML = "<p>No data available for this matchup.</p>";
+        document.getElementById("pairwise-results").innerHTML = "<p>No data available for this matchup!<br>These players are yet to play against each other.</p>";
         return;
     }
     
