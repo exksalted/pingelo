@@ -67,19 +67,36 @@ function updatePlayerInfo() {
   const player2 = players.find(p => p.name === player2Name);
 
   document.getElementById("player1-name").textContent = player1 ? player1.name : "";
-  document.getElementById("player1-rating").textContent = player1 ? player1.rating : "";
-  document.getElementById("player1-rd").textContent = player1 ? player1.rd : "";
+  document.getElementById("player1-rating").textContent = player1 ? player1.rating.toFixed(2) : "";
+  document.getElementById("player1-rd").textContent = player1 ? player1.rd.toFixed(2) : "";
 
   document.getElementById("player2-name").textContent = player2 ? player2.name : "";
-  document.getElementById("player2-rating").textContent = player2 ? player2.rating : "";
-  document.getElementById("player2-rd").textContent = player2 ? player2.rd : "";
+  document.getElementById("player2-rating").textContent = player2 ? player2.rating.toFixed(2) : "";
+  document.getElementById("player2-rd").textContent = player2 ? player2.rd.toFixed(2) : "";
 }
 
-// Calculate winning probability using only rating difference
+// Calculate the Glicko-1 rating change for a player
+function calculateGlickoChange(player, opponent, outcome) {
+  const q = Math.log(10) / 400;
+  const gRD = 1 / Math.sqrt(1 + (3 * q * q * opponent.rd * opponent.rd) / (Math.PI * Math.PI));
+  const expectedScore = 1 / (1 + Math.pow(10, -gRD * (player.rating - opponent.rating) / 400));
+  const dSquared = 1 / (q * q * gRD * gRD * expectedScore * (1 - expectedScore));
+  const newRating = player.rating + (q / (1 / (player.rd * player.rd) + 1 / dSquared)) * gRD * (outcome - expectedScore);
+  const newRD = Math.sqrt(1 / (1 / (player.rd * player.rd) + 1 / dSquared));
+
+  return {
+    newRating: newRating,
+    newRD: newRD,
+    ratingChange: newRating - player.rating, // Calculate rating change
+    rdChange: newRD - player.rd, // Calculate RD change
+  };
+}
+
+// Calculate win probability using the Glicko-1 system
 function calculateWinProbability(player1, player2) {
-  const ratingDiff = player2.rating - player1.rating;
-  const exponent = -ratingDiff / 400;
-  return 1 / (1 + Math.pow(10, exponent));
+  const q = Math.log(10) / 400;
+  const gRD = 1 / Math.sqrt(1 + (3 * q * q * player2.rd * player2.rd) / (Math.PI * Math.PI));
+  return 1 / (1 + Math.pow(10, -gRD * (player1.rating - player2.rating) / 400));
 }
 
 // Calculate and display matchup results
@@ -95,16 +112,65 @@ function calculateMatchup() {
     return;
   }
 
+  // Calculate win probabilities
   const player1WinProb = calculateWinProbability(player1, player2);
   const player2WinProb = 1 - player1WinProb;
 
+  // Calculate rating changes for both scenarios
+  const player1Wins = calculateGlickoChange(player1, player2, 1);
+  const player1Loses = calculateGlickoChange(player1, player2, 0);
+  const player2Wins = calculateGlickoChange(player2, player1, 1);
+  const player2Loses = calculateGlickoChange(player2, player1, 0);
+
   // Display results
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = `
-    <h2>Results</h2>
-    <p><strong>${player1.name} Win Probability:</strong> ${(player1WinProb * 100).toFixed(2)}%</p>
-    <p><strong>${player2.name} Win Probability:</strong> ${(player2WinProb * 100).toFixed(2)}%</p>
-  `;
+const resultsDiv = document.getElementById("results");
+
+// Determine which win % is larger
+const player1WinClass = player1WinProb > player2WinProb ? "change-pos" : "change-neg";
+const player2WinClass = player2WinProb > player1WinProb ? "change-pos" : "change-neg";
+
+resultsDiv.innerHTML = `
+  <div class="results-container">
+    <div class="results-table">
+      <div class="row header">
+        <div class="cell">Name:</div>
+        <div class="cell">${player1.name}</div>
+        <div class="cell">${player2.name}</div>
+      </div>
+      <div class="row">
+        <div class="cell">Win %</div>
+        <div class="cell ${player1WinClass}">${(player1WinProb * 100).toFixed(2)}%</div>
+        <div class="cell ${player2WinClass}">${(player2WinProb * 100).toFixed(2)}%</div>
+      </div>
+      <div class="row">
+        <div class="cell">RD Change:</div>
+        <div class="cell">${player1Wins.rdChange.toFixed(2)}</div>
+        <div class="cell">${player2Loses.rdChange.toFixed(2)}</div>
+      </div>
+      <div class="row">
+        <div class="cell">Rating Change (P1 Wins):</div>
+        <div class="cell ${player1Wins.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player1Wins.ratingChange.toFixed(1)}
+        </div>
+        <div class="cell ${player2Loses.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player2Loses.ratingChange.toFixed(1)}
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">Rating Change (P2 Wins):</div>
+        <div class="cell ${player1Loses.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player1Loses.ratingChange.toFixed(1)}
+        </div>
+        <div class="cell ${player2Wins.ratingChange >= 0 ? "change-pos" : "change-neg"}">
+          ${player2Wins.ratingChange.toFixed(1)}
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+
+
 
   // Draw pie chart
   drawChart(player1WinProb, player2WinProb, player1.name, player2.name);
