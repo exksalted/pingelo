@@ -212,10 +212,24 @@
     <button onclick="calculateMatchup()">Calculate</button>
 
 <div class="flex-container">
-  <div id="results"</div>
-  <div <canvas id="matchupChart"></canvas>
+  <!-- Results Section -->
+  <div id="results" class="results-container">
+    <div class="results-table">
+      <!-- Content will be dynamically updated by JavaScript -->
+    </div>
   </div>
-  <div id="pairwise-results"</div>
+
+  <!-- Chart Section -->
+  <div class="chart-container">
+    <canvas id="matchupChart"></canvas>
+  </div>
+
+  <!-- Pairwise Results Section -->
+  <div id="pairwise-results" class="pairwise-results-container">
+    <div class="results-table">
+      <!-- Content will be dynamically updated by JavaScript -->
+    </div>
+  </div>
 </div>
 
   <script src="script.js"></script>
