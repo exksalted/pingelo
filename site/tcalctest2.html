@@ -4,174 +4,158 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tournament Simulator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
-    }
-    .player-list-container {
-  display: flex;
-  gap: 20px; /* Space between Player List and Selected Players */
-}
-.player-select-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Space between sections */
-}
-
-.player-select, .selected-players {
-  flex: 1; /* Make both sections equal in width */
-}
-.player-select-buttons {
-  display: flex;
-  gap: 20px; /* Space between buttons */
-}
-
-.player-select-buttons button {
-  flex: 1; /* Each button takes up half the space */
-  padding: 15px; /* Bigger padding */
-  font-size: 16px; /* Larger text */
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.player-select-buttons button:hover {
-  background-color: #0056b3;
-}
-
-
-.selected-players {
-  max-height: 300px; /* Limit height to prevent it from being too bulky */
-  overflow-y: auto; /* Add scroll if content overflows */
-}
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #1e1e2f;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2a2a40;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #f0f0f0;
+    font-size: 2.5em;
+    animation: fadeIn 1s ease-in;
+  }
+  .player-select {
+    margin-bottom: 20px;
+  }
+  .player-select label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #f0f0f0;
+  }
+  .player-select select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #3e3e55;
+    color: #f0f0f0;
+  }
+  .player-select button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .player-select button:hover {
+    background-color: #0056b3;
+  }
+  .selected-players {
+    margin-top: 20px;
+  }
+  .selected-players h2 {
+    margin-bottom: 10px;
+    color: #f0f0f0;
+  }
+  .player-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #444;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #3e3e55;
+    color: #f0f0f0;
+  }
+  .player-card button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .player-card button:hover {
+    background-color: #c82333;
+  }
+  .results {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  .results table {
+    width: 50%;
+    border-collapse: collapse;
+    background-color: #3e3e55;
+    border: 1px solid #444;
+    border-radius: 4px;
+  }
+  .results th, .results td {
+    border: 1px solid #444;
+    padding: 15px;
+    text-align: left;
+    color: #f0f0f0;
+  }
+  .results th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .results tr:hover {
+    background-color: #3e3e55;
+  }
+  #pieChart {
+    width: 50%;
+    max-width: 400px;
+    background-color: #3e3e55;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  .reset-button {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .reset-button button {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .reset-button button:hover {
+    background-color: #5a6268;
+  }
+  a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: #66bfff;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  /* Responsive Styles */
+  @media (max-width: 768px) {
     h1 {
-      text-align: center;
-      color: #333;
+      font-size: 2em;
     }
-   .player-select {
-  flex: 1; /* Take up full width */
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Space between elements */
-}
-
-.player-select input[type="text"] {
-  width: 100%; /* Full width */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.player-list, .selected-players {
-  flex: 1; /* Both sections take equal width */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  background-color: #fff;
-  max-height: 300px; /* Limit height */
-  overflow-y: auto; /* Add scroll if content overflows */
-}
-
-    .player-item {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      border-bottom: 1px solid #eee;
-    }
-    .player-item:last-child {
-      border-bottom: none;
-    }
-    .player-item input {
-      margin-right: 10px;
-    }
-    .selected-players h2 {
-      margin-bottom: 10px;
-      color: #333;
-    }
-    .player-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #ccc;
+    td, th {
       padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      background-color: #f4f4f4;
     }
-    .player-card button {
-      background-color: #dc3545;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .player-card button:hover {
-      background-color: #c82333;
-    }
-    .results th, .results td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: left;
-    }
-    .results th {
-      background-color: #007bff;
-      color: #fff;
-    }
-    .results td {
-      background-color: #f9f9f9;
-    }
-    .results {
-  display: flex;
-  gap: 20px; /* Space between table and chart */
-  margin-top: 20px;
-}
-
-.results table {
-  flex: 1; /* Table takes up half the space */
-  max-width: 50%; /* Limit table width */
-  border-collapse: collapse;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-    .search-bar {
-  width: 100%; /* Full width */
-}
-
-#pieChart {
-  flex: 1; /* Chart takes up half the space */
-  max-width: 50%; /* Limit chart width */
-  height: 400px; /* Set a fixed height for the chart */
-}
-    .reset-button {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .reset-button button {
-      padding: 10px 20px;
-      background-color: #6c757d;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .reset-button button:hover {
-      background-color: #5a6268;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div class="container">
