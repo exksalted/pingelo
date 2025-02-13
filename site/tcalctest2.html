@@ -68,9 +68,9 @@
 .results-area th {
   background-color: #f4f4f4;
 }
-.results-area canvas {
-  width: 65% !important; /* 2/3 of the space */
-  height: 300px !important; /* Fixed height to prevent stretching */
+.results-area .chart-container {
+  width: 65%; /* 2/3 of the space */
+  aspect-ratio: 1.5; /* Maintain aspect ratio (width:height = 1.5:1) */
 }
   </style>
 </head>
@@ -99,20 +99,21 @@
       <button class="reset-button" id="resetBtn">Reset</button>
     </div>
 
-    <div class="results-area">
-      <table id="probabilityTable">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Probability</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-      <canvas id="pieChart"></canvas>
-    </div>
+<div class="results-area">
+  <table id="probabilityTable">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Probability</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <div class="chart-container">
+    <canvas id="pieChart"></canvas>
   </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -237,41 +238,42 @@
       }
 
       // Draw the pie chart using Chart.js
-      function drawPieChart(probabilities) {
-        const ctx = document.getElementById("pieChart").getContext("2d");
-        if (chartInstance) {
-          chartInstance.destroy();
-        }
-        chartInstance = new Chart(ctx, {
-          type: "pie",
-          data: {
-            labels: selectedPlayers.map(player => player.name),
-            datasets: [{
-              data: probabilities,
-              backgroundColor: [
-                "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
-              ],
-            }],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
-              },
-              tooltip: {
-                callbacks: {
-                  label: (context) => {
-                    const label = context.label || "";
-                    const value = context.raw || 0;
-                    return `${label}: ${value.toFixed(2)}%`;
-                  },
-                },
-              },
+     function drawPieChart(probabilities) {
+  const ctx = document.getElementById("pieChart").getContext("2d");
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+  chartInstance = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: selectedPlayers.map(player => player.name),
+      datasets: [{
+        data: probabilities,
+        backgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
+        ],
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false, // Disable default aspect ratio
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              const label = context.label || "";
+              const value = context.raw || 0;
+              return `${label}: ${value.toFixed(2)}%`;
             },
           },
-        });
-      }
+        },
+      },
+    },
+  });
+}
 
       // Event listeners
       document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
