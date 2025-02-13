@@ -10,148 +10,89 @@
       margin: 20px;
       background-color: #1e1e2f;
       color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     .container {
+      width: 80%;
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
       background-color: #2a2a40;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
+
     h1 {
       text-align: center;
       font-size: 2.5em;
-      animation: fadeIn 1s ease-in;
-    }
-    
-    /* Search Bar */
-    .search-bar {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #444;
-      border-radius: 4px;
-      background-color: #3e3e55;
-      color: #f0f0f0;
-      font-size: 1em;
-    }
-    
-    /* Player Selection Section */
-    .selection-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .player-list, .selected-players {
-      flex: 1;
-      border: 1px solid #444;
-      padding: 10px;
-      border-radius: 4px;
-      background-color: #3e3e55;
-      min-height: 200px;
-    }
-    .player-list h2, .selected-players h2 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    
-    /* Buttons */
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-    .button-container button {
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .add-btn {
-      background-color: #007bff;
-      color: #fff;
-    }
-    .add-btn:hover {
-      background-color: #0056b3;
-    }
-    .calculate-btn {
-      background-color: #28a745;
-      color: #fff;
-    }
-    .calculate-btn:hover {
-      background-color: #218838;
-    }
-    
-    /* Results */
-    .results {
-      margin-top: 20px;
-      display: flex;
-      gap: 20px;
-    }
-    .results table {
-      width: 50%;
-      border-collapse: collapse;
-      background-color: #3e3e55;
-      border: 1px solid #444;
-      border-radius: 4px;
-    }
-    .results th, .results td {
-      border: 1px solid #444;
-      padding: 15px;
-      text-align: left;
-      color: #f0f0f0;
-    }
-    .results th {
-      background-color: #007bff;
-      color: #fff;
-    }
-    .results tr:hover {
-      background-color: #3e3e55;
-    }
-    #pieChart {
-      width: 50%;
-      max-width: 400px;
-      background-color: #3e3e55;
-      border: 1px solid #444;
-      border-radius: 4px;
-      padding: 10px;
-    }
-    
-    /* Reset Button */
-    .reset-button {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .reset-button button {
-      padding: 10px 20px;
-      background-color: #6c757d;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .reset-button button:hover {
-      background-color: #5a6268;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .selection-area {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .column {
+      flex: 1;
+      background-color: #3e3e55;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      min-height: 300px;
+    }
+
+    .player-list select, .selected-players div {
+      width: 100%;
+      height: 250px;
+      background-color: #3e3e55;
+      border: 1px solid #444;
+      color: #f0f0f0;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-y: auto;
+    }
+
+    .button-area {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .button-area button {
+      flex: 1;
+      padding: 15px;
+      font-size: 1.2em;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-button {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .add-button:hover {
+      background-color: #0056b3;
+    }
+
+    .simulate-button {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .simulate-button:hover {
+      background-color: #218838;
     }
 
     @media (max-width: 768px) {
-      .selection-container {
+      .selection-area {
         flex-direction: column;
       }
-      .results {
+      .button-area {
         flex-direction: column;
-      }
-      h1 {
-        font-size: 2em;
       }
     }
   </style>
@@ -159,200 +100,22 @@
 <body>
   <div class="container">
     <h1>Tournament Simulator</h1>
-
-    <!-- Search Bar -->
-    <input type="text" id="playerSearch" placeholder="Search players..." style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #444; background-color: #3e3e55; color: #f0f0f0;">
-    <!-- Player Selection -->
-    <div class="selection-container">
-      <div class="player-list">
+    
+    <div class="selection-area">
+      <div class="column player-list">
         <h2>Player List</h2>
-        <select id="playerDropdown" multiple style="width: 100%;"></select>
+        <select id="playerDropdown" multiple></select>
       </div>
-      <div class="selected-players">
+      <div class="column selected-players">
         <h2>Selected Players</h2>
         <div id="selectedPlayersList"></div>
       </div>
     </div>
-
-    <!-- Buttons -->
-    <div class="button-container">
-      <button class="add-btn" id="addPlayerBtn">Add Selected Players</button>
-      <button class="calculate-btn" id="calculateChancesBtn">Calculate Winning Chances</button>
-    </div>
-
-    <!-- Results -->
-    <div class="results">
-      <table id="probabilityTable">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Winning Chance (%)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Results will be dynamically added -->
-        </tbody>
-      </table>
-      <canvas id="pieChart"></canvas>
-    </div>
-
-    <!-- Reset -->
-    <div class="reset-button">
-      <button id="resetBtn">Reset</button>
+    
+    <div class="button-area">
+      <button class="add-button" id="addPlayerBtn">Add Selected Players</button>
+      <button class="simulate-button" id="calculateChancesBtn">Simulate Tournament</button>
     </div>
   </div>
 </body>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
-
-  let players = [];
-  let filteredPlayers = [];
-  let selectedPlayers = [];
-  let chartInstance = null;
-
-  async function loadPlayers() {
-    try {
-      const response = await fetch(csvUrl);
-      const csvData = await response.text();
-      players = parseCsvData(csvData);
-      filteredPlayers = [...players]; // Start with all players visible
-      populateDropdown();
-    } catch (error) {
-      console.error("Error loading player data:", error);
-    }
-  }
-
-  function parseCsvData(csvData) {
-    const rows = csvData.split("\n").slice(1);
-    return rows.map(row => {
-      const columns = row.split(",");
-      return {
-        name: columns[0].trim(),
-        rating: parseFloat(columns[1].trim()),
-        rd: parseFloat(columns[2].trim()),
-      };
-    });
-  }
-
-  function populateDropdown() {
-    const dropdown = document.getElementById("playerDropdown");
-    dropdown.innerHTML = "";
-    filteredPlayers.forEach(player => {
-      const option = document.createElement("option");
-      option.value = player.name;
-      option.textContent = player.name;
-      dropdown.appendChild(option);
-    });
-  }
-
-  document.getElementById("playerSearch").addEventListener("input", (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    filteredPlayers = players.filter(player => player.name.toLowerCase().includes(searchTerm));
-    populateDropdown();
-  });
-
-  function addSelectedPlayers() {
-    const dropdown = document.getElementById("playerDropdown");
-    const selectedOptions = Array.from(dropdown.selectedOptions);
-    selectedOptions.forEach(option => {
-      const player = players.find(p => p.name === option.value);
-      if (player && !selectedPlayers.some(p => p.name === player.name)) {
-        selectedPlayers.push(player);
-      }
-    });
-    renderSelectedPlayers();
-  }
-
-  function renderSelectedPlayers() {
-    const selectedPlayersList = document.getElementById("selectedPlayersList");
-    selectedPlayersList.innerHTML = "";
-    selectedPlayers.forEach((player, index) => {
-      const playerCard = document.createElement("div");
-      playerCard.className = "player-card";
-      playerCard.innerHTML = `
-        <div>
-          <strong>${player.name}</strong><br>
-          Rating: ${player.rating}<br>
-          RD: ${player.rd}
-        </div>
-        <button onclick="removePlayer(${index})">Remove</button>
-      `;
-      selectedPlayersList.appendChild(playerCard);
-    });
-  }
-
-  window.removePlayer = function(index) {
-    selectedPlayers.splice(index, 1);
-    renderSelectedPlayers();
-  };
-
-  function resetSimulation() {
-    selectedPlayers = [];
-    renderSelectedPlayers();
-    document.querySelector("#probabilityTable tbody").innerHTML = "";
-    if (chartInstance) {
-      chartInstance.destroy();
-      chartInstance = null;
-    }
-  }
-
-  function calculateWinningProbabilities() {
-    const Q = selectedPlayers.map(player => Math.pow(10, player.rating / 400));
-    const sumQ = Q.reduce((acc, q) => acc + q, 0);
-    const probabilities = Q.map(q => (q / sumQ) * 100);
-
-    const tableBody = document.querySelector("#probabilityTable tbody");
-    tableBody.innerHTML = "";
-    selectedPlayers.forEach((player, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${player.name}</td>
-        <td>${probabilities[index].toFixed(2)}%</td>
-      `;
-      tableBody.appendChild(row);
-    });
-
-    drawPieChart(probabilities);
-  }
-
-  function drawPieChart(probabilities) {
-    const ctx = document.getElementById("pieChart").getContext("2d");
-    if (chartInstance) {
-      chartInstance.destroy();
-    }
-    chartInstance = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: selectedPlayers.map(player => player.name),
-        datasets: [{
-          data: probabilities,
-          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"],
-        }],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "top" },
-          tooltip: {
-            callbacks: {
-              label: (context) => {
-                const label = context.label || "";
-                const value = context.raw || 0;
-                return `${label}: ${value.toFixed(2)}%`;
-              },
-            },
-          },
-        },
-      },
-    });
-  }
-
-  document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
-  document.getElementById("resetBtn").addEventListener("click", resetSimulation);
-  document.getElementById("calculateChancesBtn").addEventListener("click", calculateWinningProbabilities);
-
-  loadPlayers();
-});
-  </script>
 </html>
