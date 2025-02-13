@@ -4,186 +4,186 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tournament Simulator</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #1e1e2f;
-    color: #f0f0f0;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #2a2a40;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  h1 {
-    text-align: center;
-    color: #f0f0f0;
-    font-size: 2.5em;
-    animation: fadeIn 1s ease-in;
-  }
-  .player-select {
-    margin-bottom: 20px;
-  }
-  .player-select label {
-    font-weight: bold;
-    margin-right: 10px;
-    color: #f0f0f0;
-  }
-  .player-select select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: #3e3e55;
-    color: #f0f0f0;
-  }
-  .player-select button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .player-select button:hover {
-    background-color: #0056b3;
-  }
-  .selected-players {
-    margin-top: 20px;
-  }
-  .selected-players h2 {
-    margin-bottom: 10px;
-    color: #f0f0f0;
-  }
-  .player-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #444;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    background-color: #3e3e55;
-    color: #f0f0f0;
-  }
-  .player-card button {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .player-card button:hover {
-    background-color: #c82333;
-  }
-  .results {
-    margin-top: 20px;
-    display: flex;
-    gap: 20px;
-  }
-  .results table {
-    width: 50%;
-    border-collapse: collapse;
-    background-color: #3e3e55;
-    border: 1px solid #444;
-    border-radius: 4px;
-  }
-  .results th, .results td {
-    border: 1px solid #444;
-    padding: 15px;
-    text-align: left;
-    color: #f0f0f0;
-  }
-  .results th {
-    background-color: #007bff;
-    color: #fff;
-  }
-  .results tr:hover {
-    background-color: #3e3e55;
-  }
-  #pieChart {
-    width: 50%;
-    max-width: 400px;
-    background-color: #3e3e55;
-    border: 1px solid #444;
-    border-radius: 4px;
-    padding: 10px;
-  }
-  .reset-button {
-    margin-top: 20px;
-    text-align: center;
-  }
-  .reset-button button {
-    padding: 10px 20px;
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .reset-button button:hover {
-    background-color: #5a6268;
-  }
-  a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  a:hover {
-    text-decoration: underline;
-    color: #66bfff;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2em;
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #1e1e2f;
+      color: #f0f0f0;
     }
-    td, th {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #2a2a40;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      animation: fadeIn 1s ease-in;
+    }
+    
+    /* Search Bar */
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #3e3e55;
+      color: #f0f0f0;
+      font-size: 1em;
+    }
+    
+    /* Player Selection Section */
+    .selection-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .player-list, .selected-players {
+      flex: 1;
+      border: 1px solid #444;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: #3e3e55;
+      min-height: 200px;
+    }
+    .player-list h2, .selected-players h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    
+    /* Buttons */
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .button-container button {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .add-btn {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .add-btn:hover {
+      background-color: #0056b3;
+    }
+    .calculate-btn {
+      background-color: #28a745;
+      color: #fff;
+    }
+    .calculate-btn:hover {
+      background-color: #218838;
+    }
+    
+    /* Results */
+    .results {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .results table {
+      width: 50%;
+      border-collapse: collapse;
+      background-color: #3e3e55;
+      border: 1px solid #444;
+      border-radius: 4px;
+    }
+    .results th, .results td {
+      border: 1px solid #444;
+      padding: 15px;
+      text-align: left;
+      color: #f0f0f0;
+    }
+    .results th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .results tr:hover {
+      background-color: #3e3e55;
+    }
+    #pieChart {
+      width: 50%;
+      max-width: 400px;
+      background-color: #3e3e55;
+      border: 1px solid #444;
+      border-radius: 4px;
       padding: 10px;
     }
-  }
-</style>
+    
+    /* Reset Button */
+    .reset-button {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .reset-button button {
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .reset-button button:hover {
+      background-color: #5a6268;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .selection-container {
+        flex-direction: column;
+      }
+      .results {
+        flex-direction: column;
+      }
+      h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Tournament Simulator</h1>
-   <div class="player-select-container">
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" id="searchPlayer" placeholder="Search players..." />
-  </div>
 
-  <!-- Player List and Selected Players -->
-  <div class="player-list-container">
-    <div class="player-list" id="playerList">
-      <!-- Player checkboxes will be populated here -->
-    </div>
-    <div class="selected-players">
-      <h2>Selected Players</h2>
-      <div id="selectedPlayersList"></div>
-    </div>
-  </div>
+    <!-- Search Bar -->
+    <input type="text" id="playerSearch" class="search-bar" placeholder="Search for players...">
 
-  <!-- Buttons -->
-  <div class="player-select-buttons">
-    <button id="addPlayerBtn">Add Selected Players</button>
-    <button id="calculateChancesBtn">Calculate Winning Chances</button>
-  </div>
-</div>
-  
+    <!-- Player Selection -->
+    <div class="selection-container">
+      <div class="player-list">
+        <h2>Player List</h2>
+        <select id="playerDropdown" multiple style="width: 100%; height: 150px;">
+          <!-- Players will be dynamically added -->
+        </select>
+      </div>
+      <div class="selected-players">
+        <h2>Selected Players</h2>
+        <div id="selectedPlayersList"></div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-container">
+      <button class="add-btn" id="addPlayerBtn">Add Selected Players</button>
+      <button class="calculate-btn" id="calculateChancesBtn">Calculate Winning Chances</button>
+    </div>
+
+    <!-- Results -->
     <div class="results">
       <table id="probabilityTable">
         <thead>
@@ -193,178 +193,16 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Results will be populated here -->
+          <!-- Results will be dynamically added -->
         </tbody>
       </table>
       <canvas id="pieChart"></canvas>
     </div>
+
+    <!-- Reset -->
     <div class="reset-button">
       <button id="resetBtn">Reset</button>
     </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
-
-  let players = [];
-  let selectedPlayers = [];
-  let chartInstance = null;
-
-  // Load player data from Google Sheets
-  async function loadPlayers() {
-    try {
-      const response = await fetch(csvUrl);
-      const csvData = await response.text();
-      players = parseCsvData(csvData);
-      populateDropdown();
-    } catch (error) {
-      console.error("Error loading player data:", error);
-    }
-  }
-
-  // Parse CSV data into an array of player objects
-  function parseCsvData(csvData) {
-    const rows = csvData.split("\n").slice(1); // Skip header row
-    return rows.map(row => {
-      const columns = row.split(",");
-      return {
-        name: columns[0].trim(),
-        rating: parseFloat(columns[1].trim()),
-        rd: parseFloat(columns[2].trim()),
-      };
-    });
-  }
-
-  // Populate the dropdown with player names
-  function populateDropdown() {
-    const dropdown = document.getElementById("playerDropdown");
-    dropdown.innerHTML = ""; // Clear existing options
-    players.forEach(player => {
-      const option = document.createElement("option");
-      option.value = player.name;
-      option.textContent = player.name;
-      dropdown.appendChild(option);
-    });
-  }
-
-  // Add selected players to the list
-  function addSelectedPlayers() {
-    const dropdown = document.getElementById("playerDropdown");
-    const selectedOptions = Array.from(dropdown.selectedOptions);
-    selectedOptions.forEach(option => {
-      const player = players.find(p => p.name === option.value);
-      if (player && !selectedPlayers.some(p => p.name === player.name)) {
-        selectedPlayers.push(player);
-      }
-    });
-    renderSelectedPlayers();
-  }
-
-  // Render the list of selected players
-  function renderSelectedPlayers() {
-    const selectedPlayersList = document.getElementById("selectedPlayersList");
-    selectedPlayersList.innerHTML = ""; // Clear existing list
-    selectedPlayers.forEach((player, index) => {
-      const playerCard = document.createElement("div");
-      playerCard.className = "player-card";
-      playerCard.innerHTML = `
-        <div>
-          <strong>${player.name}</strong><br>
-          Rating: ${player.rating}<br>
-          RD: ${player.rd}
-        </div>
-        <button onclick="removePlayer(${index})">Remove</button>
-      `;
-      selectedPlayersList.appendChild(playerCard);
-    });
-  }
-
-  // Remove a player from the selected list
-  window.removePlayer = function(index) {
-    selectedPlayers.splice(index, 1);
-    renderSelectedPlayers();
-  }
-
-  // Reset the entire simulation
-  function resetSimulation() {
-    selectedPlayers = [];
-    renderSelectedPlayers();
-    document.querySelector("#probabilityTable tbody").innerHTML = "";
-    if (chartInstance) {
-      chartInstance.destroy();
-      chartInstance = null;
-    }
-  }
-
-  // Calculate winning probabilities
-  function calculateWinningProbabilities() {
-    const Q = selectedPlayers.map(player => Math.pow(10, player.rating / 400));
-    const sumQ = Q.reduce((acc, q) => acc + q, 0);
-    const probabilities = Q.map(q => (q / sumQ) * 100);
-
-    // Display probabilities in the table
-    const tableBody = document.querySelector("#probabilityTable tbody");
-    tableBody.innerHTML = ""; // Clear existing rows
-    selectedPlayers.forEach((player, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${player.name}</td>
-        <td>${probabilities[index].toFixed(2)}%</td>
-      `;
-      tableBody.appendChild(row);
-    });
-
-    // Draw the pie chart
-    drawPieChart(probabilities);
-  }
-
-  // Draw the pie chart using Chart.js
-  function drawPieChart(probabilities) {
-    const ctx = document.getElementById("pieChart").getContext("2d");
-    if (chartInstance) {
-      chartInstance.destroy();
-    }
-    chartInstance = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: selectedPlayers.map(player => player.name),
-        datasets: [{
-          data: probabilities,
-          backgroundColor: [
-            "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
-          ],
-        }],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          tooltip: {
-            callbacks: {
-              label: (context) => {
-                const label = context.label || "";
-                const value = context.raw || 0;
-                return `${label}: ${value.toFixed(2)}%`;
-              },
-            },
-          },
-        },
-      },
-    });
-  }
-
-  // Event listeners
-  document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
-  document.getElementById("resetBtn").addEventListener("click", resetSimulation);
-  document.getElementById("calculateChancesBtn").addEventListener("click", calculateWinningProbabilities);
-
-  // Load players when the page loads
-  loadPlayers();
-});
-  </script>
 </body>
 </html>
