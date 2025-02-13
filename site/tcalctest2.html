@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tournament Simulator</title>
-  <style>
+    <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
@@ -116,265 +116,192 @@
       <button class="add-button" id="addPlayerBtn">Add Selected Players</button>
       <button class="simulate-button" id="calculateChancesBtn">Simulate Tournament</button>
     </div>
+        <div class="button-area">
+      <button class="reset-button" id="resetBtn">Reset</button>
+    </div>
+
+    <div>
+      <h2>Winning Probabilities</h2>
+      <table id="probabilityTable">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Probability</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h2>Probability Chart</h2>
+      <canvas id="pieChart"></canvas>
+    </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
+    document.addEventListener("DOMContentLoaded", () => {
+      const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
 
-  let players = [];
-  let selectedPlayers = [];
-  let chartInstance = null;
+      let players = [];
+      let selectedPlayers = [];
+      let chartInstance = null;
 
-  // Load player data from Google Sheets
-  async function loadPlayers() {
-    try {
-      const response = await fetch(csvUrl);
-      const csvData = await response.text();
-      players = parseCsvData(csvData);
-      populateDropdown();
-    } catch (error) {
-      console.error("Error loading player data:", error);
-    }
-  }
-
-  // Parse CSV data into an array of player objects
-  function parseCsvData(csvData) {
-    const rows = csvData.split("\n").slice(1); // Skip header row
-    return rows.map(row => {
-      const columns = row.split(",");
-      return {
-        name: columns[0].trim(),
-        rating: parseFloat(columns[1].trim()),
-        rd: parseFloat(columns[2].trim()),
-      };
-    });
-  }
-
-  // Populate the dropdown with player names
-  function populateDropdown() {
-    const dropdown = document.getElementById("playerDropdown");
-    dropdown.innerHTML = ""; // Clear existing options
-    players.forEach(player => {
-      const option = document.createElement("option");
-      option.value = player.name;
-      option.textContent = player.name;
-      dropdown.appendChild(option);
-    });
-  }
-
-  // Add selected players to the list
-  function addSelectedPlayers() {
-    const dropdown = document.getElementById("playerDropdown");
-    const selectedOptions = Array.from(dropdown.selectedOptions);
-    selectedOptions.forEach(option => {
-      const player = players.find(p => p.name === option.value);
-      if (player && !selectedPlayers.some(p => p.name === player.name)) {
-        selectedPlayers.push(player);
+      // Load player data from Google Sheets
+      async function loadPlayers() {
+        try {
+          const response = await fetch(csvUrl);
+          const csvData = await response.text();
+          players = parseCsvData(csvData);
+          populateDropdown();
+        } catch (error) {
+          console.error("Error loading player data:", error);
+        }
       }
-    });
-    renderSelectedPlayers();
-  }
 
-  // Render the list of selected players
-  function renderSelectedPlayers() {
-    const selectedPlayersList = document.getElementById("selectedPlayersList");
-    selectedPlayersList.innerHTML = ""; // Clear existing list
-    selectedPlayers.forEach((player, index) => {
-      const playerCard = document.createElement("div");
-      playerCard.className = "player-card";
-      playerCard.innerHTML = `
-        <div>
-          <strong>${player.name}</strong><br>
-          Rating: ${player.rating}<br>
-          RD: ${player.rd}
-        </div>
-        <button onclick="removePlayer(${index})">Remove</button>
-      `;
-      selectedPlayersList.appendChild(playerCard);
-    });
-  }
-
-  // Remove a player from the selected list
-  window.removePlayer = function(index) {
-    selectedPlayers.splice(index, 1);
-    renderSelectedPlayers();
-  }
-
-  // Reset the entire simulation
-  function resetSimulation() {
-    selectedPlayers = [];
-    renderSelectedPlayers();
-    document.querySelector("#probabilityTable tbody").innerHTML = "";
-    if (chartInstance) {
-      chartInstance.destroy();
-      chartInstance = null;
-    }
-  }
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJtlTjWV6j8VcWAR67efp2DDbYSWUEuYo1UYIeNCUW8ioBpKqNYZuEXJEOzYktsxQoy4KF74S3Hl-t/pub?gid=1546031711&single=true&output=csv";
-
-  let players = [];
-  let selectedPlayers = [];
-  let chartInstance = null;
-
-  // Load player data from Google Sheets
-  async function loadPlayers() {
-    try {
-      const response = await fetch(csvUrl);
-      const csvData = await response.text();
-      players = parseCsvData(csvData);
-      populateDropdown();
-    } catch (error) {
-      console.error("Error loading player data:", error);
-    }
-  }
-
-  // Parse CSV data into an array of player objects
-  function parseCsvData(csvData) {
-    const rows = csvData.split("\n").slice(1); // Skip header row
-    return rows.map(row => {
-      const columns = row.split(",");
-      return {
-        name: columns[0].trim(),
-        rating: parseFloat(columns[1].trim()),
-        rd: parseFloat(columns[2].trim()),
-      };
-    });
-  }
-
-  // Populate the dropdown with player names
-  function populateDropdown() {
-    const dropdown = document.getElementById("playerDropdown");
-    dropdown.innerHTML = ""; // Clear existing options
-    players.forEach(player => {
-      const option = document.createElement("option");
-      option.value = player.name;
-      option.textContent = player.name;
-      dropdown.appendChild(option);
-    });
-  }
-
-  // Add selected players to the list
-  function addSelectedPlayers() {
-    const dropdown = document.getElementById("playerDropdown");
-    const selectedOptions = Array.from(dropdown.selectedOptions);
-    selectedOptions.forEach(option => {
-      const player = players.find(p => p.name === option.value);
-      if (player && !selectedPlayers.some(p => p.name === player.name)) {
-        selectedPlayers.push(player);
+      // Parse CSV data into an array of player objects
+      function parseCsvData(csvData) {
+        const rows = csvData.split("\n").slice(1); // Skip header row
+        return rows.map(row => {
+          const columns = row.split(",");
+          return {
+            name: columns[0].trim(),
+            rating: parseFloat(columns[1].trim()),
+            rd: parseFloat(columns[2].trim()),
+          };
+        });
       }
-    });
-    renderSelectedPlayers();
-  }
 
-  // Render the list of selected players
-  function renderSelectedPlayers() {
-    const selectedPlayersList = document.getElementById("selectedPlayersList");
-    selectedPlayersList.innerHTML = ""; // Clear existing list
-    selectedPlayers.forEach((player, index) => {
-      const playerCard = document.createElement("div");
-      playerCard.className = "player-card";
-      playerCard.innerHTML = `
-        <div>
-          <strong>${player.name}</strong><br>
-          Rating: ${player.rating}<br>
-          RD: ${player.rd}
-        </div>
-        <button onclick="removePlayer(${index})">Remove</button>
-      `;
-      selectedPlayersList.appendChild(playerCard);
-    });
-  }
+      // Populate the dropdown with player names
+      function populateDropdown() {
+        const dropdown = document.getElementById("playerDropdown");
+        dropdown.innerHTML = ""; // Clear existing options
+        players.forEach(player => {
+          const option = document.createElement("option");
+          option.value = player.name;
+          option.textContent = player.name;
+          dropdown.appendChild(option);
+        });
+      }
 
-  // Remove a player from the selected list
-  window.removePlayer = function(index) {
-    selectedPlayers.splice(index, 1);
-    renderSelectedPlayers();
-  }
+      // Add selected players to the list
+      function addSelectedPlayers() {
+        const dropdown = document.getElementById("playerDropdown");
+        const selectedOptions = Array.from(dropdown.selectedOptions);
+        selectedOptions.forEach(option => {
+          const player = players.find(p => p.name === option.value);
+          if (player && !selectedPlayers.some(p => p.name === player.name)) {
+            selectedPlayers.push(player);
+          }
+        });
+        renderSelectedPlayers();
+      }
 
-  // Reset the entire simulation
-  function resetSimulation() {
-    selectedPlayers = [];
-    renderSelectedPlayers();
-    document.querySelector("#probabilityTable tbody").innerHTML = "";
-    if (chartInstance) {
-      chartInstance.destroy();
-      chartInstance = null;
-    }
-  }
+      // Render the list of selected players
+      function renderSelectedPlayers() {
+        const selectedPlayersList = document.getElementById("selectedPlayersList");
+        selectedPlayersList.innerHTML = ""; // Clear existing list
+        selectedPlayers.forEach((player, index) => {
+          const playerCard = document.createElement("div");
+          playerCard.className = "player-card";
+          playerCard.innerHTML = `
+            <div>
+              <strong>${player.name}</strong><br>
+              Rating: ${player.rating}<br>
+              RD: ${player.rd}
+            </div>
+            <button onclick="removePlayer(${index})">Remove</button>
+          `;
+          selectedPlayersList.appendChild(playerCard);
+        });
+      }
 
-  // Calculate winning probabilities
+      // Remove a player from the selected list
+      window.removePlayer = function(index) {
+        selectedPlayers.splice(index, 1);
+        renderSelectedPlayers();
+      }
 
-  // Calculate winning probabilities
-  function calculateWinningProbabilities() {
-    const Q = selectedPlayers.map(player => Math.pow(10, player.rating / 400));
-    const sumQ = Q.reduce((acc, q) => acc + q, 0);
-    const probabilities = Q.map(q => (q / sumQ) * 100);
+      // Reset the entire simulation
+      function resetSimulation() {
+        selectedPlayers = [];
+        renderSelectedPlayers();
+        document.querySelector("#probabilityTable tbody").innerHTML = "";
+        if (chartInstance) {
+          chartInstance.destroy();
+          chartInstance = null;
+        }
+      }
 
-    // Display probabilities in the table
-    const tableBody = document.querySelector("#probabilityTable tbody");
-    tableBody.innerHTML = ""; // Clear existing rows
-    selectedPlayers.forEach((player, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${player.name}</td>
-        <td>${probabilities[index].toFixed(2)}%</td>
-      `;
-      tableBody.appendChild(row);
-    });
+      // Calculate winning probabilities
+      function calculateWinningProbabilities() {
+        const Q = selectedPlayers.map(player => Math.pow(10, player.rating / 400));
+        const sumQ = Q.reduce((acc, q) => acc + q, 0);
+        const probabilities = Q.map(q => (q / sumQ) * 100);
 
-    // Draw the pie chart
-    drawPieChart(probabilities);
-  }
+        // Display probabilities in the table
+        const tableBody = document.querySelector("#probabilityTable tbody");
+        tableBody.innerHTML = ""; // Clear existing rows
+        selectedPlayers.forEach((player, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${player.name}</td>
+            <td>${probabilities[index].toFixed(2)}%</td>
+          `;
+          tableBody.appendChild(row);
+        });
 
-  // Draw the pie chart using Chart.js
-  function drawPieChart(probabilities) {
-    const ctx = document.getElementById("pieChart").getContext("2d");
-    if (chartInstance) {
-      chartInstance.destroy();
-    }
-    chartInstance = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: selectedPlayers.map(player => player.name),
-        datasets: [{
-          data: probabilities,
-          backgroundColor: [
-            "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
-          ],
-        }],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
+        // Draw the pie chart
+        drawPieChart(probabilities);
+      }
+
+      // Draw the pie chart using Chart.js
+      function drawPieChart(probabilities) {
+        const ctx = document.getElementById("pieChart").getContext("2d");
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+        chartInstance = new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: selectedPlayers.map(player => player.name),
+            datasets: [{
+              data: probabilities,
+              backgroundColor: [
+                "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
+              ],
+            }],
           },
-          tooltip: {
-            callbacks: {
-              label: (context) => {
-                const label = context.label || "";
-                const value = context.raw || 0;
-                return `${label}: ${value.toFixed(2)}%`;
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    const label = context.label || "";
+                    const value = context.raw || 0;
+                    return `${label}: ${value.toFixed(2)}%`;
+                  },
+                },
               },
             },
           },
-        },
-      },
+        });
+      }
+
+      // Event listeners
+      document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
+      document.getElementById("resetBtn").addEventListener("click", resetSimulation);
+      document.getElementById("calculateChancesBtn").addEventListener("click", calculateWinningProbabilities);
+
+      // Load players when the page loads
+      loadPlayers();
     });
-  }
-
-  // Event listeners
-  document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
-  document.getElementById("resetBtn").addEventListener("click", resetSimulation);
-  document.getElementById("calculateChancesBtn").addEventListener("click", calculateWinningProbabilities);
-
-  // Load players when the page loads
-  loadPlayers();
-});
   </script>
 </body>
 </html>
