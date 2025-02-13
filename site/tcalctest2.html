@@ -51,25 +51,27 @@
       cursor: pointer;
     }
     .results-area {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .results-area table {
-      width: 48%;
-      border-collapse: collapse;
-    }
-    .results-area th, .results-area td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-    .results-area th {
-      background-color: #f4f4f4;
-    }
-    .results-area canvas {
-      width: 48%;
-    }
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.results-area table {
+  width: 48%; /* Adjust table width */
+  border-collapse: collapse;
+  font-size: 14px; /* Smaller font size for the table */
+}
+.results-area th, .results-area td {
+  border: 1px solid #ccc;
+  padding: 6px; /* Smaller padding for compactness */
+  text-align: left;
+}
+.results-area th {
+  background-color: #f4f4f4;
+}
+.results-area canvas {
+  width: 48% !important; /* Adjust chart width */
+  max-height: 300px; /* Limit chart height */
+}
   </style>
 </head>
 <body>
