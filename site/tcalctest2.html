@@ -205,4 +205,157 @@
     </div>
   </div>
 </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  let allPlayers = [];  // Store the full player list
+  let selectedPlayers = [];
+  let chartInstance = null;
+
+  // Load players into the dropdown (Mock data for now)
+  function loadPlayers() {
+    allPlayers = [
+      { name: "Alice", skill: 80 },
+      { name: "Bob", skill: 70 },
+      { name: "Charlie", skill: 60 },
+      { name: "David", skill: 90 },
+      { name: "Eve", skill: 75 },
+      { name: "Frank", skill: 65 }
+    ];
+    updatePlayerDropdown();
+  }
+
+  // Update dropdown options based on search
+  function updatePlayerDropdown(searchText = "") {
+    const dropdown = document.getElementById("playerDropdown");
+    dropdown.innerHTML = ""; // Clear existing options
+
+    allPlayers
+      .filter(player => player.name.toLowerCase().includes(searchText.toLowerCase()))
+      .forEach(player => {
+        const option = document.createElement("option");
+        option.value = player.name;
+        option.textContent = player.name;
+        dropdown.appendChild(option);
+      });
+  }
+
+  // Search functionality
+  document.getElementById("playerSearch").addEventListener("input", (event) => {
+    updatePlayerDropdown(event.target.value);
+  });
+
+  // Add selected players from dropdown to the list
+  function addSelectedPlayers() {
+    const dropdown = document.getElementById("playerDropdown");
+    Array.from(dropdown.selectedOptions).forEach(option => {
+      const playerName = option.value;
+      const player = allPlayers.find(p => p.name === playerName);
+      if (player && !selectedPlayers.some(p => p.name === playerName)) {
+        selectedPlayers.push(player);
+      }
+    });
+
+    updateSelectedPlayersList();
+  }
+
+  // Update the selected players display
+  function updateSelectedPlayersList() {
+    const listContainer = document.getElementById("selectedPlayersList");
+    listContainer.innerHTML = ""; // Clear existing list
+
+    selectedPlayers.forEach((player, index) => {
+      const div = document.createElement("div");
+      div.classList.add("player-card");
+      div.innerHTML = `
+        <span>${player.name}</span>
+        <button onclick="removePlayer(${index})">Remove</button>
+      `;
+      listContainer.appendChild(div);
+    });
+  }
+
+  // Remove a player from the selected list
+  window.removePlayer = function(index) {
+    selectedPlayers.splice(index, 1);
+    updateSelectedPlayersList();
+  };
+
+  // Calculate winning probabilities
+  function calculateWinningProbabilities() {
+    if (selectedPlayers.length === 0) return;
+
+    const Q = selectedPlayers.map(player => player.skill);
+    const sumQ = Q.reduce((acc, q) => acc + q, 0);
+    const probabilities = Q.map(q => (q / sumQ) * 100);
+
+    // Display probabilities in the table
+    const tableBody = document.querySelector("#probabilityTable tbody");
+    tableBody.innerHTML = ""; // Clear existing rows
+    selectedPlayers.forEach((player, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${player.name}</td>
+        <td>${probabilities[index].toFixed(2)}%</td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    // Draw the pie chart
+    drawPieChart(probabilities);
+  }
+
+  // Draw the pie chart using Chart.js
+  function drawPieChart(probabilities) {
+    const ctx = document.getElementById("pieChart").getContext("2d");
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
+    chartInstance = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: selectedPlayers.map(player => player.name),
+        datasets: [{
+          data: probabilities,
+          backgroundColor: [
+            "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
+          ],
+        }],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "top" },
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                const label = context.label || "";
+                const value = context.raw || 0;
+                return `${label}: ${value.toFixed(2)}%`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Reset the simulation
+  function resetSimulation() {
+    selectedPlayers = [];
+    updateSelectedPlayersList();
+    document.querySelector("#probabilityTable tbody").innerHTML = "";
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
+  }
+
+  // Event listeners
+  document.getElementById("addPlayerBtn").addEventListener("click", addSelectedPlayers);
+  document.getElementById("resetBtn").addEventListener("click", resetSimulation);
+  document.getElementById("calculateChancesBtn").addEventListener("click", calculateWinningProbabilities);
+
+  // Load players when the page loads
+  loadPlayers();
+});
+  </script>
 </html>
