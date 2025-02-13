@@ -128,29 +128,14 @@
 <body>
   <div class="container">
     <h1>Tournament Simulator</h1>
-   <div class="player-select-container">
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" id="searchPlayer" placeholder="Search players..." />
-  </div>
-
-  <!-- Player List and Selected Players -->
-  <div class="player-list-container">
-    <div class="player-list" id="playerList">
-      <!-- Player checkboxes will be populated here -->
+    <div class="player-select">
+      <label for="playerDropdown">Select Players:</label>
+      <select id="playerDropdown" multiple>
+        <!-- Player options will be populated here -->
+      </select>
+      <button id="addPlayerBtn">Add Player</button>
+      <button id="calculateChancesBtn">Calculate Winning Chances</button>
     </div>
-    <div class="selected-players">
-      <h2>Selected Players</h2>
-      <div id="selectedPlayersList"></div>
-    </div>
-  </div>
-
-  <!-- Buttons -->
-  <div class="player-select-buttons">
-    <button id="addPlayerBtn">Add Selected Players</button>
-    <button id="calculateChancesBtn">Calculate Winning Chances</button>
-  </div>
-   </div>
     <div class="selected-players">
       <h2>Selected Players</h2>
       <div id="selectedPlayersList"></div>
